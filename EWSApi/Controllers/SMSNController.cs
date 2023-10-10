@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace EWSApi.Controllers
 {
@@ -29,14 +30,15 @@ namespace EWSApi.Controllers
 
 
         // GET: api/SMSN/GetLabData/578
-        [HttpGet("GetLabData/{UniqueNumber}")]
-        public async Task<ActionResult<SMSNController>> GetLabData(string UniqueNumber)
+        [HttpGet("GetLabData/{UniqueNumber}/{LabCode}")]
+        public async Task<ActionResult<SMSNController>> GetLabData(string UniqueNumber, string LabCode)
         {
             var currentHttpContext = _httpContextAccessor.HttpContext;
 
 
             if (_context.ReportRegister == null)
             {
+                await _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", true);
                 return NotFound();
             }
 
@@ -51,7 +53,7 @@ namespace EWSApi.Controllers
                                 join ms in _context.MedicalStaff on rrs.MedicalStaffId equals ms.MedicalStaffId
                                 join rrt in _context.ReportRegisterTest on rr.ReportRegisterId equals rrt.ReportRegisterId
                                 join e in _context.Examination on rrt.ExaminationId equals e.ExaminationId into testTypes
-                                where rr.UniqueNumber == UniqueNumber
+                                where (rr.UniqueNumber == UniqueNumber) || (cr.PersonalNumber == UniqueNumber) // Assuming personalNumberParameter is the parameter for @PersonalNumber
                                 select new
                                 {
                                     UniqueNumberSMSN = rr.UniqueNumber,
@@ -70,14 +72,16 @@ namespace EWSApi.Controllers
 
             
 
-            await _logService.InsertLog(currentHttpContext, "GetLabData", "UniqueNumber= " + UniqueNumber + "");
+            await _logService.InsertLog(currentHttpContext, "GetLabData", "UniqueNumber= " + UniqueNumber + ", Laboratory code= "+LabCode+ ", Accepted date= "+DateTime.Now.ToString()+"",false);
 
 
 
 
             if (result == null || result.Count == 0)
             {
+                await _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", true);
                 return NotFound();
+               
             }
 
             return Ok(result);
@@ -85,48 +89,152 @@ namespace EWSApi.Controllers
 
 
 
-        // POST: api/MedicalStaffs
+        // POST: api/PostMedicalStaff
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("PostMedicalStaff")]
         public async Task<ActionResult<MedicalStaff>> PostMedicalStaff(MedicalStaff medicalStaff)
         {
+
             var currentHttpContext = _httpContextAccessor.HttpContext;
-
-            var existingMedicalStaff = await _context.MedicalStaff
-               .FirstOrDefaultAsync(ms => ms.LicenceNumber == medicalStaff.LicenceNumber);
-
-            if (existingMedicalStaff == null)
+            try
             {
-                // Create new medical staff
-                _context.MedicalStaff.Add(new MedicalStaff
+                if (!ModelState.IsValid)
                 {
-                    LicenceNumber = medicalStaff.LicenceNumber,
-                    Firstname = medicalStaff.Firstname,
-                    Lastname = medicalStaff.Lastname,
-                    Specialization = medicalStaff.Specialization,
-                    Status = medicalStaff.Status,
-                    InsertedDate = DateTime.Now,
-                    InsertedFrom = _conf["Jwt:UserID"].ToString()
+                    await _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "An error occurred while processing the request MedicalStaff", true);
+                    return BadRequest(ModelState);
+
                 }
 
-                ) ;
+                var existingMedicalStaff = await _context.MedicalStaff
+                  .FirstOrDefaultAsync(ms => ms.PersonalNumber == medicalStaff.PersonalNumber && ms.LicenceNumber == medicalStaff.LicenceNumber);
+
+                if (existingMedicalStaff == null)
+                {
+                    // Create new medical staff
+                    _context.MedicalStaff.Add(new MedicalStaff
+                    {
+                        PersonalNumber = medicalStaff.PersonalNumber,
+                        LicenceNumber = medicalStaff.LicenceNumber,
+                        Firstname = medicalStaff.Firstname,
+                        Lastname = medicalStaff.Lastname,
+                        Specialization = medicalStaff.Specialization,
+                        Status = medicalStaff.Status,
+                        InsertedDate = DateTime.Now,
+                        InsertedFrom = _conf["Jwt:UserID"].ToString()
+                    }
+
+
+                    );
+
+                    await _context.SaveChangesAsync();
+
+                    string jsonMedicalStaff = JsonConvert.SerializeObject(medicalStaff);
+                    await _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "MedicalStaff created: " + jsonMedicalStaff + "", false);
+                }
+                else
+                {
+                    // Update existing medical staff
+
+                    existingMedicalStaff.Firstname = medicalStaff.Firstname;
+                    existingMedicalStaff.Lastname = medicalStaff.Lastname;
+                    existingMedicalStaff.Specialization = medicalStaff.Specialization;
+                    existingMedicalStaff.Status = medicalStaff.Status;
+                    existingMedicalStaff.UpdatedDate = DateTime.Now;
+                    existingMedicalStaff.UpdatedFrom = _conf["Jwt:UserID"];
+
+                    await _context.SaveChangesAsync();
+                    string jsonMedicalStaff = JsonConvert.SerializeObject(existingMedicalStaff);
+                    await _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "MedicalStaff updated: " + jsonMedicalStaff + "", false);
+                }
+
+
+
+                return Ok(new { Message = "Success" });
             }
-            else
+            catch
             {
-                // Update existing medical staff
-                existingMedicalStaff.Firstname = medicalStaff.Firstname;
-                existingMedicalStaff.Lastname = medicalStaff.Lastname;
-                existingMedicalStaff.Specialization = medicalStaff.Specialization;
-                existingMedicalStaff.Status = medicalStaff.Status;
-                existingMedicalStaff.UpdatedDate = DateTime.Now;
-                existingMedicalStaff.UpdatedFrom = _conf["Jwt:UserID"];
+                string jsonMedicalStaff = JsonConvert.SerializeObject(medicalStaff);
+                await _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "An error occurred while processing the request MedicalStaff :" + jsonMedicalStaff + "", true);
+                return BadRequest(new { Message = "BadRequest" });
             }
+        }
 
-            await _context.SaveChangesAsync();
 
-            await _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "PostMedicalStaff");
+        //POST: api/PostExamination
+        //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("PostExamination")]
+        public async Task<ActionResult<Examination>> PostExamination(Examination examination)
+        {
 
-            return Ok(new { Message = "Success" });
+            var currentHttpContext = _httpContextAccessor.HttpContext;
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    await _logService.InsertLog(currentHttpContext, "PostExamination", "An error occurred while processing the request Examination", true);
+                    return BadRequest(ModelState);
+
+                }
+
+                var existingExamination = await _context.Examination
+                  .FirstOrDefaultAsync(ms => ms.ExaminationId == examination.ExaminationId);
+
+                if (existingExamination == null)
+                {
+                    // Create new medical staff
+                    _context.Examination.Add(new Examination
+                    {
+                        ExaminationId = examination.ExaminationId,
+                        ExaminationName = examination.ExaminationName,  
+                        ExaminationCode = examination.ExaminationCode,
+                        IsEpidemic = examination.IsEpidemic,
+                        ResultTime = examination.ResultTime,
+                        LocalPrice = examination.LocalPrice,
+                        ForeignPrice = examination.ForeignPrice,
+                        Active = examination.Active,
+                        IsDynamic = examination.IsDynamic,
+                        InsertedDate = DateTime.Now,
+                        InsertedFrom = _conf["Jwt:UserID"].ToString()
+                    }
+
+
+                    );
+
+                    await _context.SaveChangesAsync();
+
+                    string jsonExamination = JsonConvert.SerializeObject(examination);
+                    await _logService.InsertLog(currentHttpContext, "PostExamination", "Examination created: " + jsonExamination + "", false);
+                }
+                else
+                {
+                    // Update existing medical staff
+
+                    existingExamination.ExaminationName=examination.ExaminationName;
+                    existingExamination.ExaminationCode=examination.ExaminationCode;
+                    existingExamination.IsEpidemic=examination.IsEpidemic;
+                    existingExamination.ResultTime=examination.ResultTime;
+                    existingExamination.LocalPrice=examination.LocalPrice;
+                    existingExamination.ForeignPrice=examination.ForeignPrice;
+                    existingExamination.Active=examination.Active;
+                    existingExamination.IsDynamic=examination.IsDynamic;
+                    existingExamination.UpdatedDate = DateTime.Now;
+                    existingExamination.UpdatedFrom = _conf["Jwt:UserID"];
+
+                    await _context.SaveChangesAsync();
+                    string jsonExamination = JsonConvert.SerializeObject(examination);
+                    await _logService.InsertLog(currentHttpContext, "PostExamination", "Examination updated: " + jsonExamination + "", false);
+                }
+
+
+
+                return Ok(new { Message = "Success" });
+            }
+            catch
+            {
+                string jsonExamination = JsonConvert.SerializeObject(examination);
+                await _logService.InsertLog(currentHttpContext, "PostExamination", "An error occurred while processing the request Examination :" + jsonExamination + "", true);
+                return BadRequest(new { Message = "BadRequest" });
+            }
         }
 
 

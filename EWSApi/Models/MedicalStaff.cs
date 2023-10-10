@@ -7,6 +7,8 @@ public partial class MedicalStaff
 {
     public int MedicalStaffId { get; set; }
 
+    public string PersonalNumber { get; set; } = null!;
+
     public string LicenceNumber { get; set; } = null!;
 
     public string Firstname { get; set; } = null!;

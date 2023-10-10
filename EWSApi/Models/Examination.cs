@@ -13,15 +13,23 @@ public partial class Examination
 
     public bool IsEpidemic { get; set; }
 
-    public byte ResultTime { get; set; }
+    public int ResultTime { get; set; }
 
-    public byte LocalPrice { get; set; }
+    public int LocalPrice { get; set; }
 
-    public byte ForeignPrice { get; set; }
+    public int ForeignPrice { get; set; }
 
-    public byte Active { get; set; }
+    public bool Active { get; set; }
 
     public bool IsDynamic { get; set; }
+
+    public string? InsertedFrom { get; set; }
+
+    public DateTime? InsertedDate { get; set; }
+
+    public string? UpdatedFrom { get; set; }
+
+    public DateTime? UpdatedDate { get; set; }
 
     public virtual ICollection<ReportRegisterTest> ReportRegisterTest { get; set; } = new List<ReportRegisterTest>();
 }

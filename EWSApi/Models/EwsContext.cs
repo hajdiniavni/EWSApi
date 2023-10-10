@@ -439,9 +439,15 @@ public partial class EwsContext : DbContext
 
         modelBuilder.Entity<Examination>(entity =>
         {
-            entity.Property(e => e.ExaminationId).HasColumnName("ExaminationID");
+            entity.Property(e => e.ExaminationId)
+                .ValueGeneratedNever()
+                .HasColumnName("ExaminationID");
             entity.Property(e => e.ExaminationCode).HasMaxLength(50);
             entity.Property(e => e.ExaminationName).HasMaxLength(100);
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
         });
 
         modelBuilder.Entity<Faqcategory>(entity =>
@@ -740,6 +746,7 @@ public partial class EwsContext : DbContext
             entity.Property(e => e.LicenceNumber)
                 .HasMaxLength(32)
                 .IsUnicode(false);
+            entity.Property(e => e.PersonalNumber).HasMaxLength(64);
             entity.Property(e => e.Specialization).HasMaxLength(256);
             entity.Property(e => e.Status).HasMaxLength(64);
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");

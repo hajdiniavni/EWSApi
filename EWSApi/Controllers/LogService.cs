@@ -25,7 +25,7 @@ public class LogService : ControllerBase
     }
 
 
-    public async Task InsertLog(HttpContext httpContext,string Action,string FormContent)
+    public async Task InsertLog(HttpContext httpContext,string Action,string FormContent,bool BError)
     {
 
    
@@ -33,13 +33,13 @@ public class LogService : ControllerBase
         {
             Action = Action,
             ActionDescription = Action,
-            BError = false,
-            Controller = "EWSAPI",
+            BError = BError,
+            Controller = "SMSNApi",
             InsertedDate = DateTime.Now,
             UserId = null,
             Ip = httpContext.Connection.RemoteIpAddress.ToString(),
-            Description = "EWSAPI",
-            Developer = "Betim Krasniqi",
+            Description = "SMSNApi",
+            Developer = "DataProgNet",
             DescriptionTitle = "Thirrja e API",
             HttpMethod = httpContext.Request.Method,
             HostName = httpContext.Connection.RemoteIpAddress.ToString(), //Dns.GetHostEntry(context.HttpContext.Connection.RemoteIpAddress.ToString()).HostName;

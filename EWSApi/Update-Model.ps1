@@ -1,0 +1,1 @@
+dotnet ef dbcontext scaffold "Server=dev;Database=EWS;user id=ateam_sql; password=Ateam.sql2019#; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models --force --no-pluralize

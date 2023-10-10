@@ -28,7 +28,7 @@ namespace EWSApi.Controllers
         }
 
 
-        // GET: api/SMSN/GetLabData/5
+        // GET: api/SMSN/GetLabData/578
         [HttpGet("GetLabData/{UniqueNumber}")]
         public async Task<ActionResult<SMSNController>> GetLabData(string UniqueNumber)
         {

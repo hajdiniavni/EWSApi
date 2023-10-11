@@ -18,8 +18,8 @@ namespace EWSAPI.Controllers;
 public class LogService : ControllerBase
 {
     private IConfiguration _conf;
-    private readonly EwsContext _context;
-    public LogService(EwsContext context, IConfiguration conf)
+    private readonly AppDBContext _context;
+    public LogService(AppDBContext context, IConfiguration conf)
     {
         this._context = context;
         _conf = conf;
@@ -29,20 +29,20 @@ public class LogService : ControllerBase
     public void InsertLog(HttpContext httpContext, string Action, string FormContent, bool BError)
     {
 
-        if (BError == true)
-        {
-            var ip = new SqlParameter("@IP", httpContext.Connection.RemoteIpAddress.ToString());
-            var httpMethod = new SqlParameter("@HttpMethod", httpContext.Request.Method);
-            var hostName = new SqlParameter("@HostName", httpContext.Connection.RemoteIpAddress.ToString());
-            var url = new SqlParameter("@Url", httpContext.Request.GetDisplayUrl());
-            var status = new SqlParameter("@Status", StatusCodes.Status200OK);
-            var action = new SqlParameter("@Action", Action);
-            var formContent = new SqlParameter("@FormContent", FormContent);
-            var bError = new SqlParameter("@BError", BError);
-            _context.Database.ExecuteSqlRaw("EXEC InsertDataLog @IP,@HttpMethod,@HostName,@Url,@Status,@Action, @FormContent,@BError", ip, httpMethod, hostName, url, status, action, formContent, bError);
-        }
-        else
-        {
+        //if (BError == true)
+        //{
+        //    var ip = new SqlParameter("@IP", httpContext.Connection.RemoteIpAddress.ToString());
+        //    var httpMethod = new SqlParameter("@HttpMethod", httpContext.Request.Method);
+        //    var hostName = new SqlParameter("@HostName", httpContext.Connection.RemoteIpAddress.ToString());
+        //    var url = new SqlParameter("@Url", httpContext.Request.GetDisplayUrl());
+        //    var status = new SqlParameter("@Status", StatusCodes.Status200OK);
+        //    var action = new SqlParameter("@Action", Action);
+        //    var formContent = new SqlParameter("@FormContent", FormContent);
+        //    var bError = new SqlParameter("@BError", BError);
+        //    _context.Database.ExecuteSqlRaw("EXEC InsertDataLog @IP,@HttpMethod,@HostName,@Url,@Status,@Action, @FormContent,@BError", ip, httpMethod, hostName, url, status, action, formContent, bError);
+        //}
+        //else
+        //{
             var transaction = _context.Database.BeginTransaction();
 
             try
@@ -79,7 +79,7 @@ public class LogService : ControllerBase
                 transaction.Rollback();
 
             }
-        }
+        //}
     }
 
 

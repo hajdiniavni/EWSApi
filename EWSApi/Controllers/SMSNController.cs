@@ -1,5 +1,5 @@
 ﻿using EWSAPI.Controllers;
-using EWSApi.Models;
+using EWSApi.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +8,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Newtonsoft.Json;
+
+using EWSApi.Models.HealthInstitution;
+using EWSApi.Models.Examination;
+using EWSApi.Models.MedicalStaff;
+
+
 
 namespace EWSApi.Controllers
 {
@@ -70,9 +76,9 @@ namespace EWSApi.Controllers
 
                                 }).ToListAsync();
 
-            
 
-            await _logService.InsertLog(currentHttpContext, "GetLabData", "UniqueNumber= " + UniqueNumber + ", Laboratory code= "+LabCode+ ", Accepted date= "+DateTime.Now.ToString()+"",false);
+
+            await _logService.InsertLog(currentHttpContext, "GetLabData", "UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", false);
 
 
 
@@ -81,7 +87,7 @@ namespace EWSApi.Controllers
             {
                 await _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", true);
                 return NotFound();
-               
+
             }
 
             return Ok(result);
@@ -92,7 +98,7 @@ namespace EWSApi.Controllers
         // POST: api/PostMedicalStaff
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("PostMedicalStaff")]
-        public async Task<ActionResult<MedicalStaff>> PostMedicalStaff(MedicalStaff medicalStaff)
+        public async Task<ActionResult<MedicalStaffVM>> PostMedicalStaff(MedicalStaffVM medicalStaff)
         {
 
             var currentHttpContext = _httpContextAccessor.HttpContext;
@@ -151,10 +157,10 @@ namespace EWSApi.Controllers
 
                 return Ok(new { Message = "Success" });
             }
-            catch
+            catch (Exception ex)
             {
-                string jsonMedicalStaff = JsonConvert.SerializeObject(medicalStaff);
-                await _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "An error occurred while processing the request MedicalStaff :" + jsonMedicalStaff + "", true);
+
+                await _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "An error occurred while processing the request MedicalStaff :" + ex.Message + "", true);
                 return BadRequest(new { Message = "BadRequest" });
             }
         }
@@ -163,7 +169,7 @@ namespace EWSApi.Controllers
         //POST: api/PostExamination
         //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("PostExamination")]
-        public async Task<ActionResult<Examination>> PostExamination(Examination examination)
+        public async Task<ActionResult<ExaminationVM>> PostExamination(ExaminationVM examination)
         {
 
             var currentHttpContext = _httpContextAccessor.HttpContext;
@@ -181,11 +187,11 @@ namespace EWSApi.Controllers
 
                 if (existingExamination == null)
                 {
-                    // Create new medical staff
+                    // Create new Examination
                     _context.Examination.Add(new Examination
                     {
                         ExaminationId = examination.ExaminationId,
-                        ExaminationName = examination.ExaminationName,  
+                        ExaminationName = examination.ExaminationName,
                         ExaminationCode = examination.ExaminationCode,
                         IsEpidemic = examination.IsEpidemic,
                         ResultTime = examination.ResultTime,
@@ -207,16 +213,16 @@ namespace EWSApi.Controllers
                 }
                 else
                 {
-                    // Update existing medical staff
+                    // Update existingExamination
 
-                    existingExamination.ExaminationName=examination.ExaminationName;
-                    existingExamination.ExaminationCode=examination.ExaminationCode;
-                    existingExamination.IsEpidemic=examination.IsEpidemic;
-                    existingExamination.ResultTime=examination.ResultTime;
-                    existingExamination.LocalPrice=examination.LocalPrice;
-                    existingExamination.ForeignPrice=examination.ForeignPrice;
-                    existingExamination.Active=examination.Active;
-                    existingExamination.IsDynamic=examination.IsDynamic;
+                    existingExamination.ExaminationName = examination.ExaminationName;
+                    existingExamination.ExaminationCode = examination.ExaminationCode;
+                    existingExamination.IsEpidemic = examination.IsEpidemic;
+                    existingExamination.ResultTime = examination.ResultTime;
+                    existingExamination.LocalPrice = examination.LocalPrice;
+                    existingExamination.ForeignPrice = examination.ForeignPrice;
+                    existingExamination.Active = examination.Active;
+                    existingExamination.IsDynamic = examination.IsDynamic;
                     existingExamination.UpdatedDate = DateTime.Now;
                     existingExamination.UpdatedFrom = _conf["Jwt:UserID"];
 
@@ -229,14 +235,104 @@ namespace EWSApi.Controllers
 
                 return Ok(new { Message = "Success" });
             }
-            catch
+            catch (Exception ex)
             {
-                string jsonExamination = JsonConvert.SerializeObject(examination);
-                await _logService.InsertLog(currentHttpContext, "PostExamination", "An error occurred while processing the request Examination :" + jsonExamination + "", true);
+
+                await _logService.InsertLog(currentHttpContext, "PostExamination", "An error occurred while processing the request Examination :" + ex.Message + "", true);
                 return BadRequest(new { Message = "BadRequest" });
             }
         }
 
+
+
+        //POST: api/PostHealthInstitution
+        //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("PostHealthInstitution")]
+        public async Task<ActionResult<HealthInstitutionVM>> PostHealthInstitution(HealthInstitutionVM healthInstitution)
+        {
+
+            var currentHttpContext = _httpContextAccessor.HttpContext;
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    await _logService.InsertLog(currentHttpContext, "PostHealthInstitution", "An error occurred while processing the request healthInstitution", true);
+                    return BadRequest(ModelState);
+
+                }
+
+                var existingHealthInstitution = await _context.HealthInstitution
+                  .FirstOrDefaultAsync(ms => ms.IdentificationNumber == healthInstitution.IdentificationNumber && ms.LicenceNumber == healthInstitution.LicenceNumber);
+
+                if (existingHealthInstitution == null)
+                {
+                    // Create new HealthInstitution
+                    _context.HealthInstitution.Add(new HealthInstitution
+                    {
+                        HealthInstitutionLevelId = healthInstitution.HealthInstitutionLevelId,
+                        IdentificationNumber = healthInstitution.IdentificationNumber,
+                        LicenceNumber = healthInstitution.LicenceNumber,
+                        NameSq = healthInstitution.NameSq,
+                        NameEn = healthInstitution.NameEn,
+                        NameSr = healthInstitution.NameSr,
+                        ShortNameSq = healthInstitution.ShortNameSq,
+                        ShortNameEn = healthInstitution.ShortNameEn,
+                        ShortNameSr = healthInstitution.ShortNameSr,
+                        Description = healthInstitution.Description,
+                        MinicipalityId = healthInstitution.MinicipalityId,
+                        SettlementId = healthInstitution.SettlementId,
+                        Address = healthInstitution.Address,
+                        Status = healthInstitution.Status,
+                        EmailAddress = healthInstitution.EmailAddress,
+                        PhoneNumber = healthInstitution.PhoneNumber,
+                        InsertedDate = DateTime.Now,
+                        InsertedFrom = _conf["Jwt:UserID"].ToString()
+                    }
+
+
+                    );
+
+                    await _context.SaveChangesAsync();
+
+                    string jsonHealthInstitution = JsonConvert.SerializeObject(healthInstitution);
+                    await _logService.InsertLog(currentHttpContext, "PostHealthInstitution", "healthInstitution created: " + jsonHealthInstitution + "", false);
+                }
+                else
+                {
+                    // Update existingHealthInstitution
+
+                    existingHealthInstitution.NameSq = healthInstitution.NameSq;
+                    existingHealthInstitution.NameEn = healthInstitution.NameEn;
+                    existingHealthInstitution.NameSr = healthInstitution.NameSr;
+                    existingHealthInstitution.ShortNameSq = healthInstitution.ShortNameSq;
+                    existingHealthInstitution.ShortNameEn = healthInstitution.ShortNameEn;
+                    existingHealthInstitution.ShortNameSr = healthInstitution.ShortNameSr;
+                    existingHealthInstitution.Description = healthInstitution.Description;
+                    existingHealthInstitution.MinicipalityId = healthInstitution.MinicipalityId;
+                    existingHealthInstitution.SettlementId = healthInstitution.SettlementId;
+                    existingHealthInstitution.Address = healthInstitution.Address;
+                    existingHealthInstitution.Status = healthInstitution.Status;
+                    existingHealthInstitution.EmailAddress = healthInstitution.EmailAddress;
+                    existingHealthInstitution.PhoneNumber = healthInstitution.PhoneNumber;
+                    existingHealthInstitution.UpdatedDate = DateTime.Now;
+                    existingHealthInstitution.UpdatedFrom = _conf["Jwt:UserID"];
+
+                    await _context.SaveChangesAsync();
+                    string jsonHealthInstitution = JsonConvert.SerializeObject(healthInstitution);
+                    await _logService.InsertLog(currentHttpContext, "PostHealthInstitution", "healthInstitution updated: " + jsonHealthInstitution + "", false);
+                }
+
+
+
+                return Ok(new { Message = "Success" });
+            }
+            catch (Exception ex)
+            {
+
+                await _logService.InsertLog(currentHttpContext, "PostHealthInstitution", "An error occurred while processing the request healthInstitution :" + ex.Message + "", true);
+                return BadRequest(new { Message = "BadRequest" });
+            }
+        }
 
         //eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJTdGFuZGFyZCBVc2VyIiwibmJmIjoxNjk1MTMzNjM0LCJleHAiOjE4NTI5ODY0MzQsImlzcyI6IkVXU0FwaSIsImF1ZCI6IkVXU0FwaSJ9.lwx7O1E7ejZdNdOAvdLvL185TrAl7ZoL_6ALC9cZ84cSOq4xVpuvMpvtIvqXhJxwRIYxGt_LiKnJUSDtrv8pgA
 

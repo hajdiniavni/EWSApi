@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using EWSApi.Models;
+using EWSApi.Core;
 using Humanizer.Localisation;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel;
@@ -25,10 +25,10 @@ public class LogService : ControllerBase
     }
 
 
-    public async Task InsertLog(HttpContext httpContext,string Action,string FormContent,bool BError)
+    public async Task InsertLog(HttpContext httpContext, string Action, string FormContent, bool BError)
     {
 
-   
+
         _context.Add(new Log
         {
             Action = Action,
@@ -48,12 +48,12 @@ public class LogService : ControllerBase
             FormContent = FormContent
 
         }
-       
+
         );
         await _context.SaveChangesAsync();
 
-       
-      
+
+
     }
 }
         

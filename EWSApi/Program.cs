@@ -1,4 +1,4 @@
-using EWSApi.Models;
+using EWSApi.Core;
 using EWSAPI.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;

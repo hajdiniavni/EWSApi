@@ -12,8 +12,7 @@ using Newtonsoft.Json;
 using EWSApi.Models.HealthInstitution;
 using EWSApi.Models.Examination;
 using EWSApi.Models.MedicalStaff;
-
-
+using System.Data.Common;
 
 namespace EWSApi.Controllers
 {
@@ -44,7 +43,7 @@ namespace EWSApi.Controllers
 
             if (_context.ReportRegister == null)
             {
-                await _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", true);
+                 _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", true);
                 return NotFound();
             }
 
@@ -78,14 +77,14 @@ namespace EWSApi.Controllers
 
 
 
-            await _logService.InsertLog(currentHttpContext, "GetLabData", "UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", false);
+             _logService.InsertLog(currentHttpContext, "GetLabData", "UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", false);
 
 
 
 
             if (result == null || result.Count == 0)
             {
-                await _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", true);
+                 _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", true);
                 return NotFound();
 
             }
@@ -102,14 +101,11 @@ namespace EWSApi.Controllers
         {
 
             var currentHttpContext = _httpContextAccessor.HttpContext;
+            var transaction = _context.Database.BeginTransaction();
+
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    await _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "An error occurred while processing the request MedicalStaff", true);
-                    return BadRequest(ModelState);
-
-                }
+              
 
                 var existingMedicalStaff = await _context.MedicalStaff
                   .FirstOrDefaultAsync(ms => ms.PersonalNumber == medicalStaff.PersonalNumber && ms.LicenceNumber == medicalStaff.LicenceNumber);
@@ -133,9 +129,9 @@ namespace EWSApi.Controllers
                     );
 
                     await _context.SaveChangesAsync();
-
                     string jsonMedicalStaff = JsonConvert.SerializeObject(medicalStaff);
-                    await _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "MedicalStaff created: " + jsonMedicalStaff + "", false);
+                    transaction.Commit();
+                    _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "MedicalStaff created: " + jsonMedicalStaff + "", false);
                 }
                 else
                 {
@@ -150,7 +146,8 @@ namespace EWSApi.Controllers
 
                     await _context.SaveChangesAsync();
                     string jsonMedicalStaff = JsonConvert.SerializeObject(existingMedicalStaff);
-                    await _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "MedicalStaff updated: " + jsonMedicalStaff + "", false);
+                    transaction.Commit();
+                    _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "MedicalStaff updated: " + jsonMedicalStaff + "", false);
                 }
 
 
@@ -159,11 +156,12 @@ namespace EWSApi.Controllers
             }
             catch (Exception ex)
             {
-
-                await _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "An error occurred while processing the request MedicalStaff :" + ex.Message + "", true);
-                return BadRequest(new { Message = "BadRequest" });
+                transaction.Rollback();
+                _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "An error occurred while processing the request MedicalStaff :" + ex.InnerException.ToString() + "", true);
+                return BadRequest(new { Message = ex.InnerException.ToString() });
             }
         }
+
 
 
         //POST: api/PostExamination
@@ -173,15 +171,11 @@ namespace EWSApi.Controllers
         {
 
             var currentHttpContext = _httpContextAccessor.HttpContext;
+            var transaction = _context.Database.BeginTransaction();
+
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    await _logService.InsertLog(currentHttpContext, "PostExamination", "An error occurred while processing the request Examination", true);
-                    return BadRequest(ModelState);
-
-                }
-
+              
                 var existingExamination = await _context.Examination
                   .FirstOrDefaultAsync(ms => ms.ExaminationId == examination.ExaminationId);
 
@@ -207,9 +201,9 @@ namespace EWSApi.Controllers
                     );
 
                     await _context.SaveChangesAsync();
-
                     string jsonExamination = JsonConvert.SerializeObject(examination);
-                    await _logService.InsertLog(currentHttpContext, "PostExamination", "Examination created: " + jsonExamination + "", false);
+                    transaction.Commit();
+                    _logService.InsertLog(currentHttpContext, "PostExamination", "Examination created: " + jsonExamination + "", false);
                 }
                 else
                 {
@@ -228,7 +222,8 @@ namespace EWSApi.Controllers
 
                     await _context.SaveChangesAsync();
                     string jsonExamination = JsonConvert.SerializeObject(examination);
-                    await _logService.InsertLog(currentHttpContext, "PostExamination", "Examination updated: " + jsonExamination + "", false);
+                    transaction.Commit();
+                    _logService.InsertLog(currentHttpContext, "PostExamination", "Examination updated: " + jsonExamination + "", false);
                 }
 
 
@@ -237,9 +232,9 @@ namespace EWSApi.Controllers
             }
             catch (Exception ex)
             {
-
-                await _logService.InsertLog(currentHttpContext, "PostExamination", "An error occurred while processing the request Examination :" + ex.Message + "", true);
-                return BadRequest(new { Message = "BadRequest" });
+                transaction.Rollback();
+                _logService.InsertLog(currentHttpContext, "PostExamination", "An error occurred while processing the request Examination :" + ex.InnerException.ToString() + "", true);
+                return BadRequest(new { Message = ex.InnerException.ToString() });
             }
         }
 
@@ -252,14 +247,12 @@ namespace EWSApi.Controllers
         {
 
             var currentHttpContext = _httpContextAccessor.HttpContext;
+            var transaction = _context.Database.BeginTransaction();
+
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    await _logService.InsertLog(currentHttpContext, "PostHealthInstitution", "An error occurred while processing the request healthInstitution", true);
-                    return BadRequest(ModelState);
 
-                }
+
 
                 var existingHealthInstitution = await _context.HealthInstitution
                   .FirstOrDefaultAsync(ms => ms.IdentificationNumber == healthInstitution.IdentificationNumber && ms.LicenceNumber == healthInstitution.LicenceNumber);
@@ -293,14 +286,14 @@ namespace EWSApi.Controllers
                     );
 
                     await _context.SaveChangesAsync();
-
                     string jsonHealthInstitution = JsonConvert.SerializeObject(healthInstitution);
-                    await _logService.InsertLog(currentHttpContext, "PostHealthInstitution", "healthInstitution created: " + jsonHealthInstitution + "", false);
+                    transaction.Commit();
+                    _logService.InsertLog(currentHttpContext, "PostHealthInstitution", "healthInstitution created: " + jsonHealthInstitution + "", false);
                 }
                 else
                 {
                     // Update existingHealthInstitution
-
+                    existingHealthInstitution.HealthInstitutionLevelId = healthInstitution.HealthInstitutionLevelId;
                     existingHealthInstitution.NameSq = healthInstitution.NameSq;
                     existingHealthInstitution.NameEn = healthInstitution.NameEn;
                     existingHealthInstitution.NameSr = healthInstitution.NameSr;
@@ -319,20 +312,27 @@ namespace EWSApi.Controllers
 
                     await _context.SaveChangesAsync();
                     string jsonHealthInstitution = JsonConvert.SerializeObject(healthInstitution);
-                    await _logService.InsertLog(currentHttpContext, "PostHealthInstitution", "healthInstitution updated: " + jsonHealthInstitution + "", false);
+                    transaction.Commit();
+                    _logService.InsertLog(currentHttpContext, "PostHealthInstitution", "healthInstitution updated: " + jsonHealthInstitution + "", false);
                 }
 
 
 
                 return Ok(new { Message = "Success" });
+
             }
+
             catch (Exception ex)
             {
 
-                await _logService.InsertLog(currentHttpContext, "PostHealthInstitution", "An error occurred while processing the request healthInstitution :" + ex.Message + "", true);
-                return BadRequest(new { Message = "BadRequest" });
+                transaction.Rollback();
+                _logService.InsertLog(currentHttpContext, "PostHealthInstitution", "An error occurred while processing the request healthInstitution :" + ex.InnerException.ToString() + "", true);
+                return BadRequest(new { Message = ex.InnerException.ToString() });
             }
+
+        
         }
+
 
         //eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJTdGFuZGFyZCBVc2VyIiwibmJmIjoxNjk1MTMzNjM0LCJleHAiOjE4NTI5ODY0MzQsImlzcyI6IkVXU0FwaSIsImF1ZCI6IkVXU0FwaSJ9.lwx7O1E7ejZdNdOAvdLvL185TrAl7ZoL_6ALC9cZ84cSOq4xVpuvMpvtIvqXhJxwRIYxGt_LiKnJUSDtrv8pgA
 

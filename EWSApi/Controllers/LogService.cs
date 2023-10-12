@@ -29,6 +29,8 @@ public class LogService : ControllerBase
     public void InsertLog(HttpContext httpContext, string Action, string FormContent, bool BError)
     {
 
+
+        
         //if (BError == true)
         //{
         //    var ip = new SqlParameter("@IP", httpContext.Connection.RemoteIpAddress.ToString());
@@ -43,7 +45,7 @@ public class LogService : ControllerBase
         //}
         //else
         //{
-            var transaction = _context.Database.BeginTransaction();
+        var transaction = _context.Database.BeginTransaction();
 
             try
             {

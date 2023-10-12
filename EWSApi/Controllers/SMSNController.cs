@@ -12,7 +12,9 @@ using Newtonsoft.Json;
 using EWSApi.Models.HealthInstitution;
 using EWSApi.Models.Examination;
 using EWSApi.Models.MedicalStaff;
+using EWSApi.Models.ReportRegister;
 using System.Data.Common;
+using System.Transactions;
 
 namespace EWSApi.Controllers
 {
@@ -23,11 +25,13 @@ namespace EWSApi.Controllers
         private IConfiguration _conf;
         private readonly LogService _logService;
         private readonly EwsContext _context;
+        private readonly AppDBContext _sqlContext;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public SMSNController(EwsContext context, LogService logService, IHttpContextAccessor httpContextAccessor, IConfiguration conf)
+        public SMSNController(EwsContext context, AppDBContext sqlContext, LogService logService, IHttpContextAccessor httpContextAccessor, IConfiguration conf)
         {
             this._context = context;
+            this._sqlContext = sqlContext;
             _conf = conf;
             this._logService = logService;
             this._httpContextAccessor = httpContextAccessor;
@@ -334,25 +338,237 @@ namespace EWSApi.Controllers
         }
 
 
-        //eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJTdGFuZGFyZCBVc2VyIiwibmJmIjoxNjk1MTMzNjM0LCJleHAiOjE4NTI5ODY0MzQsImlzcyI6IkVXU0FwaSIsImF1ZCI6IkVXU0FwaSJ9.lwx7O1E7ejZdNdOAvdLvL185TrAl7ZoL_6ALC9cZ84cSOq4xVpuvMpvtIvqXhJxwRIYxGt_LiKnJUSDtrv8pgA
+
+        //POST: api/PostHealthInstitution
+        //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("PostReportRegister")]
+        public async Task<ActionResult<ReportRegisterVM>> PostReportRegister(ReportRegisterVM reportRegister)
+        {
+            var transaction = _context.Database.BeginTransaction();
+            var currentHttpContext = _httpContextAccessor.HttpContext;
+
+            try
+            {
+
+              
+
+
+                string uniqueNumber = _sqlContext.GenerateUniqueNumber.FromSqlInterpolated($"select   dbo.GenerateUniqueNumber (1) as uniqueNumber").FirstOrDefault().uniqueNumber;
+
+                int healthInstitutionID = await _context.HealthInstitution
+               .Where(ms => ms.IdentificationNumber == reportRegister.HealthInstitutionIdentificationNumber && ms.LicenceNumber == reportRegister.HealthInstitutionLicenseNumber)
+               .Select(ms => ms.HealthInstitutionId)
+               .FirstOrDefaultAsync();
+
+                int citizenRegisterID = await _context.CitizenRegister
+               .Where(ms => ms.PersonalNumber == reportRegister.PersonalNumber)
+               .Select(ms => ms.CitizenRegisterId)
+               .FirstOrDefaultAsync();
+
+                int medicalStaffID = await _context.MedicalStaff
+               .Where(ms => ms.PersonalNumber == reportRegister.MedicalLicenseNumber && ms.LicenceNumber == reportRegister.MedicalLicenseNumber)
+               .Select(ms => ms.MedicalStaffId)
+               .FirstOrDefaultAsync();
+
+
+                if (citizenRegisterID == null || citizenRegisterID == 0)
+                {
+                    var newCitizen = new CitizenRegister
+                    {
+                        PersonalNumber = reportRegister.PersonalNumber,
+                        Firstname = reportRegister.Firstname,
+                        Lastname = reportRegister.Lastname,
+                        FatherName = reportRegister.FatherName,
+                        MotherName = reportRegister.MotherName,
+                        PartnerName = reportRegister.PartnerName,
+                        GenderId = reportRegister.Gender == "M" ? 1 : 2,
+                        Birthdate = reportRegister.Birthdate,
+                        LivingStatus = reportRegister.LivingStatus,
+                        MaritalStatusId = reportRegister.MaritalStatusId,
+                        Foreign = reportRegister.Foreign,
+                        CountryId = reportRegister.CountryId,
+                        MunicipalityId = reportRegister.MunicipalityId,
+                        Municipality = reportRegister.Municipality,
+                        SettlementId = reportRegister.SettlementId,
+                        Settlement = reportRegister.Settlement,
+                        Address = reportRegister.Address,
+                        BirthPlace = reportRegister.BirthPlace,
+                        PhoneNumber = reportRegister.PhoneNumber,
+                        Email = reportRegister.Email,
+                        InsertedFrom = _conf["Jwt:UserID"].ToString(),
+                        InsertedDate = DateTime.Now
+
+
+
+                    };
+
+                    _context.CitizenRegister.Add(newCitizen);
+                    await _context.SaveChangesAsync();
+                    citizenRegisterID = newCitizen.CitizenRegisterId;
+
+                }
+
+                var newResportRegister = new ReportRegister
+                {
+                    UniqueNumber = uniqueNumber,
+                    HealthInstitutionId = healthInstitutionID,
+                    HealthInstitutionName = reportRegister.HealthInstitutionName,
+                    HealthInstitutionAddress = reportRegister.HealthInstitutionAddress,
+                    CitizenRegisterId = citizenRegisterID,
+                    PersonalNumber = reportRegister.PersonalNumber,
+                    Firstname = reportRegister.Firstname,
+                    Lastname = reportRegister.Lastname,
+                    FatherName = reportRegister.FatherName,
+                    MotherName = reportRegister.MotherName,
+                    PartnerName = reportRegister.PartnerName,
+                    GenderId = reportRegister.Gender == "M" ? 1 : 2,
+                    Birthdate = reportRegister.Birthdate,
+                    Address = reportRegister.Address,
+                    PhoneNumber = reportRegister.PhoneNumber,
+                    ConsultingDate = reportRegister.ConsultingDate,
+                    SyndromeTypeId = reportRegister.SyndromeTypeId,
+                    SymptomDate = reportRegister.SymptomDate,
+                    SampleTakenDate = reportRegister.SampleTakenDate,
+                    InsertedDate = DateTime.Now,
+                    InsertedFrom = _conf["Jwt:UserID"].ToString()
+
+                };
+                _context.ReportRegister.Add(newResportRegister);
+                await _context.SaveChangesAsync();
+                int ResportRegisterID = newResportRegister.ReportRegisterId;
+
+
+                var newReportRegisterSampleTaken = reportRegister.reportRegisterSampleTaken.Select(sample => new ReportRegisterSampleTaken
+                {
+                    ReportRegisterId = ResportRegisterID,
+                    SampleTakenTypeId = sample.SampleTakenTypeId,
+                    Active = true,
+                    InsertedDate = DateTime.Now,
+                    InsertedFrom = _conf["Jwt:UserID"].ToString()
+                }).ToList();
+
+
+                _context.ReportRegisterSampleTaken.AddRange(newReportRegisterSampleTaken);
+                await _context.SaveChangesAsync();
+
+                var newClassClassification = reportRegister.caseClassification.Select(cc => new ReportRegisterCaseClassification
+                {
+                    ReportRegisterId = ResportRegisterID,
+                    SyndromeTypeId = cc.CCSyndromeTypeId,
+                    CaseClassificationTypeId = cc.CaseClassificationTypeId,
+                    DiseaseInfectionId = cc.DiseaseInfectionId,
+                    Active = true,
+                    InsertedDate = DateTime.Now,
+                    InsertedFrom = _conf["Jwt:UserID"].ToString()
+                }).ToList();
+
+                _context.ReportRegisterCaseClassification.AddRange(newClassClassification);
+                await _context.SaveChangesAsync();
+
+
+                var newReportRegisterStatus = reportRegister.reportRegisterStatus.Select(status => new ReportRegisterStatus
+                {
+                    ReportRegisterId = ResportRegisterID,
+                    ReportRegisterStatusTypeId = status.ReportRegisterStatusTypeId,
+                    MedicalStaffId = medicalStaffID == 0 ? null : medicalStaffID,
+                    Active = true,
+                    InsertedDate = DateTime.Now,
+                    InsertedFrom = _conf["Jwt:UserID"].ToString()
+                }).ToList();
+
+
+                _context.ReportRegisterStatus.AddRange(newReportRegisterStatus);
+                await _context.SaveChangesAsync();
+
+                var newReportRegisterExamination = reportRegister.reportRegisterTest.Select(test => new ReportRegisterTest
+                {
+                    ReportRegisterId = ResportRegisterID,
+                    ExaminationId = test.ExaminationId,
+                    TestTypeName = test.TestTypeName,
+                    InsertedDate = DateTime.Now,
+                    InsertedFrom = _conf["Jwt:UserID"].ToString()
+                }).ToList();
+
+                _context.ReportRegisterTest.AddRange(newReportRegisterExamination);
+                await _context.SaveChangesAsync();
+
+                transaction.Commit();
+                return Ok(new { UniqueNumber = uniqueNumber, Message = "Success" });
+            }
+            catch (Exception ex)
+            {
+
+                transaction.Rollback();
+                _logService.InsertLog(currentHttpContext, "PostReportRegister", "An error occurred while processing the request ReportRegister :" + ex.InnerException.ToString() + "", true);
+                return BadRequest(new { Message = ex.InnerException.ToString() });
+            }
+
+        }
+
+
+
+        [HttpPost("PostReportRegisterTestResult")]
+        public async Task<ActionResult<ReportRegisterTestResultVM>> PostReportRegisterTestResult(ReportRegisterTestResultVM reportRegisterTestResult)
+        {
+            var transaction = _context.Database.BeginTransaction();
+            var currentHttpContext = _httpContextAccessor.HttpContext;
+
+            int healthInstitutionID = await _context.HealthInstitution
+              .Where(ms => ms.IdentificationNumber == reportRegisterTestResult.HealthInstitutionIdentificationNumber && ms.LicenceNumber == reportRegisterTestResult.HealthInstitutionLicenseNumber)
+              .Select(ms => ms.HealthInstitutionId)
+              .FirstOrDefaultAsync();
+
+            try 
+            {
+                _context.ReportRegisterTestResult.Add(new ReportRegisterTestResult
+                {
+                    ReportRegisterTestId = reportRegisterTestResult.ReportRegisterTestId,
+                    HealthInstitutionId = healthInstitutionID,
+                    HealthInstitutionName = reportRegisterTestResult.HealthInstitutionName,
+                    HealthInstitutionAddress = reportRegisterTestResult.HealthInstitutionAddress,
+                    IsPositive = reportRegisterTestResult.IsPositive,
+                    ResultSchema = reportRegisterTestResult.ResultSchema,
+                    ResultDate = reportRegisterTestResult.ResultDate,
+                    UserName = reportRegisterTestResult.Username,
+                    InsertedDate = DateTime.Now,
+                   
+
+                }
+                );
+               
+                await _context.SaveChangesAsync();
+                transaction.Commit();
+                return Ok(new { Message = "Success" });
+            }
+            catch (Exception ex)
+            {
+
+                transaction.Rollback();
+                _logService.InsertLog(currentHttpContext, "PostReportRegisterTestResult", "An error occurred while processing the request ReportRegisterTestResult :" + ex.InnerException.ToString() + "", true);
+                return BadRequest(new { Message = ex.InnerException.ToString() });
+            }
+
+        }
+
+            //eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJTdGFuZGFyZCBVc2VyIiwibmJmIjoxNjk1MTMzNjM0LCJleHAiOjE4NTI5ODY0MzQsImlzcyI6IkVXU0FwaSIsImF1ZCI6IkVXU0FwaSJ9.lwx7O1E7ejZdNdOAvdLvL185TrAl7ZoL_6ALC9cZ84cSOq4xVpuvMpvtIvqXhJxwRIYxGt_LiKnJUSDtrv8pgA
 
 
 
 
-        //[AllowAnonymous]
-        //[HttpGet("Token")]
-        //public string GenerateToken()
-        //{
-        //    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_conf["Jwt:Key"]));
-        //    var credential = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512Signature);
+            //[AllowAnonymous]
+            //[HttpGet("Token")]
+            //public string GenerateToken()
+            //{
+            //    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_conf["Jwt:Key"]));
+            //    var credential = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512Signature);
 
-        //    List<Claim> claims = new List<Claim> {
-        //     new Claim(ClaimTypes.Role, "Standard User")
-        //};
+            //    List<Claim> claims = new List<Claim> {
+            //     new Claim(ClaimTypes.Role, "Standard User")
+            //};
 
-        //    var token = new JwtSecurityToken(_conf["Jwt:Issuer"], _conf["Jwt:Audience"], claims: claims, notBefore: DateTime.Now, expires: DateTime.Now.AddYears(5), signingCredentials: credential);
-        //    return new JwtSecurityTokenHandler().WriteToken(token);
-        //}
+            //    var token = new JwtSecurityToken(_conf["Jwt:Issuer"], _conf["Jwt:Audience"], claims: claims, notBefore: DateTime.Now, expires: DateTime.Now.AddYears(5), signingCredentials: credential);
+            //    return new JwtSecurityTokenHandler().WriteToken(token);
+            //}
 
-    }
+        }
 }

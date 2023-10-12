@@ -27,13 +27,7 @@ public partial class MedicalStaffVM
     [Required]
     public string Status { get; set; } = null!;
 
-    public string? InsertedFrom { get; set; } = null!;
-
-    public DateTime? InsertedDate { get; set; }
-
-    public string? UpdatedFrom { get; set; }
-
-    public DateTime? UpdatedDate { get; set; }
+   
 
     
 }

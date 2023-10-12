@@ -61,13 +61,7 @@ public partial class HealthInstitutionVM
     [RegularExpression(@"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$", ErrorMessage = "Please enter correct phone number")]
     public string? PhoneNumber { get; set; }
 
-    public string? InsertedFrom { get; set; } = null!;
-
-    public DateTime? InsertedDate { get; set; }
-
-    public string? UpdatedFrom { get; set; }
-
-    public DateTime? UpdatedDate { get; set; }
+  
 
     
 }

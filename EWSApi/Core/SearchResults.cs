@@ -13,6 +13,8 @@ public partial class SearchResults
 
     public string Title { get; set; } = null!;
 
+    public string Description { get; set; } = null!;
+
     public DateTime PublishDate { get; set; }
 
     public string InsertedFrom { get; set; } = null!;

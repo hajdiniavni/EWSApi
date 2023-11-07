@@ -59,29 +59,42 @@ namespace EWSApi.Controllers
                                 join c in _context.Country on cr.CountryId equals c.CountryId
                                 join rrs in _context.ReportRegisterStatus
                                      on new { rr.ReportRegisterId, Active = true } equals new { rrs.ReportRegisterId, rrs.Active }
-                                join ms in _context.MedicalStaff on rrs.MedicalStaffId equals ms.MedicalStaffId
+                                join ms in _context.MedicalStaff on rrs.MedicalStaffId equals ms.MedicalStaffId into medicalStaff
+                                     from staff in medicalStaff.DefaultIfEmpty() // Left Join
                                 join rrt in _context.ReportRegisterTest on rr.ReportRegisterId equals rrt.ReportRegisterId
                                 join e in _context.Examination on rrt.ExaminationId equals e.ExaminationId into testTypes
-                                where (rr.UniqueNumber == UniqueNumber) || (cr.PersonalNumber == UniqueNumber) // Assuming personalNumberParameter is the parameter for @PersonalNumber
+                                where (rr.UniqueNumber == UniqueNumber) || (cr.PersonalNumber == AesCrypto.Ecrypt<string>(UniqueNumber)) // Assuming personalNumberParameter is the parameter for @PersonalNumber
                                 select new
                                 {
                                     UniqueNumberSMSN = rr.UniqueNumber,
-                                    PersonalNumber = cr.PersonalNumber,
-                                    Name = cr.Firstname,
-                                    ParentName = cr.FatherName,
-                                    Surname = cr.Lastname,
-                                    Address = $"{c.NameSq}, {cr.Municipality}, {cr.Address}",
-                                    Doctor = $"{ms.Firstname} {ms.Lastname} - {ms.LicenceNumber}",
-                                    SampleTaken = rr.SampleTakenDate == null ? "NO" : "YES",
-                                    SampleTakenDate = rr.SampleTakenDate,
-                                    TestType = testTypes.Select(tt => new { TestNumber = tt.ExaminationCode, Description = tt.ExaminationName }).ToArray(),
+                                    PersonalNumber = AesCrypto.Decrypt<string>(cr.PersonalNumber),
+                                    Name = AesCrypto.Decrypt<string>(cr.Firstname),
+                                    ParentName = AesCrypto.Decrypt<string>(cr.FatherName),
+                                    Surname = AesCrypto.Decrypt<string>(cr.Lastname),
+                                    Address = $"{c.NameSq}, {AesCrypto.Decrypt<string>(cr.Municipality)}, {AesCrypto.Decrypt<string>(cr.Address)}",
+                                    Doctor = (staff == null) ? null : $"{staff.Firstname} {staff.Lastname} - {staff.LicenceNumber}",
+                                    TestTypes = testTypes
+                                               .Where(tt => tt != null)
+                                               .Select(tt => new { TestNumber = tt.ExaminationCode, Description = tt.ExaminationName })
+                                               .Distinct()
+                                               .ToList(),
+
+                                }).GroupBy(x => x.UniqueNumberSMSN)
+                                  .Select(group => new
+                                   {
+                                       UniqueNumberSMSN = group.Key,
+                                       PersonalNumber = group.First().PersonalNumber,
+                                       Name = group.First().Name,
+                                       ParentName = group.First().ParentName,
+                                       Surname = group.First().Surname,
+                                       Address = group.First().Address,
+                                       Doctor = group.First().Doctor,
+                                       TestTypes = group.SelectMany(x => x.TestTypes).Distinct().ToList(),
+                                  })
+                                  .ToListAsync();
 
 
-                                }).ToListAsync();
-
-
-
-             _logService.InsertLog(currentHttpContext, "GetLabData", "UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", false);
+            _logService.InsertLog(currentHttpContext, "GetLabData", "UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", false);
 
 
 
@@ -361,7 +374,7 @@ namespace EWSApi.Controllers
                .FirstOrDefaultAsync();
 
                 int citizenRegisterID = await _context.CitizenRegister
-               .Where(ms => ms.PersonalNumber == reportRegister.PersonalNumber)
+               .Where(ms => ms.PersonalNumber == AesCrypto.Ecrypt<string>(reportRegister.PersonalNumber))
                .Select(ms => ms.CitizenRegisterId)
                .FirstOrDefaultAsync();
 
@@ -375,26 +388,26 @@ namespace EWSApi.Controllers
                 {
                     var newCitizen = new CitizenRegister
                     {
-                        PersonalNumber = reportRegister.PersonalNumber,
-                        Firstname = reportRegister.Firstname,
-                        Lastname = reportRegister.Lastname,
-                        FatherName = reportRegister.FatherName,
-                        MotherName = reportRegister.MotherName,
-                        PartnerName = reportRegister.PartnerName,
+                        PersonalNumber = AesCrypto.Ecrypt<string>(reportRegister.PersonalNumber),
+                        Firstname = AesCrypto.Ecrypt<string>(reportRegister.Firstname),
+                        Lastname = AesCrypto.Ecrypt<string>(reportRegister.Lastname),
+                        FatherName = AesCrypto.Ecrypt<string>(reportRegister.FatherName),
+                        MotherName = AesCrypto.Ecrypt<string>(reportRegister.MotherName),
+                        PartnerName = AesCrypto.Ecrypt<string>(reportRegister.PartnerName),
                         GenderId = reportRegister.Gender == "M" ? 1 : 2,
-                        Birthdate = reportRegister.Birthdate,
+                        Birthdate = AesCrypto.Ecrypt<string>(reportRegister.Birthdate),
                         LivingStatus = reportRegister.LivingStatus,
                         MaritalStatusId = reportRegister.MaritalStatusId,
                         Foreign = reportRegister.Foreign,
                         CountryId = reportRegister.CountryId,
                         MunicipalityId = reportRegister.MunicipalityId,
-                        Municipality = reportRegister.Municipality,
+                        Municipality = AesCrypto.Ecrypt<string>(reportRegister.Municipality),
                         SettlementId = reportRegister.SettlementId,
-                        Settlement = reportRegister.Settlement,
-                        Address = reportRegister.Address,
-                        BirthPlace = reportRegister.BirthPlace,
-                        PhoneNumber = reportRegister.PhoneNumber,
-                        Email = reportRegister.Email,
+                        Settlement = AesCrypto.Ecrypt<string>(reportRegister.Settlement),
+                        Address = AesCrypto.Ecrypt<string>(reportRegister.Address),
+                        BirthPlace = AesCrypto.Ecrypt<string>(reportRegister.BirthPlace),
+                        PhoneNumber = AesCrypto.Ecrypt<string>(reportRegister.PhoneNumber),
+                        Email = AesCrypto.Ecrypt<string>(reportRegister.Email),
                         InsertedFrom = _conf["Jwt:UserID"].ToString(),
                         InsertedDate = DateTime.Now
 
@@ -415,20 +428,21 @@ namespace EWSApi.Controllers
                     HealthInstitutionName = reportRegister.HealthInstitutionName,
                     HealthInstitutionAddress = reportRegister.HealthInstitutionAddress,
                     CitizenRegisterId = citizenRegisterID,
-                    PersonalNumber = reportRegister.PersonalNumber,
-                    Firstname = reportRegister.Firstname,
-                    Lastname = reportRegister.Lastname,
-                    FatherName = reportRegister.FatherName,
-                    MotherName = reportRegister.MotherName,
-                    PartnerName = reportRegister.PartnerName,
+                    PersonalNumber = AesCrypto.Ecrypt<string>(reportRegister.PersonalNumber),
+                    Firstname = AesCrypto.Ecrypt<string>(reportRegister.Firstname),
+                    Lastname = AesCrypto.Ecrypt<string>(reportRegister.Lastname),
+                    FatherName = AesCrypto.Ecrypt<string>(reportRegister.FatherName),
+                    MotherName = AesCrypto.Ecrypt<string>(reportRegister.MotherName),
+                    PartnerName = AesCrypto.Ecrypt<string>(reportRegister.PartnerName),
                     GenderId = reportRegister.Gender == "M" ? 1 : 2,
-                    Birthdate = reportRegister.Birthdate,
-                    Address = reportRegister.Address,
-                    PhoneNumber = reportRegister.PhoneNumber,
+                    Birthdate = AesCrypto.Ecrypt<string>(reportRegister.Birthdate),
+                    Address = AesCrypto.Ecrypt<string>(reportRegister.Address),
+                    PhoneNumber = AesCrypto.Ecrypt<string>(reportRegister.PhoneNumber),
                     ConsultingDate = reportRegister.ConsultingDate,
                     SyndromeTypeId = reportRegister.SyndromeTypeId,
                     SymptomDate = reportRegister.SymptomDate,
-                    SampleTakenDate = reportRegister.SampleTakenDate,
+                    SuspectedPlaceTypeId = reportRegister.SuspectedPlaceTypeID,
+                    SuspectedPlace = reportRegister.SuspectedPlace,
                     InsertedDate = DateTime.Now,
                     InsertedFrom = _conf["Jwt:UserID"].ToString()
 
@@ -549,6 +563,10 @@ namespace EWSApi.Controllers
             }
 
         }
+
+
+
+
 
             //eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJTdGFuZGFyZCBVc2VyIiwibmJmIjoxNjk1MTMzNjM0LCJleHAiOjE4NTI5ODY0MzQsImlzcyI6IkVXU0FwaSIsImF1ZCI6IkVXU0FwaSJ9.lwx7O1E7ejZdNdOAvdLvL185TrAl7ZoL_6ALC9cZ84cSOq4xVpuvMpvtIvqXhJxwRIYxGt_LiKnJUSDtrv8pgA
 

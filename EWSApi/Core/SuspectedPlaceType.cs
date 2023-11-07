@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace EWSApi.Core;
 
-public partial class SurveyType
+public partial class SuspectedPlaceType
 {
-    public int SurveyTypeId { get; set; }
+    public int SuspectedPlaceTypeId { get; set; }
 
     public string NameSq { get; set; } = null!;
 
@@ -23,7 +23,5 @@ public partial class SurveyType
 
     public DateTime? UpdatedDate { get; set; }
 
-    public virtual ICollection<SurveyModel> SurveyModel { get; set; } = new List<SurveyModel>();
-
-    public virtual ICollection<SurveyModelTemp> SurveyModelTemp { get; set; } = new List<SurveyModelTemp>();
+    public virtual ICollection<ReportRegister> ReportRegister { get; set; } = new List<ReportRegister>();
 }

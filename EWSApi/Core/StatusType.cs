@@ -24,4 +24,6 @@ public partial class StatusType
     public DateTime? UpdatedDate { get; set; }
 
     public virtual ICollection<FaqquestionStatus> FaqquestionStatus { get; set; } = new List<FaqquestionStatus>();
+
+    public virtual ICollection<ReportRegisterTrackingStatus> ReportRegisterTrackingStatus { get; set; } = new List<ReportRegisterTrackingStatus>();
 }

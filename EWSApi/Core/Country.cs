@@ -19,5 +19,7 @@ public partial class Country
 
     public string? Prefix { get; set; }
 
+    public virtual ICollection<CitizenRegister> CitizenRegister { get; set; } = new List<CitizenRegister>();
+
     public virtual ICollection<City> City { get; set; } = new List<City>();
 }

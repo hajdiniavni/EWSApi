@@ -3,19 +3,17 @@ using System.Collections.Generic;
 
 namespace EWSApi.Core;
 
-public partial class ReportRegisterSampleTaken
+public partial class ReportRegisterTrackingStatus
 {
-    public int ReportRegisterSampleTakenId { get; set; }
+    public int ReportRegisterTrackingStatusId { get; set; }
 
     public int ReportRegisterId { get; set; }
 
-    public int SampleTakenTypeId { get; set; }
-
-    public DateTime? SampleTakenDate { get; set; }
-
-    public string? Description { get; set; }
+    public int StatusTypeId { get; set; }
 
     public bool Active { get; set; }
+
+    public string? Description { get; set; }
 
     public string InsertedFrom { get; set; } = null!;
 
@@ -29,7 +27,7 @@ public partial class ReportRegisterSampleTaken
 
     public virtual ReportRegister ReportRegister { get; set; } = null!;
 
-    public virtual SampleTakenType SampleTakenType { get; set; } = null!;
+    public virtual ICollection<ReportRegisterTrackingStatusStaff> ReportRegisterTrackingStatusStaff { get; set; } = new List<ReportRegisterTrackingStatusStaff>();
 
-    public virtual AspNetUsers? UpdatedFromNavigation { get; set; }
+    public virtual StatusType StatusType { get; set; } = null!;
 }

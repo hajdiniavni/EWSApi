@@ -19,11 +19,15 @@ public partial class ReportRegisterTestResult
 
     public string ResultSchema { get; set; } = null!;
 
+    public bool? Active { get; set; }
+
     public DateTime ResultDate { get; set; }
 
     public DateTime InsertedDate { get; set; }
 
     public string UserName { get; set; } = null!;
+
+    public DateTime? UpdatedDate { get; set; }
 
     public virtual HealthInstitution HealthInstitution { get; set; } = null!;
 

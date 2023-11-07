@@ -3,15 +3,13 @@ using System.Collections.Generic;
 
 namespace EWSApi.Core;
 
-public partial class ReportRegisterSurvey
+public partial class RealRole
 {
-    public int ReportRegisterSurveyId { get; set; }
+    public int RealRoleId { get; set; }
 
-    public int ReportRegisterId { get; set; }
+    public string UserId { get; set; } = null!;
 
-    public string SurveyNumber { get; set; } = null!;
-
-    public string Schema { get; set; } = null!;
+    public string RoleId { get; set; } = null!;
 
     public string InsertedFrom { get; set; } = null!;
 
@@ -23,7 +21,9 @@ public partial class ReportRegisterSurvey
 
     public virtual AspNetUsers InsertedFromNavigation { get; set; } = null!;
 
-    public virtual ReportRegister ReportRegister { get; set; } = null!;
+    public virtual AspNetRoles Role { get; set; } = null!;
 
     public virtual AspNetUsers? UpdatedFromNavigation { get; set; }
+
+    public virtual AspNetUsers User { get; set; } = null!;
 }

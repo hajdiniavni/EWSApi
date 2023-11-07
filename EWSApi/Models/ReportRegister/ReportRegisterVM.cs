@@ -36,7 +36,7 @@ public partial class ReportRegisterVM
 
     public string? Gender { get; set; }
 
-    public DateTime Birthdate { get; set; }
+    public string? Birthdate { get; set; }
 
     public bool LivingStatus { get; set; }
 
@@ -68,7 +68,9 @@ public partial class ReportRegisterVM
 
     public DateTime? SymptomDate { get; set; }
 
-    public DateTime? SampleTakenDate { get; set; }
+    public int SuspectedPlaceTypeID { get; set; }
+
+    public string? SuspectedPlace { get; set; }
 
     public string? MedicalLicenseNumber { get; set; }
     public string? MedicalPersonalNumber { get; set; }

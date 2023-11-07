@@ -19,7 +19,7 @@ public partial class ReportRegisterContact
 
     public string LastName { get; set; } = null!;
 
-    public DateTime BirthDate { get; set; }
+    public string BirthDate { get; set; } = null!;
 
     public int GenderId { get; set; }
 

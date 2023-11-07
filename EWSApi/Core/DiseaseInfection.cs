@@ -11,6 +11,10 @@ public partial class DiseaseInfection
 
     public string DiseaseCode { get; set; } = null!;
 
+    public bool? DataEncrypted { get; set; }
+
+    public bool? IsTransmissionDisease { get; set; }
+
     public string NameSq { get; set; } = null!;
 
     public string NameEn { get; set; } = null!;
@@ -31,17 +35,17 @@ public partial class DiseaseInfection
 
     public DateTime? UpdatedDate { get; set; }
 
+    public virtual ICollection<DiseaseInfectionSurvey> DiseaseInfectionSurvey { get; set; } = new List<DiseaseInfectionSurvey>();
+
     public virtual DiseaseInfectionType? DiseaseInfectionType { get; set; }
 
     public virtual AspNetUsers InsertedFromNavigation { get; set; } = null!;
 
     public virtual ICollection<ReportRegisterCaseClassification> ReportRegisterCaseClassification { get; set; } = new List<ReportRegisterCaseClassification>();
 
+    public virtual ICollection<ReportRegisterConcomitantDisease> ReportRegisterConcomitantDisease { get; set; } = new List<ReportRegisterConcomitantDisease>();
+
     public virtual ReportingTimeType ReportingTimeType { get; set; } = null!;
-
-    public virtual ICollection<SurveyType> SurveyType { get; set; } = new List<SurveyType>();
-
-    public virtual ICollection<SurveyTypeTemp> SurveyTypeTemp { get; set; } = new List<SurveyTypeTemp>();
 
     public virtual AspNetUsers? UpdatedFromNavigation { get; set; }
 }

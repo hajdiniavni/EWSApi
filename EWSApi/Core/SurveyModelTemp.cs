@@ -3,17 +3,15 @@ using System.Collections.Generic;
 
 namespace EWSApi.Core;
 
-public partial class ReportRegisterSampleTaken
+public partial class SurveyModelTemp
 {
-    public int ReportRegisterSampleTakenId { get; set; }
+    public int SurveyModelTempId { get; set; }
 
-    public int ReportRegisterId { get; set; }
+    public int SurveyTypeId { get; set; }
 
-    public int SampleTakenTypeId { get; set; }
+    public int? RowId { get; set; }
 
-    public DateTime? SampleTakenDate { get; set; }
-
-    public string? Description { get; set; }
+    public string Schema { get; set; } = null!;
 
     public bool Active { get; set; }
 
@@ -27,9 +25,7 @@ public partial class ReportRegisterSampleTaken
 
     public virtual AspNetUsers InsertedFromNavigation { get; set; } = null!;
 
-    public virtual ReportRegister ReportRegister { get; set; } = null!;
-
-    public virtual SampleTakenType SampleTakenType { get; set; } = null!;
+    public virtual SurveyType SurveyType { get; set; } = null!;
 
     public virtual AspNetUsers? UpdatedFromNavigation { get; set; }
 }

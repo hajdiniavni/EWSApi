@@ -21,7 +21,7 @@ public partial class CitizenRegister
 
     public int GenderId { get; set; }
 
-    public DateTime Birthdate { get; set; }
+    public string Birthdate { get; set; } = null!;
 
     public bool LivingStatus { get; set; }
 
@@ -61,6 +61,8 @@ public partial class CitizenRegister
     public bool? UpdatedCitizen { get; set; }
 
     public virtual ICollection<CitizenRegisterVaccine> CitizenRegisterVaccine { get; set; } = new List<CitizenRegisterVaccine>();
+
+    public virtual Country Country { get; set; } = null!;
 
     public virtual ICollection<ReportRegister> ReportRegister { get; set; } = new List<ReportRegister>();
 }

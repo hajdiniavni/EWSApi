@@ -25,5 +25,7 @@ public partial class AspNetRoles
 
     public virtual ICollection<FaqcategoryGroup> FaqcategoryGroup { get; set; } = new List<FaqcategoryGroup>();
 
+    public virtual ICollection<RealRole> RealRole { get; set; } = new List<RealRole>();
+
     public virtual ICollection<AspNetUsers> User { get; set; } = new List<AspNetUsers>();
 }

@@ -29,7 +29,7 @@ public partial class ReportRegister
 
     public string? PartnerName { get; set; }
 
-    public DateTime Birthdate { get; set; }
+    public string Birthdate { get; set; } = null!;
 
     public int GenderId { get; set; }
 
@@ -45,9 +45,11 @@ public partial class ReportRegister
 
     public DateTime? SymptomDate { get; set; }
 
-    public DateTime? SampleTakenDate { get; set; }
-
     public bool? LaboratoryConfirmation { get; set; }
+
+    public int? SuspectedPlaceTypeId { get; set; }
+
+    public string? SuspectedPlace { get; set; }
 
     public string InsertedFrom { get; set; } = null!;
 
@@ -67,6 +69,8 @@ public partial class ReportRegister
 
     public virtual ICollection<ReportRegisterCaseClassification> ReportRegisterCaseClassification { get; set; } = new List<ReportRegisterCaseClassification>();
 
+    public virtual ICollection<ReportRegisterConcomitantDisease> ReportRegisterConcomitantDisease { get; set; } = new List<ReportRegisterConcomitantDisease>();
+
     public virtual ICollection<ReportRegisterContact> ReportRegisterContact { get; set; } = new List<ReportRegisterContact>();
 
     public virtual ICollection<ReportRegisterSampleTaken> ReportRegisterSampleTaken { get; set; } = new List<ReportRegisterSampleTaken>();
@@ -76,6 +80,12 @@ public partial class ReportRegister
     public virtual ICollection<ReportRegisterSurvey> ReportRegisterSurvey { get; set; } = new List<ReportRegisterSurvey>();
 
     public virtual ICollection<ReportRegisterTest> ReportRegisterTest { get; set; } = new List<ReportRegisterTest>();
+
+    public virtual ICollection<ReportRegisterTherapy> ReportRegisterTherapy { get; set; } = new List<ReportRegisterTherapy>();
+
+    public virtual ICollection<ReportRegisterTrackingStatus> ReportRegisterTrackingStatus { get; set; } = new List<ReportRegisterTrackingStatus>();
+
+    public virtual SuspectedPlaceType? SuspectedPlaceType { get; set; }
 
     public virtual SyndromeType? SyndromeType { get; set; }
 

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace EWSApi.Core;
 
-public partial class ReportRegisterSurvey
+public partial class SurveyModel
 {
-    public int ReportRegisterSurveyId { get; set; }
+    public int SurveyModelId { get; set; }
 
-    public int ReportRegisterId { get; set; }
-
-    public string SurveyNumber { get; set; } = null!;
+    public int SurveyTypeId { get; set; }
 
     public string Schema { get; set; } = null!;
+
+    public bool Active { get; set; }
 
     public string InsertedFrom { get; set; } = null!;
 
@@ -21,9 +21,11 @@ public partial class ReportRegisterSurvey
 
     public DateTime? UpdatedDate { get; set; }
 
+    public virtual ICollection<DiseaseInfectionSurvey> DiseaseInfectionSurvey { get; set; } = new List<DiseaseInfectionSurvey>();
+
     public virtual AspNetUsers InsertedFromNavigation { get; set; } = null!;
 
-    public virtual ReportRegister ReportRegister { get; set; } = null!;
+    public virtual SurveyType SurveyType { get; set; } = null!;
 
     public virtual AspNetUsers? UpdatedFromNavigation { get; set; }
 }

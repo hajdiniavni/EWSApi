@@ -9,7 +9,7 @@ public partial class City
 
     public int CountryId { get; set; }
 
-    public int? RegionId { get; set; }
+    public int RegionId { get; set; }
 
     public string NameSq { get; set; } = null!;
 
@@ -22,6 +22,10 @@ public partial class City
     public virtual Country Country { get; set; } = null!;
 
     public virtual ICollection<HealthInstitution> HealthInstitution { get; set; } = new List<HealthInstitution>();
+
+    public virtual Region Region { get; set; } = null!;
+
+    public virtual ICollection<Region> RegionNavigation { get; set; } = new List<Region>();
 
     public virtual ICollection<Settlement> Settlement { get; set; } = new List<Settlement>();
 }

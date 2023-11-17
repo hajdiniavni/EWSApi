@@ -13,6 +13,7 @@ using EWSApi.Models.HealthInstitution;
 using EWSApi.Models.Examination;
 using EWSApi.Models.MedicalStaff;
 using EWSApi.Models.ReportRegister;
+using EWSApi.Models.DiseaseInfection;
 using System.Data.Common;
 using System.Transactions;
 
@@ -565,28 +566,105 @@ namespace EWSApi.Controllers
         }
 
 
+        //POST: api/PostDiseaseInfection
+        //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("PostDiseaseInfection")]
+        public async Task<ActionResult<DiseaseInfectionVM>> PostDiseaseInfection(DiseaseInfectionVM disease)
+        {
+
+            var currentHttpContext = _httpContextAccessor.HttpContext;
+            var transaction = _context.Database.BeginTransaction();
+
+            try
+            {
+
+                var existingDisease = await _context.DiseaseInfection
+                  .FirstOrDefaultAsync(ms => ms.DiseaseCode == disease.DiseaseCode);
+
+                if (existingDisease == null)
+                {
+                    // Create new DiseaseInfection
+                    _context.DiseaseInfection.Add(new DiseaseInfection
+                    {
+                        DiseaseInfectionTypeId = disease.DiseaseInfectionTypeId,
+                        DiseaseCode = disease.DiseaseCode,
+                        DataEncrypted = disease.DataEncrypted,
+                        IsTransmissionDisease = disease.IsTransmissionDisease,
+                        NameSq = disease.NameSq,
+                        NameEn = disease.NameEn,
+                        NameSr = disease.NameSr,
+                        ReportingTimeTypeId = disease.ReportingTimeTypeId,
+                        Description = disease.Description,
+                        Active = disease.Active,
+                        InsertedDate = DateTime.Now,
+                        InsertedFrom = _conf["Jwt:UserID"].ToString()
+                    }
+
+
+                    );
+
+                    await _context.SaveChangesAsync();
+                    string jsonDisease = JsonConvert.SerializeObject(disease);
+                    transaction.Commit();
+                    _logService.InsertLog(currentHttpContext, "PostDiseaseInfection", "DiseaseInfection created: " + jsonDisease + "", false);
+                }
+                else
+                {
+                    // Update DiseaseInfection
+
+                    existingDisease.DiseaseInfectionTypeId = disease.DiseaseInfectionTypeId;
+                    existingDisease.DataEncrypted = disease.DataEncrypted;
+                    existingDisease.IsTransmissionDisease = disease.IsTransmissionDisease;
+                    existingDisease.NameSq = disease.NameSq;
+                    existingDisease.NameEn = disease.NameEn;
+                    existingDisease.NameSr = disease.NameSr;
+                    existingDisease.ReportingTimeTypeId = disease.ReportingTimeTypeId;
+                    existingDisease.Description = disease.Description;
+                    existingDisease.Active = disease.Active;
+                    existingDisease.UpdatedDate = DateTime.Now;
+                    existingDisease.UpdatedFrom = _conf["Jwt:UserID"];
+
+                    await _context.SaveChangesAsync();
+                    string jsonDisease = JsonConvert.SerializeObject(disease);
+                    transaction.Commit();
+                    _logService.InsertLog(currentHttpContext, "PostDiseaseInfection", "DiseaseInfection updated: " + jsonDisease + "", false);
+                }
 
 
 
-            //eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJTdGFuZGFyZCBVc2VyIiwibmJmIjoxNjk1MTMzNjM0LCJleHAiOjE4NTI5ODY0MzQsImlzcyI6IkVXU0FwaSIsImF1ZCI6IkVXU0FwaSJ9.lwx7O1E7ejZdNdOAvdLvL185TrAl7ZoL_6ALC9cZ84cSOq4xVpuvMpvtIvqXhJxwRIYxGt_LiKnJUSDtrv8pgA
-
-
-
-
-            //[AllowAnonymous]
-            //[HttpGet("Token")]
-            //public string GenerateToken()
-            //{
-            //    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_conf["Jwt:Key"]));
-            //    var credential = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512Signature);
-
-            //    List<Claim> claims = new List<Claim> {
-            //     new Claim(ClaimTypes.Role, "Standard User")
-            //};
-
-            //    var token = new JwtSecurityToken(_conf["Jwt:Issuer"], _conf["Jwt:Audience"], claims: claims, notBefore: DateTime.Now, expires: DateTime.Now.AddYears(5), signingCredentials: credential);
-            //    return new JwtSecurityTokenHandler().WriteToken(token);
-            //}
-
+                return Ok(new { Message = "Success" });
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                _logService.InsertLog(currentHttpContext, "PostDiseaseInfection", "An error occurred while processing the request Examination :" + ex.InnerException.ToString() + "", true);
+                return BadRequest(new { Message = ex.InnerException.ToString() });
+            }
         }
+
+
+
+
+
+        //eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJTdGFuZGFyZCBVc2VyIiwibmJmIjoxNjk1MTMzNjM0LCJleHAiOjE4NTI5ODY0MzQsImlzcyI6IkVXU0FwaSIsImF1ZCI6IkVXU0FwaSJ9.lwx7O1E7ejZdNdOAvdLvL185TrAl7ZoL_6ALC9cZ84cSOq4xVpuvMpvtIvqXhJxwRIYxGt_LiKnJUSDtrv8pgA
+
+
+
+
+        //[AllowAnonymous]
+        //[HttpGet("Token")]
+        //public string GenerateToken()
+        //{
+        //    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_conf["Jwt:Key"]));
+        //    var credential = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512Signature);
+
+        //    List<Claim> claims = new List<Claim> {
+        //     new Claim(ClaimTypes.Role, "Standard User")
+        //};
+
+        //    var token = new JwtSecurityToken(_conf["Jwt:Issuer"], _conf["Jwt:Audience"], claims: claims, notBefore: DateTime.Now, expires: DateTime.Now.AddYears(5), signingCredentials: credential);
+        //    return new JwtSecurityTokenHandler().WriteToken(token);
+        //}
+
+    }
 }

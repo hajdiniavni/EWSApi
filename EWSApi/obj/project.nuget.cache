@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "75K21aB40IKtotZKEf6+HzA+yeTCzbrfG4pcj1z671pOV08F9qM5BgkTokcWXyq3YYKFfSB5puVpqT0LmxXT7Q==",
+  "dgSpecHash": "4ru/+okKciGL36iEMEwDJlH2V2ce/CT+7hQyD4LAkt9FiZqezG5G4tqSzFlHbqNEHN9wMCjWBcicVY9SIgffzw==",
   "success": true,
   "projectFilePath": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\EWSApi.csproj",
   "expectedPackageFiles": [
@@ -235,10 +235,10 @@
     "C:\\Users\\betim.krasniqi\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\betim.krasniqi\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\betim.krasniqi\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\betim.krasniqi\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.11\\microsoft.netcore.app.host.win-x64.6.0.11.nupkg.sha512",
-    "C:\\Users\\betim.krasniqi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.11\\microsoft.aspnetcore.app.ref.6.0.11.nupkg.sha512",
-    "C:\\Users\\betim.krasniqi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.11\\microsoft.windowsdesktop.app.ref.6.0.11.nupkg.sha512",
-    "C:\\Users\\betim.krasniqi\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.11\\microsoft.netcore.app.ref.6.0.11.nupkg.sha512"
+    "C:\\Users\\betim.krasniqi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\betim.krasniqi\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\betim.krasniqi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\betim.krasniqi\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.14\\microsoft.netcore.app.host.win-x64.7.0.14.nupkg.sha512"
   ],
   "logs": []
 }

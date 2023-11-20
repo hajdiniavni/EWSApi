@@ -43,7 +43,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (bool.Parse(builder.Configuration["Jwt:Swagger"]) == true)
 {
     app.UseSwagger();
     app.UseSwaggerUI();

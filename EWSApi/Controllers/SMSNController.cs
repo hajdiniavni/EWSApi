@@ -16,6 +16,8 @@ using EWSApi.Models.ReportRegister;
 using EWSApi.Models.DiseaseInfection;
 using System.Data.Common;
 using System.Transactions;
+using Newtonsoft.Json.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace EWSApi.Controllers
 {
@@ -41,14 +43,14 @@ namespace EWSApi.Controllers
 
         // GET: api/SMSN/GetLabData/578
         [HttpGet("GetLabData/{UniqueNumber}/{LabCode}")]
-        public async Task<ActionResult<SMSNController>> GetLabData(string UniqueNumber, string LabCode)
+        public async Task<ActionResult<SMSNController>> GetLabData([FromRoute] LabDataRequestModel requestModel)//(string UniqueNumber, string LabCode)
         {
             var currentHttpContext = _httpContextAccessor.HttpContext;
 
 
             if (_context.ReportRegister == null)
             {
-                 _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", true);
+                 _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + requestModel.UniqueNumber + ", Laboratory code= " + requestModel.LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", true);
                 return NotFound();
             }
 
@@ -64,7 +66,7 @@ namespace EWSApi.Controllers
                                      from staff in medicalStaff.DefaultIfEmpty() // Left Join
                                 join rrt in _context.ReportRegisterTest on rr.ReportRegisterId equals rrt.ReportRegisterId
                                 join e in _context.Examination on rrt.ExaminationId equals e.ExaminationId into testTypes
-                                where (rr.UniqueNumber == UniqueNumber) || (cr.PersonalNumber == AesCrypto.Ecrypt<string>(UniqueNumber)) // Assuming personalNumberParameter is the parameter for @PersonalNumber
+                                where (rr.UniqueNumber == requestModel.UniqueNumber) || (cr.PersonalNumber == AesCrypto.Ecrypt<string>(requestModel.UniqueNumber)) // Assuming personalNumberParameter is the parameter for @PersonalNumber
                                 select new
                                 {
                                     UniqueNumberSMSN = rr.UniqueNumber,
@@ -95,14 +97,14 @@ namespace EWSApi.Controllers
                                   .ToListAsync();
 
 
-            _logService.InsertLog(currentHttpContext, "GetLabData", "UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", false);
+            _logService.InsertLog(currentHttpContext, "GetLabData", "UniqueNumber= " + requestModel.UniqueNumber + ", Laboratory code= " + requestModel.LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", false);
 
 
 
 
             if (result == null || result.Count == 0)
             {
-                 _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + UniqueNumber + ", Laboratory code= " + LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", true);
+                 _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + requestModel.UniqueNumber + ", Laboratory code= " + requestModel.LabCode + ", Accepted date= " + DateTime.Now.ToString() + "", true);
                 return NotFound();
 
             }
@@ -370,7 +372,7 @@ namespace EWSApi.Controllers
                 string uniqueNumber = _sqlContext.GenerateUniqueNumber.FromSqlInterpolated($"select   dbo.GenerateUniqueNumber (1) as uniqueNumber").FirstOrDefault().uniqueNumber;
 
                 int healthInstitutionID = await _context.HealthInstitution
-               .Where(ms => ms.IdentificationNumber == reportRegister.HealthInstitutionIdentificationNumber && ms.LicenceNumber == reportRegister.HealthInstitutionLicenseNumber)
+               .Where(ms => ms.NameSq == reportRegister.HealthInstitutionName && ms.MinicipalityId == reportRegister.HealthInstitutionMunicipalityID)
                .Select(ms => ms.HealthInstitutionId)
                .FirstOrDefaultAsync();
 
@@ -380,9 +382,20 @@ namespace EWSApi.Controllers
                .FirstOrDefaultAsync();
 
                 int medicalStaffID = await _context.MedicalStaff
-               .Where(ms => ms.PersonalNumber == reportRegister.MedicalLicenseNumber && ms.LicenceNumber == reportRegister.MedicalLicenseNumber)
+               .Where(ms => ms.PersonalNumber == reportRegister.MedicalPersonalNumber && ms.LicenceNumber == reportRegister.MedicalLicenseNumber)
                .Select(ms => ms.MedicalStaffId)
                .FirstOrDefaultAsync();
+
+                if (healthInstitutionID == null || healthInstitutionID == 0)
+                {
+
+                    return Ok(new {  Message = "Nuk u gjet asnje institucion shendetesor me keto parametra" });
+                }
+                if (medicalStaffID == null || medicalStaffID == 0)
+                {
+
+                    return Ok(new { Message = "Nuk u gjet asnje personel mjekesore me keto parametra" });
+                }
 
 
                 if (citizenRegisterID == null || citizenRegisterID == 0)
@@ -396,7 +409,7 @@ namespace EWSApi.Controllers
                         MotherName = AesCrypto.Ecrypt<string>(reportRegister.MotherName),
                         PartnerName = AesCrypto.Ecrypt<string>(reportRegister.PartnerName),
                         GenderId = reportRegister.Gender == "M" ? 1 : 2,
-                        Birthdate = AesCrypto.Ecrypt<string>(reportRegister.Birthdate),
+                        Birthdate = AesCrypto.Ecrypt<string>(DateTime.ParseExact(reportRegister.Birthdate, "yyyy-MM-ddTHH:mm:ss.fffZ", null).ToString("dd/MM/yyyy HH:mm:ss")),
                         LivingStatus = reportRegister.LivingStatus,
                         MaritalStatusId = reportRegister.MaritalStatusId,
                         Foreign = reportRegister.Foreign,
@@ -436,7 +449,7 @@ namespace EWSApi.Controllers
                     MotherName = AesCrypto.Ecrypt<string>(reportRegister.MotherName),
                     PartnerName = AesCrypto.Ecrypt<string>(reportRegister.PartnerName),
                     GenderId = reportRegister.Gender == "M" ? 1 : 2,
-                    Birthdate = AesCrypto.Ecrypt<string>(reportRegister.Birthdate),
+                    Birthdate = AesCrypto.Ecrypt<string>(DateTime.ParseExact(reportRegister.Birthdate, "yyyy-MM-ddTHH:mm:ss.fffZ", null).ToString("dd/MM/yyyy HH:mm:ss")),
                     Address = AesCrypto.Ecrypt<string>(reportRegister.Address),
                     PhoneNumber = AesCrypto.Ecrypt<string>(reportRegister.PhoneNumber),
                     ConsultingDate = reportRegister.ConsultingDate,
@@ -480,20 +493,74 @@ namespace EWSApi.Controllers
                 _context.ReportRegisterCaseClassification.AddRange(newClassClassification);
                 await _context.SaveChangesAsync();
 
-
-                var newReportRegisterStatus = reportRegister.reportRegisterStatus.Select(status => new ReportRegisterStatus
+                var newReportRegisterStatus = reportRegister.reportRegisterStatus.Select(async status =>
                 {
-                    ReportRegisterId = ResportRegisterID,
-                    ReportRegisterStatusTypeId = status.ReportRegisterStatusTypeId,
-                    MedicalStaffId = medicalStaffID == 0 ? null : medicalStaffID,
-                    Active = true,
-                    InsertedDate = DateTime.Now,
-                    InsertedFrom = _conf["Jwt:UserID"].ToString()
+                    //if (status.ReportRegisterStatusTypeId == 1 || status.ReportRegisterStatusTypeId == 2)
+                    //{
+                        // Always insert into the current table (ReportRegisterStatus)
+                        var reportRegisterStatusItem = new ReportRegisterStatus
+                        {
+                            ReportRegisterId = ResportRegisterID,
+                            ReportRegisterStatusTypeId = status.ReportRegisterStatusTypeId,
+                            MedicalStaffId = medicalStaffID == 0 ? null : medicalStaffID,
+                            Active = true,
+                            InsertedDate = DateTime.Now,
+                            InsertedFrom = _conf["Jwt:UserID"].ToString()
+                        };
+
+                        // Add to the DbSet of your DbContext
+                        _context.ReportRegisterStatus.Add(reportRegisterStatusItem);
+
+                        // Save changes to the database to generate the ID
+                        _context.SaveChanges();
+
+                        // Get the generated ID
+                        var generatedReportRegisterStatusId = reportRegisterStatusItem.ReportRegisterStatusId;
+                        if (status.ReportRegisterStatusTypeId == 2)
+                        {
+                            int healthInstitutionIDTo = await _context.HealthInstitution
+                  .Where(ms => ms.NameSq == status.HealthInstitutionNameTo && ms.MinicipalityId == status.HealthInstitutionMunicipalityIDTo)
+                  .Select(ms => ms.HealthInstitutionId)
+                  .FirstOrDefaultAsync();
+
+
+                            //if (healthInstitutionIDTo == null || healthInstitutionIDTo == 0)
+                            //{
+
+                            //    return Ok(new { Message = "Nuk u gjet asnje institucion shendetesor per dergim me keto parametra" });
+                            //}
+                            // Create ReportRegisterReference with the generated ID
+                            var reportRegisterReference = new ReportRegisterReference
+                            {
+                                ReportRegisterStatusId = generatedReportRegisterStatusId,
+                                InsertedDate = DateTime.Now,
+                                InsertedFrom = _conf["Jwt:UserID"].ToString(),
+                                Active = true,
+                                HealthInstitutionFromId = healthInstitutionID,
+                                HealthInstitutionFromName = reportRegister.HealthInstitutionName,
+                                HealthInstitutionFromAddress = reportRegister.HealthInstitutionAddress,
+                                HealthInstitutionToId = healthInstitutionIDTo,
+                                HealthInstitutionToAddress = status.HealthInstitutionAddressTo,
+                                HealthInstitutionToName = status.HealthInstitutionNameTo
+                            };
+
+                            // Add to the DbSet of your DbContext
+                            _context.ReportRegisterReference.Add(reportRegisterReference);
+                        }
+                        // Return the original ReportRegisterStatus object
+                        return reportRegisterStatusItem;
+                    //}
+                    //else
+                    //{
+
+                    //    transaction.Rollback();
+                    //    _logService.InsertLog(currentHttpContext, "PostReportRegister", "An error occurred while processing the request ReportRegister", true);
+                    //    return BadRequest(new { Message = "Statusi duhet te jete Trajtim ambulantor/shtëpiak ose Referuar në institucion shëndetësor" });
+                    //}
                 }).ToList();
 
-
-                _context.ReportRegisterStatus.AddRange(newReportRegisterStatus);
                 await _context.SaveChangesAsync();
+
 
                 var newReportRegisterExamination = reportRegister.reportRegisterTest.Select(test => new ReportRegisterTest
                 {
@@ -504,10 +571,36 @@ namespace EWSApi.Controllers
                     InsertedFrom = _conf["Jwt:UserID"].ToString()
                 }).ToList();
 
+      
+
                 _context.ReportRegisterTest.AddRange(newReportRegisterExamination);
                 await _context.SaveChangesAsync();
 
+                _context.ReportRegisterTrackingStatus.Add(new ReportRegisterTrackingStatus
+                {
+                    ReportRegisterId = ResportRegisterID,
+                    StatusTypeId = 7,
+                    Active = true,
+                    InsertedDate = DateTime.Now,
+                    InsertedFrom = _conf["Jwt:UserID"].ToString()
+                });
+                await _context.SaveChangesAsync();
+
+                _context.ReportRegisterStatus.Add(new ReportRegisterStatus
+                {
+                    ReportRegisterId = ResportRegisterID,
+                    ReportRegisterStatusTypeId = 6,
+                    MedicalStaffId = medicalStaffID == 0 ? null : medicalStaffID,
+                    Active = false,
+                    InsertedDate = DateTime.Now,
+                    InsertedFrom = _conf["Jwt:UserID"].ToString()
+                });
+                await _context.SaveChangesAsync();
+
+                string json = JsonConvert.SerializeObject(reportRegister);
+
                 transaction.Commit();
+                _logService.InsertLog(currentHttpContext, "PostReportRegister", "PostReportRegister inserted: " + json + "", false);
                 return Ok(new { UniqueNumber = uniqueNumber, Message = "Success" });
             }
             catch (Exception ex)

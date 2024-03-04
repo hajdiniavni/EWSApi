@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace EWSApi.Models.ReportRegister;
 
@@ -14,6 +15,8 @@ public partial class ReportRegisterVM
 
     public string? HealthInstitutionName { get; set; }
 
+    public int? HealthInstitutionMunicipalityID { get; set; }
+
     public string? HealthInstitutionAddress { get; set; }
 
     /// <summary>
@@ -21,11 +24,15 @@ public partial class ReportRegisterVM
     /// </summary>
 
 
-
+    [Required(ErrorMessage = "Mungesë informacioni për fushën PersonalNumber")]
+    [MaxLength(10, ErrorMessage = "Numri personal duhet ti përmbaj 10 numra!")]
+    [MinLength(10, ErrorMessage = "Numri personal duhet ti përmbaj 10 numra!")]
     public string PersonalNumber { get; set; } = null!;
 
+    [Required(ErrorMessage = "Mungesë informacioni për fushën Firstname")]
     public string Firstname { get; set; } = null!;
 
+    [Required(ErrorMessage = "Mungesë informacioni për fushën Lastname")]
     public string Lastname { get; set; } = null!;
 
     public string? FatherName { get; set; }
@@ -34,10 +41,15 @@ public partial class ReportRegisterVM
 
     public string? PartnerName { get; set; }
 
+    [StringLength(1, MinimumLength = 1, ErrorMessage = "Vlera në fushën gender duhet të jetë M ose F")]
     public string? Gender { get; set; }
 
+    //[Required(ErrorMessage = "Birthdate is required.")]
+    //[Display(Name = "Birthdate")]
+    //[RegularExpression(@"^\d{4}-\d{2}-\d{2}$", ErrorMessage = "Datelindja duhet te jete vetem ne formatin 'yyyy-MM-dd'.")]
     public string? Birthdate { get; set; }
 
+    [Required(ErrorMessage = "Mungesë informacioni për fushën LivingStatus")]
     public bool LivingStatus { get; set; }
 
     public int? MaritalStatusId { get; set; }
@@ -99,7 +111,13 @@ public class CaseClassificationVM
 public class ReportRegisterStatusVM
 {
     public int ReportRegisterStatusTypeId { get; set; }
- 
+
+    public string? HealthInstitutionNameTo { get; set; }
+
+    public int? HealthInstitutionMunicipalityIDTo { get; set; }
+
+    public string? HealthInstitutionAddressTo { get; set; }
+
 }
 
 /// <summary>

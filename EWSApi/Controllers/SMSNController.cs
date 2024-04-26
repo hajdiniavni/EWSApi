@@ -42,6 +42,7 @@ namespace EWSApi.Controllers
 
 
         // GET: api/SMSN/GetLabData/578
+        [Authorize]
         [HttpGet("GetLabData/{UniqueNumber}/{LabCode}")]
         public async Task<ActionResult<SMSNController>> GetLabData([FromRoute] LabDataRequestModel requestModel)//(string UniqueNumber, string LabCode)
         {
@@ -116,6 +117,7 @@ namespace EWSApi.Controllers
 
         // POST: api/PostMedicalStaff
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost("PostMedicalStaff")]
         public async Task<ActionResult<MedicalStaffVM>> PostMedicalStaff(MedicalStaffVM medicalStaff)
         {
@@ -186,6 +188,7 @@ namespace EWSApi.Controllers
 
         //POST: api/PostExamination
         //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost("PostExamination")]
         public async Task<ActionResult<ExaminationVM>> PostExamination(ExaminationVM examination)
         {
@@ -262,6 +265,7 @@ namespace EWSApi.Controllers
 
         //POST: api/PostHealthInstitution
         //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost("PostHealthInstitution")]
         public async Task<ActionResult<HealthInstitutionVM>> PostHealthInstitution(HealthInstitutionVM healthInstitution)
         {
@@ -357,6 +361,7 @@ namespace EWSApi.Controllers
 
         //POST: api/PostHealthInstitution
         //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost("PostReportRegister")]
         public async Task<ActionResult<ReportRegisterVM>> PostReportRegister(ReportRegisterVM reportRegister)
         {
@@ -614,7 +619,7 @@ namespace EWSApi.Controllers
         }
 
 
-
+        [Authorize]
         [HttpPost("PostReportRegisterTestResult")]
         public async Task<ActionResult<ReportRegisterTestResultVM>> PostReportRegisterTestResult(ReportRegisterTestResultVM reportRegisterTestResult)
         {
@@ -661,6 +666,7 @@ namespace EWSApi.Controllers
 
         //POST: api/PostDiseaseInfection
         //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost("PostDiseaseInfection")]
         public async Task<ActionResult<DiseaseInfectionVM>> PostDiseaseInfection(DiseaseInfectionVM disease)
         {

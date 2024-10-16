@@ -26,4 +26,6 @@ public partial class StatusType
     public virtual ICollection<FaqquestionStatus> FaqquestionStatus { get; set; } = new List<FaqquestionStatus>();
 
     public virtual ICollection<ReportRegisterTrackingStatus> ReportRegisterTrackingStatus { get; set; } = new List<ReportRegisterTrackingStatus>();
+
+    public virtual ICollection<ReportStatus> ReportStatus { get; set; } = new List<ReportStatus>();
 }

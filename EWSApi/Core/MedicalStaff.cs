@@ -27,6 +27,8 @@ public partial class MedicalStaff
 
     public DateTime? UpdatedDate { get; set; }
 
+    public virtual ICollection<Report> Report { get; set; } = new List<Report>();
+
     public virtual ICollection<ReportRegisterStatus> ReportRegisterStatus { get; set; } = new List<ReportRegisterStatus>();
 
     public virtual ICollection<ReportRegisterTherapy> ReportRegisterTherapyMedicalStaff { get; set; } = new List<ReportRegisterTherapy>();

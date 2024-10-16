@@ -249,9 +249,9 @@ D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets\ms
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets\msbuild.buildTransitive.EWSApi.props
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets.pack.json
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\scopedcss\bundle\EWSApi.styles.css
-D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\EWSApi.csproj.CopyComplete
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\EWSApi.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\refint\EWSApi.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\EWSApi.pdb
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\EWSApi.genruntimeconfig.cache
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\ref\EWSApi.dll
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\EWSApi.csproj.Up2Date

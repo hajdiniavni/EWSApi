@@ -9,11 +9,11 @@ public partial class ReportRegisterStatusDetail
 
     public int ReportRegisterStatusId { get; set; }
 
-    public string Floor { get; set; } = null!;
+    public string? Floor { get; set; }
 
     public string? Department { get; set; }
 
-    public string RoomNumber { get; set; } = null!;
+    public string? RoomNumber { get; set; }
 
     public string? BedNumber { get; set; }
 

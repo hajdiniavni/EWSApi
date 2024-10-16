@@ -14,7 +14,7 @@ using Microsoft.Data.SqlClient;
 
 namespace EWSAPI.Controllers;
 
-[Authorize]
+
 public class LogService : ControllerBase
 {
     private IConfiguration _conf;

@@ -15,13 +15,17 @@ public partial class DiseaseInfection
 
     public bool? IsTransmissionDisease { get; set; }
 
+    public int? NumberCaseNotification { get; set; }
+
+    public int? DaysNotification { get; set; }
+
     public string NameSq { get; set; } = null!;
 
     public string NameEn { get; set; } = null!;
 
     public string NameSr { get; set; } = null!;
 
-    public int ReportingTimeTypeId { get; set; }
+    public int? ReportingTimeTypeId { get; set; }
 
     public string? Description { get; set; }
 
@@ -39,13 +43,15 @@ public partial class DiseaseInfection
 
     public virtual DiseaseInfectionType? DiseaseInfectionType { get; set; }
 
+    public virtual ICollection<DiseaseNotification> DiseaseNotification { get; set; } = new List<DiseaseNotification>();
+
     public virtual AspNetUsers InsertedFromNavigation { get; set; } = null!;
 
     public virtual ICollection<ReportRegisterCaseClassification> ReportRegisterCaseClassification { get; set; } = new List<ReportRegisterCaseClassification>();
 
     public virtual ICollection<ReportRegisterConcomitantDisease> ReportRegisterConcomitantDisease { get; set; } = new List<ReportRegisterConcomitantDisease>();
 
-    public virtual ReportingTimeType ReportingTimeType { get; set; } = null!;
+    public virtual ReportingTimeType? ReportingTimeType { get; set; }
 
     public virtual AspNetUsers? UpdatedFromNavigation { get; set; }
 }

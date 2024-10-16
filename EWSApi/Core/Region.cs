@@ -11,7 +11,11 @@ public partial class Region
 
     public string Code { get; set; } = null!;
 
+    public string? RegionCode { get; set; }
+
     public virtual ICollection<City> City { get; set; } = new List<City>();
 
     public virtual City CityNavigation { get; set; } = null!;
+
+    public virtual ICollection<Report> Report { get; set; } = new List<Report>();
 }

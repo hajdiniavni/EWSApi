@@ -64,5 +64,7 @@ public partial class CitizenRegister
 
     public virtual Country Country { get; set; } = null!;
 
+    public virtual ICollection<Report> Report { get; set; } = new List<Report>();
+
     public virtual ICollection<ReportRegister> ReportRegister { get; set; } = new List<ReportRegister>();
 }

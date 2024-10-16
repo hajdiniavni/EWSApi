@@ -20,4 +20,6 @@ public partial class Settlement
     public virtual City City { get; set; } = null!;
 
     public virtual ICollection<HealthInstitution> HealthInstitution { get; set; } = new List<HealthInstitution>();
+
+    public virtual ICollection<Report> Report { get; set; } = new List<Report>();
 }

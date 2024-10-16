@@ -9,6 +9,8 @@ public partial class ReportRegisterContactSurvey
 
     public int ReportRegisterContactId { get; set; }
 
+    public string SurveyNumber { get; set; } = null!;
+
     public string Schema { get; set; } = null!;
 
     public string InsertedFrom { get; set; } = null!;

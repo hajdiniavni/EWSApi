@@ -47,7 +47,11 @@ public partial class HealthInstitution
 
     public DateTime? UpdatedDate { get; set; }
 
+    public int? Bhisid { get; set; }
+
     public virtual ICollection<AspNetUsers> AspNetUsers { get; set; } = new List<AspNetUsers>();
+
+    public virtual ICollection<DiseaseNotification> DiseaseNotification { get; set; } = new List<DiseaseNotification>();
 
     public virtual HealthInstitutionLevel HealthInstitutionLevel { get; set; } = null!;
 

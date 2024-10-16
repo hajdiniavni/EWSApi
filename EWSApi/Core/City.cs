@@ -27,5 +27,7 @@ public partial class City
 
     public virtual ICollection<Region> RegionNavigation { get; set; } = new List<Region>();
 
+    public virtual ICollection<Report> Report { get; set; } = new List<Report>();
+
     public virtual ICollection<Settlement> Settlement { get; set; } = new List<Settlement>();
 }

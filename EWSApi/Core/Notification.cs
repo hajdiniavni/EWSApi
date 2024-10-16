@@ -15,7 +15,7 @@ public partial class Notification
 
     public string? Url { get; set; }
 
-    public string Receiver { get; set; } = null!;
+    public string? Receiver { get; set; }
 
     public string Icon { get; set; } = null!;
 

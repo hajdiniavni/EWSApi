@@ -15,6 +15,8 @@ public partial class EwsContext : DbContext
     {
     }
 
+    public virtual DbSet<AgeGroup> AgeGroup { get; set; }
+
     public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
 
     public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
@@ -27,6 +29,8 @@ public partial class EwsContext : DbContext
 
     public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
 
+    public virtual DbSet<Bcgtype> Bcgtype { get; set; }
+
     public virtual DbSet<CaseClassificationType> CaseClassificationType { get; set; }
 
     public virtual DbSet<CitizenRegister> CitizenRegister { get; set; }
@@ -35,7 +39,11 @@ public partial class EwsContext : DbContext
 
     public virtual DbSet<City> City { get; set; }
 
+    public virtual DbSet<ClassificationCategoryType> ClassificationCategoryType { get; set; }
+
     public virtual DbSet<Country> Country { get; set; }
+
+    public virtual DbSet<DiseaseClassificationType> DiseaseClassificationType { get; set; }
 
     public virtual DbSet<DiseaseInfection> DiseaseInfection { get; set; }
 
@@ -43,11 +51,19 @@ public partial class EwsContext : DbContext
 
     public virtual DbSet<DiseaseInfectionType> DiseaseInfectionType { get; set; }
 
+    public virtual DbSet<DiseaseNotification> DiseaseNotification { get; set; }
+
+    public virtual DbSet<DiseaseNotificationAspNetUser> DiseaseNotificationAspNetUser { get; set; }
+
+    public virtual DbSet<DiseaseNotificationReportRegister> DiseaseNotificationReportRegister { get; set; }
+
     public virtual DbSet<DocumentType> DocumentType { get; set; }
 
     public virtual DbSet<Ethnicity> Ethnicity { get; set; }
 
     public virtual DbSet<Examination> Examination { get; set; }
+
+    public virtual DbSet<ExtraPulmonarType> ExtraPulmonarType { get; set; }
 
     public virtual DbSet<Faqcategory> Faqcategory { get; set; }
 
@@ -67,9 +83,19 @@ public partial class EwsContext : DbContext
 
     public virtual DbSet<HealthInstitutionLevel> HealthInstitutionLevel { get; set; }
 
+    public virtual DbSet<Icd101> Icd101 { get; set; }
+
+    public virtual DbSet<InstitucionetShendetsore> InstitucionetShendetsore { get; set; }
+
+    public virtual DbSet<ListaInstitucioneveBhis> ListaInstitucioneveBhis { get; set; }
+
     public virtual DbSet<Log> Log { get; set; }
 
+    public virtual DbSet<Manual> Manual { get; set; }
+
     public virtual DbSet<MedicalStaff> MedicalStaff { get; set; }
+
+    public virtual DbSet<MedicalTreatmentType> MedicalTreatmentType { get; set; }
 
     public virtual DbSet<Menu> Menu { get; set; }
 
@@ -79,9 +105,19 @@ public partial class EwsContext : DbContext
 
     public virtual DbSet<ProfessionType> ProfessionType { get; set; }
 
+    public virtual DbSet<Quarter> Quarter { get; set; }
+
     public virtual DbSet<RealRole> RealRole { get; set; }
 
+    public virtual DbSet<ReferenceType> ReferenceType { get; set; }
+
+    public virtual DbSet<RegimenTreatmentType> RegimenTreatmentType { get; set; }
+
     public virtual DbSet<Region> Region { get; set; }
+
+    public virtual DbSet<RegjistriIAnetareveOmk> RegjistriIAnetareveOmk { get; set; }
+
+    public virtual DbSet<Report> Report { get; set; }
 
     public virtual DbSet<ReportRegister> ReportRegister { get; set; }
 
@@ -115,7 +151,19 @@ public partial class EwsContext : DbContext
 
     public virtual DbSet<ReportRegisterTrackingStatusStaff> ReportRegisterTrackingStatusStaff { get; set; }
 
+    public virtual DbSet<ReportRiskFactor> ReportRiskFactor { get; set; }
+
+    public virtual DbSet<ReportRiskGroup> ReportRiskGroup { get; set; }
+
+    public virtual DbSet<ReportSideEffect> ReportSideEffect { get; set; }
+
+    public virtual DbSet<ReportStatus> ReportStatus { get; set; }
+
     public virtual DbSet<ReportingTimeType> ReportingTimeType { get; set; }
+
+    public virtual DbSet<RiskFactorType> RiskFactorType { get; set; }
+
+    public virtual DbSet<RiskGroupType> RiskGroupType { get; set; }
 
     public virtual DbSet<SampleTakenType> SampleTakenType { get; set; }
 
@@ -127,9 +175,17 @@ public partial class EwsContext : DbContext
 
     public virtual DbSet<Settlement> Settlement { get; set; }
 
+    public virtual DbSet<Sheet4> Sheet4 { get; set; }
+
+    public virtual DbSet<SideEffectType> SideEffectType { get; set; }
+
+    public virtual DbSet<SmsnPerdorues> SmsnPerdorues { get; set; }
+
     public virtual DbSet<StatusType> StatusType { get; set; }
 
     public virtual DbSet<SubMenu> SubMenu { get; set; }
+
+    public virtual DbSet<SubSideEffectType> SubSideEffectType { get; set; }
 
     public virtual DbSet<SurveyModel> SurveyModel { get; set; }
 
@@ -143,6 +199,12 @@ public partial class EwsContext : DbContext
 
     public virtual DbSet<TestType> TestType { get; set; }
 
+    public virtual DbSet<TreatmentDetailType> TreatmentDetailType { get; set; }
+
+    public virtual DbSet<TreatmentResultType> TreatmentResultType { get; set; }
+
+    public virtual DbSet<TreatmentType> TreatmentType { get; set; }
+
     public virtual DbSet<UserAudit> UserAudit { get; set; }
 
 //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -151,6 +213,19 @@ public partial class EwsContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<AgeGroup>(entity =>
+        {
+            entity.Property(e => e.AgeGroupId).HasColumnName("AgeGroupID");
+            entity.Property(e => e.AgeGroup1)
+                .HasMaxLength(16)
+                .IsUnicode(false)
+                .HasColumnName("AgeGroup");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(256);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(256);
+        });
+
         modelBuilder.Entity<AspNetRoleClaims>(entity =>
         {
             entity.Property(e => e.RoleId).HasMaxLength(450);
@@ -204,6 +279,17 @@ public partial class EwsContext : DbContext
 
         modelBuilder.Entity<AspNetUsers>(entity =>
         {
+            entity.ToTable(tb => tb.IsTemporal(ttb =>
+                    {
+                        ttb.UseHistoryTable("AspNetUsers", "History");
+                        ttb
+                            .HasPeriodStart("ValidFrom")
+                            .HasColumnName("ValidFrom");
+                        ttb
+                            .HasPeriodEnd("ValidTo")
+                            .HasColumnName("ValidTo");
+                    }));
+
             entity.Property(e => e.AllowAdminNotification)
                 .IsRequired()
                 .HasDefaultValueSql("(CONVERT([bit],(0)))");
@@ -239,6 +325,37 @@ public partial class EwsContext : DbContext
                     {
                         j.HasKey("UserId", "RoleId");
                     });
+        });
+
+        modelBuilder.Entity<Bcgtype>(entity =>
+        {
+            entity.HasKey(e => e.BcgtypeId).HasName("PK__DCGType__49F8CAB4AFF05B3C");
+
+            entity.ToTable("BCGType", "TB");
+
+            entity.Property(e => e.BcgtypeId).HasColumnName("BCGTypeID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.BcgtypeInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_DCGType_AspNetUsers");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.BcgtypeUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_DCGType_AspNetUsers1");
         });
 
         modelBuilder.Entity<CaseClassificationType>(entity =>
@@ -345,6 +462,37 @@ public partial class EwsContext : DbContext
                 .HasConstraintName("FK_City_Region");
         });
 
+        modelBuilder.Entity<ClassificationCategoryType>(entity =>
+        {
+            entity.HasKey(e => e.ClassificationCategoryTypeId).HasName("PK__Classifi__182836E627BF9FEC");
+
+            entity.ToTable("ClassificationCategoryType", "TB");
+
+            entity.Property(e => e.ClassificationCategoryTypeId).HasColumnName("ClassificationCategoryTypeID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.ClassificationCategoryTypeInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ClassificationCategoryType_AspNetUsers");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.ClassificationCategoryTypeUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_ClassificationCategoryType_AspNetUsers1");
+        });
+
         modelBuilder.Entity<Country>(entity =>
         {
             entity.ToTable("Country", "Core");
@@ -366,6 +514,37 @@ public partial class EwsContext : DbContext
                 .HasMaxLength(128)
                 .HasColumnName("Name_SR");
             entity.Property(e => e.Prefix).HasMaxLength(5);
+        });
+
+        modelBuilder.Entity<DiseaseClassificationType>(entity =>
+        {
+            entity.HasKey(e => e.DiseaseClassificationTypeId).HasName("PK__DiseaseC__C2A23587E9A2B6FE");
+
+            entity.ToTable("DiseaseClassificationType", "TB");
+
+            entity.Property(e => e.DiseaseClassificationTypeId).HasColumnName("DiseaseClassificationTypeID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.DiseaseClassificationTypeInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_DiseaseClassificationType_AspNetUsers");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.DiseaseClassificationTypeUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_DiseaseClassificationType_AspNetUsers1");
         });
 
         modelBuilder.Entity<DiseaseInfection>(entity =>
@@ -402,7 +581,6 @@ public partial class EwsContext : DbContext
 
             entity.HasOne(d => d.ReportingTimeType).WithMany(p => p.DiseaseInfection)
                 .HasForeignKey(d => d.ReportingTimeTypeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_DiseaseInfection_ReportingTimeType");
 
             entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.DiseaseInfectionUpdatedFromNavigation)
@@ -467,6 +645,73 @@ public partial class EwsContext : DbContext
                 .HasConstraintName("FK_DiseaseInfectionType_AspNetUsers1");
         });
 
+        modelBuilder.Entity<DiseaseNotification>(entity =>
+        {
+            entity.ToTable("DiseaseNotification", "Core");
+
+            entity.Property(e => e.DiseaseNotificationId).HasColumnName("DiseaseNotificationID");
+            entity.Property(e => e.DiseaseInfectionId).HasColumnName("DiseaseInfectionID");
+            entity.Property(e => e.From).HasColumnType("datetime");
+            entity.Property(e => e.HealthInstitutionId).HasColumnName("HealthInstitutionID");
+            entity.Property(e => e.Icon).HasMaxLength(128);
+            entity.Property(e => e.To).HasColumnType("datetime");
+            entity.Property(e => e.TypeId).HasColumnName("TypeID");
+            entity.Property(e => e.Url)
+                .HasMaxLength(1024)
+                .HasColumnName("URL");
+
+            entity.HasOne(d => d.DiseaseInfection).WithMany(p => p.DiseaseNotification)
+                .HasForeignKey(d => d.DiseaseInfectionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_DiseaseNotification_DiseaseInfection");
+
+            entity.HasOne(d => d.HealthInstitution).WithMany(p => p.DiseaseNotification)
+                .HasForeignKey(d => d.HealthInstitutionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_DiseaseNotification_HealthInstitution");
+        });
+
+        modelBuilder.Entity<DiseaseNotificationAspNetUser>(entity =>
+        {
+            entity.ToTable("DiseaseNotificationAspNetUser", "Core");
+
+            entity.Property(e => e.DiseaseNotificationAspNetUserId).HasColumnName("DiseaseNotificationAspNetUserID");
+            entity.Property(e => e.DiseaseNotificationId).HasColumnName("DiseaseNotificationID");
+            entity.Property(e => e.UserId)
+                .HasMaxLength(450)
+                .HasColumnName("UserID");
+
+            entity.HasOne(d => d.DiseaseNotification).WithMany(p => p.DiseaseNotificationAspNetUser)
+                .HasForeignKey(d => d.DiseaseNotificationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_DiseaseNotificationAspNetUser_DiseaseNotification");
+
+            entity.HasOne(d => d.User).WithMany(p => p.DiseaseNotificationAspNetUser)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_DiseaseNotificationAspNetUser_AspNetUsers");
+        });
+
+        modelBuilder.Entity<DiseaseNotificationReportRegister>(entity =>
+        {
+            entity.ToTable("DiseaseNotificationReportRegister", "Core");
+
+            entity.Property(e => e.DiseaseNotificationReportRegisterId).HasColumnName("DiseaseNotificationReportRegisterID");
+            entity.Property(e => e.DiseaseNotificationId).HasColumnName("DiseaseNotificationID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.ReportRegisterId).HasColumnName("ReportRegisterID");
+
+            entity.HasOne(d => d.DiseaseNotification).WithMany(p => p.DiseaseNotificationReportRegister)
+                .HasForeignKey(d => d.DiseaseNotificationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_DiseaseNotificationReportRegister_DiseaseInfection");
+
+            entity.HasOne(d => d.ReportRegister).WithMany(p => p.DiseaseNotificationReportRegister)
+                .HasForeignKey(d => d.ReportRegisterId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_DiseaseNotificationReportRegister_ReportRegister");
+        });
+
         modelBuilder.Entity<DocumentType>(entity =>
         {
             entity.Property(e => e.DocumentTypeId).HasColumnName("DocumentTypeID");
@@ -508,6 +753,43 @@ public partial class EwsContext : DbContext
             entity.Property(e => e.InsertedFrom).HasMaxLength(450);
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+        });
+
+        modelBuilder.Entity<ExtraPulmonarType>(entity =>
+        {
+            entity.HasKey(e => e.ExtraPulmonarTypeId).HasName("PK__ExtraPul__4C89FA0B662C0B22");
+
+            entity.ToTable("ExtraPulmonarType", "TB");
+
+            entity.Property(e => e.ExtraPulmonarTypeId).HasColumnName("ExtraPulmonarTypeID");
+            entity.Property(e => e.DiseaseClassificationTypeId).HasColumnName("DiseaseClassificationTypeID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.DiseaseClassificationType).WithMany(p => p.ExtraPulmonarType)
+                .HasForeignKey(d => d.DiseaseClassificationTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ExtraPulmonarType_DiseaseClassificationType");
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.ExtraPulmonarTypeInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ExtraPulmonarType_AspNetUsers");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.ExtraPulmonarTypeUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_ExtraPulmonarType_AspNetUsers1");
         });
 
         modelBuilder.Entity<Faqcategory>(entity =>
@@ -679,6 +961,7 @@ public partial class EwsContext : DbContext
 
             entity.Property(e => e.HealthInstitutionId).HasColumnName("HealthInstitutionID");
             entity.Property(e => e.Address).HasMaxLength(128);
+            entity.Property(e => e.Bhisid).HasColumnName("BHISid");
             entity.Property(e => e.EmailAddress)
                 .HasMaxLength(128)
                 .IsUnicode(false);
@@ -772,6 +1055,59 @@ public partial class EwsContext : DbContext
                 .HasConstraintName("FK_HealthLevel_AspNetUsers1");
         });
 
+        modelBuilder.Entity<Icd101>(entity =>
+        {
+            entity.HasKey(e => new { e.Id, e.IcdoriginCode }).HasName("PK_tblICD10_SISH");
+
+            entity.ToTable("ICD10_1");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.IcdoriginCode)
+                .HasMaxLength(50)
+                .HasColumnName("ICDOriginCode");
+            entity.Property(e => e.TitleSq)
+                .HasMaxLength(550)
+                .HasColumnName("TitleSQ");
+        });
+
+        modelBuilder.Entity<InstitucionetShendetsore>(entity =>
+        {
+            entity.HasNoKey();
+
+            entity.Property(e => e.Adresa).HasMaxLength(50);
+            entity.Property(e => e.BhisId).HasColumnName("BHisID");
+            entity.Property(e => e.Emri).HasMaxLength(500);
+            entity.Property(e => e.Komuna).HasMaxLength(50);
+            entity.Property(e => e.KomunaId).HasColumnName("KomunaID");
+            entity.Property(e => e.Niveli).HasMaxLength(500);
+            entity.Property(e => e.Vendi).HasMaxLength(50);
+            entity.Property(e => e.VendiId).HasColumnName("VendiID");
+        });
+
+        modelBuilder.Entity<ListaInstitucioneveBhis>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("ListaInstitucioneveBHIS");
+
+            entity.Property(e => e.Column7)
+                .HasMaxLength(50)
+                .HasColumnName("column7");
+            entity.Property(e => e.Column8)
+                .HasMaxLength(50)
+                .HasColumnName("column8");
+            entity.Property(e => e.Id).HasMaxLength(50);
+            entity.Property(e => e.IdParent)
+                .HasMaxLength(50)
+                .HasColumnName("ID_Parent");
+            entity.Property(e => e.Institucioni).HasMaxLength(50);
+            entity.Property(e => e.Institucioni2).HasMaxLength(50);
+            entity.Property(e => e.Niveli).HasMaxLength(50);
+            entity.Property(e => e.Smsnid)
+                .HasMaxLength(50)
+                .HasColumnName("SMSNID");
+        });
+
         modelBuilder.Entity<Log>(entity =>
         {
             entity.ToTable("Log", "Core");
@@ -797,6 +1133,50 @@ public partial class EwsContext : DbContext
                 .HasConstraintName("FK_Log_Log");
         });
 
+        modelBuilder.Entity<Manual>(entity =>
+        {
+            entity.Property(e => e.ManualId).HasColumnName("ManualID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.PathEn)
+                .HasMaxLength(1024)
+                .HasColumnName("Path_EN");
+            entity.Property(e => e.PathSq)
+                .HasMaxLength(1024)
+                .HasColumnName("Path_SQ");
+            entity.Property(e => e.PathSr)
+                .HasMaxLength(1024)
+                .HasColumnName("Path_SR");
+            entity.Property(e => e.RoleId)
+                .HasMaxLength(450)
+                .HasColumnName("RoleID");
+            entity.Property(e => e.TitleEn)
+                .HasMaxLength(128)
+                .HasColumnName("Title_EN");
+            entity.Property(e => e.TitleSq)
+                .HasMaxLength(128)
+                .HasColumnName("Title_SQ");
+            entity.Property(e => e.TitleSr)
+                .HasMaxLength(128)
+                .HasColumnName("Title_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.ManualInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Manual_AspNetUsers");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.Manual)
+                .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Manual_AspNetRoles");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.ManualUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_Manual_AspNetUsers1");
+        });
+
         modelBuilder.Entity<MedicalStaff>(entity =>
         {
             entity.Property(e => e.MedicalStaffId).HasColumnName("MedicalStaffID");
@@ -812,6 +1192,37 @@ public partial class EwsContext : DbContext
             entity.Property(e => e.Status).HasMaxLength(64);
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+        });
+
+        modelBuilder.Entity<MedicalTreatmentType>(entity =>
+        {
+            entity.HasKey(e => e.MedicalTreatmentTypeId).HasName("PK__Institut__2677D211D4DCC85D");
+
+            entity.ToTable("MedicalTreatmentType", "TB");
+
+            entity.Property(e => e.MedicalTreatmentTypeId).HasColumnName("MedicalTreatmentTypeID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.MedicalTreatmentTypeInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_InstitutionType_AspNetUsers");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.MedicalTreatmentTypeUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_InstitutionType_AspNetUsers1");
         });
 
         modelBuilder.Entity<Menu>(entity =>
@@ -888,6 +1299,37 @@ public partial class EwsContext : DbContext
             entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
         });
 
+        modelBuilder.Entity<Quarter>(entity =>
+        {
+            entity.HasKey(e => e.QuarterId).HasName("PK__Quarter__1D2BD182A0D6C744");
+
+            entity.ToTable("Quarter", "TB");
+
+            entity.Property(e => e.QuarterId).HasColumnName("QuarterID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.QuarterInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Quarter_Quarter");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.QuarterUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_Quarter_AspNetUsers");
+        });
+
         modelBuilder.Entity<RealRole>(entity =>
         {
             entity.ToTable("RealRole", "Core");
@@ -924,6 +1366,68 @@ public partial class EwsContext : DbContext
                 .HasConstraintName("FK_RealRole_AspNetUsers2");
         });
 
+        modelBuilder.Entity<ReferenceType>(entity =>
+        {
+            entity.HasKey(e => e.ReferenceTypeId).HasName("PK__Referenc__573016EA29FE157C");
+
+            entity.ToTable("ReferenceType", "TB");
+
+            entity.Property(e => e.ReferenceTypeId).HasColumnName("ReferenceTypeID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.ReferenceTypeInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReferenceType_AspNetUsers");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.ReferenceTypeUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_ReferenceType_AspNetUsers1");
+        });
+
+        modelBuilder.Entity<RegimenTreatmentType>(entity =>
+        {
+            entity.HasKey(e => e.RegimenTreatmentTypeId).HasName("PK__RegimenT__A25E1E551AA458C1");
+
+            entity.ToTable("RegimenTreatmentType", "TB");
+
+            entity.Property(e => e.RegimenTreatmentTypeId).HasColumnName("RegimenTreatmentTypeID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.RegimenTreatmentTypeInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_RegimenTreatmentType_AspNetUsers");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.RegimenTreatmentTypeUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_RegimenTreatmentType_AspNetUsers1");
+        });
+
         modelBuilder.Entity<Region>(entity =>
         {
             entity.ToTable("Region", "Core");
@@ -935,11 +1439,199 @@ public partial class EwsContext : DbContext
             entity.Property(e => e.Code)
                 .HasMaxLength(2)
                 .IsUnicode(false);
+            entity.Property(e => e.RegionCode)
+                .HasMaxLength(4)
+                .IsUnicode(false);
 
             entity.HasOne(d => d.CityNavigation).WithMany(p => p.RegionNavigation)
                 .HasForeignKey(d => d.CityId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Region_City");
+        });
+
+        modelBuilder.Entity<RegjistriIAnetareveOmk>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("Regjistri i anetareve OMK");
+
+            entity.Property(e => e.Column10)
+                .HasMaxLength(1)
+                .HasColumnName("column10");
+            entity.Property(e => e.Column11)
+                .HasMaxLength(1)
+                .HasColumnName("column11");
+            entity.Property(e => e.Column12)
+                .HasMaxLength(1)
+                .HasColumnName("column12");
+            entity.Property(e => e.Column13)
+                .HasMaxLength(1)
+                .HasColumnName("column13");
+            entity.Property(e => e.Emri).HasMaxLength(100);
+            entity.Property(e => e.KodiILicencS)
+                .HasMaxLength(100)
+                .HasColumnName("Kodi_i_licenc_s");
+            entity.Property(e => e.KodiILicencSSDyt2)
+                .HasMaxLength(100)
+                .HasColumnName("Kodi_i_licenc_s_s_dyt_2");
+            entity.Property(e => e.Mbiemri).HasMaxLength(100);
+            entity.Property(e => e.NrRendor).HasColumnName("Nr_rendor");
+            entity.Property(e => e.NumriPersonal)
+                .HasMaxLength(100)
+                .HasColumnName("Numri_personal");
+            entity.Property(e => e.StatusiProfesional)
+                .HasMaxLength(100)
+                .HasColumnName("Statusi_Profesional");
+            entity.Property(e => e.StatusiProfesionalSDyt2)
+                .HasMaxLength(100)
+                .HasColumnName("Statusi_Profesional_s_dyt_2");
+            entity.Property(e => e.StatutiILicencS)
+                .HasMaxLength(100)
+                .HasColumnName("Statuti_i_licenc_s");
+        });
+
+        modelBuilder.Entity<Report>(entity =>
+        {
+            entity.HasKey(e => e.ReportId).HasName("PK__Report__D5BD48E5C4CCC35A");
+
+            entity.ToTable("Report", "TB");
+
+            entity.Property(e => e.ReportId).HasColumnName("ReportID");
+            entity.Property(e => e.Address).HasMaxLength(128);
+            entity.Property(e => e.BcgtypeId).HasColumnName("BCGTypeID");
+            entity.Property(e => e.Birthdate).HasMaxLength(128);
+            entity.Property(e => e.CitizenRegisterId).HasColumnName("CitizenRegisterID");
+            entity.Property(e => e.ClassificationCategoryTypeId).HasColumnName("ClassificationCategoryTypeID");
+            entity.Property(e => e.ContactPersonAddress).HasMaxLength(256);
+            entity.Property(e => e.ContactPersonName).HasMaxLength(256);
+            entity.Property(e => e.ContactPersonPhoneNumber).HasMaxLength(32);
+            entity.Property(e => e.DiseaseClassificationTypeId).HasColumnName("DiseaseClassificationTypeID");
+            entity.Property(e => e.Drugs).HasMaxLength(256);
+            entity.Property(e => e.ExtraPulmonarTypeId).HasColumnName("ExtraPulmonarTypeID");
+            entity.Property(e => e.FatherName).HasMaxLength(128);
+            entity.Property(e => e.FirstName).HasMaxLength(128);
+            entity.Property(e => e.GenderId).HasColumnName("GenderID");
+            entity.Property(e => e.IltbchemoCompleteNumber).HasColumnName("ILTBChemoCompleteNumber");
+            entity.Property(e => e.IltbchemoNumber).HasColumnName("ILTBChemoNumber");
+            entity.Property(e => e.Iltbnumber).HasColumnName("ILTBNumber");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.LastName).HasMaxLength(128);
+            entity.Property(e => e.MedicalStaffId).HasColumnName("MedicalStaffID");
+            entity.Property(e => e.MedicalTreatmentTypeId).HasColumnName("MedicalTreatmentTypeID");
+            entity.Property(e => e.MotherName).HasMaxLength(128);
+            entity.Property(e => e.MunicipalityId).HasColumnName("MunicipalityID");
+            entity.Property(e => e.NationalityId).HasColumnName("NationalityID");
+            entity.Property(e => e.PeronalNumber)
+                .HasMaxLength(256)
+                .IsUnicode(false);
+            entity.Property(e => e.Ppdnumber).HasColumnName("PPDNumber");
+            entity.Property(e => e.QuarterId).HasColumnName("QuarterID");
+            entity.Property(e => e.ReferenceTypeId).HasColumnName("ReferenceTypeID");
+            entity.Property(e => e.RegimenTreatmentTypeId).HasColumnName("RegimenTreatmentTypeID");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.ReportNumber)
+                .HasMaxLength(32)
+                .IsUnicode(false);
+            entity.Property(e => e.Rtgnumber).HasColumnName("RTGNumber");
+            entity.Property(e => e.SettlementId).HasColumnName("SettlementID");
+            entity.Property(e => e.SideEffectTypeId).HasColumnName("SideEffectTypeID");
+            entity.Property(e => e.TreatmentDetailTypeId).HasColumnName("TreatmentDetailTypeID");
+            entity.Property(e => e.TreatmentResultTypeId).HasColumnName("TreatmentResultTypeID");
+            entity.Property(e => e.TreatmentStartDate).HasColumnType("datetime");
+            entity.Property(e => e.TreatmentTypeId).HasColumnName("TreatmentTypeID");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+            entity.Property(e => e.Weight).HasColumnType("decimal(5, 2)");
+
+            entity.HasOne(d => d.Bcgtype).WithMany(p => p.Report)
+                .HasForeignKey(d => d.BcgtypeId)
+                .HasConstraintName("FK_Report_BCGType");
+
+            entity.HasOne(d => d.CitizenRegister).WithMany(p => p.Report)
+                .HasForeignKey(d => d.CitizenRegisterId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Report_CitizenRegister");
+
+            entity.HasOne(d => d.ClassificationCategoryType).WithMany(p => p.Report)
+                .HasForeignKey(d => d.ClassificationCategoryTypeId)
+                .HasConstraintName("FK_Report_ClassificationCategoryType");
+
+            entity.HasOne(d => d.DiseaseClassificationType).WithMany(p => p.Report)
+                .HasForeignKey(d => d.DiseaseClassificationTypeId)
+                .HasConstraintName("FK_Report_DiseaseClassificationType");
+
+            entity.HasOne(d => d.ExtraPulmonarType).WithMany(p => p.Report)
+                .HasForeignKey(d => d.ExtraPulmonarTypeId)
+                .HasConstraintName("FK_Report_ExtraPulmonarType");
+
+            entity.HasOne(d => d.Gender).WithMany(p => p.Report)
+                .HasForeignKey(d => d.GenderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Report_Gender");
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.ReportInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Report_AspNetUsers");
+
+            entity.HasOne(d => d.MedicalStaff).WithMany(p => p.Report)
+                .HasForeignKey(d => d.MedicalStaffId)
+                .HasConstraintName("FK_Report_MedicalStaff");
+
+            entity.HasOne(d => d.MedicalTreatmentType).WithMany(p => p.Report)
+                .HasForeignKey(d => d.MedicalTreatmentTypeId)
+                .HasConstraintName("FK_Report_InstitutionType");
+
+            entity.HasOne(d => d.Municipality).WithMany(p => p.Report)
+                .HasForeignKey(d => d.MunicipalityId)
+                .HasConstraintName("FK_Report_City");
+
+            entity.HasOne(d => d.Nationality).WithMany(p => p.Report)
+                .HasForeignKey(d => d.NationalityId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Report_Nationality");
+
+            entity.HasOne(d => d.Quarter).WithMany(p => p.Report)
+                .HasForeignKey(d => d.QuarterId)
+                .HasConstraintName("FK_Report_Quarter");
+
+            entity.HasOne(d => d.ReferenceType).WithMany(p => p.Report)
+                .HasForeignKey(d => d.ReferenceTypeId)
+                .HasConstraintName("FK_Report_ReferenceType");
+
+            entity.HasOne(d => d.RegimenTreatmentType).WithMany(p => p.Report)
+                .HasForeignKey(d => d.RegimenTreatmentTypeId)
+                .HasConstraintName("FK_Report_RegimenTreatmentType");
+
+            entity.HasOne(d => d.Region).WithMany(p => p.Report)
+                .HasForeignKey(d => d.RegionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Report_Region");
+
+            entity.HasOne(d => d.SideEffectType).WithMany(p => p.Report)
+                .HasForeignKey(d => d.SideEffectTypeId)
+                .HasConstraintName("FK_Report_SideEffectType");
+
+            entity.HasOne(d => d.TreatmentDetailType).WithMany(p => p.Report)
+                .HasForeignKey(d => d.TreatmentDetailTypeId)
+                .HasConstraintName("FK_Report_TreatmentDetailType");
+
+            entity.HasOne(d => d.TreatmentResultType).WithMany(p => p.Report)
+                .HasForeignKey(d => d.TreatmentResultTypeId)
+                .HasConstraintName("FK_Report_TreatmentResultType");
+
+            entity.HasOne(d => d.TreatmentType).WithMany(p => p.Report)
+                .HasForeignKey(d => d.TreatmentTypeId)
+                .HasConstraintName("FK_Report_TreatmentType");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.ReportUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_Report_AspNetUsers1");
+
+            entity.HasOne(d => d.Settlement).WithMany(p => p.Report)
+                .HasForeignKey(d => new { d.SettlementId, d.MunicipalityId })
+                .HasConstraintName("FK_Report_Settlement");
         });
 
         modelBuilder.Entity<ReportRegister>(entity =>
@@ -960,6 +1652,9 @@ public partial class EwsContext : DbContext
             entity.Property(e => e.Lastname).HasMaxLength(128);
             entity.Property(e => e.MotherName).HasMaxLength(128);
             entity.Property(e => e.PartnerName).HasMaxLength(128);
+            entity.Property(e => e.PatientCode)
+                .HasMaxLength(32)
+                .IsUnicode(false);
             entity.Property(e => e.PersonalNumber).HasMaxLength(128);
             entity.Property(e => e.PhoneNumber).HasMaxLength(128);
             entity.Property(e => e.ProfessionTypeId).HasColumnName("ProfessionTypeID");
@@ -977,6 +1672,11 @@ public partial class EwsContext : DbContext
                 .HasForeignKey(d => d.CitizenRegisterId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ReportRegister_CitizenRegister");
+
+            entity.HasOne(d => d.Gender).WithMany(p => p.ReportRegister)
+                .HasForeignKey(d => d.GenderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReportRegister_Gender");
 
             entity.HasOne(d => d.HealthInstitution).WithMany(p => p.ReportRegister)
                 .HasForeignKey(d => d.HealthInstitutionId)
@@ -1125,6 +1825,9 @@ public partial class EwsContext : DbContext
             entity.Property(e => e.InsertedDate).HasColumnType("datetime");
             entity.Property(e => e.InsertedFrom).HasMaxLength(450);
             entity.Property(e => e.ReportRegisterContactId).HasColumnName("ReportRegisterContactID");
+            entity.Property(e => e.SurveyNumber)
+                .HasMaxLength(32)
+                .IsUnicode(false);
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
 
@@ -1470,6 +2173,146 @@ public partial class EwsContext : DbContext
                 .HasConstraintName("FK_ReportRegisterTrackingStatusStaff_ReportRegisterTrackingStatusStaff");
         });
 
+        modelBuilder.Entity<ReportRiskFactor>(entity =>
+        {
+            entity.HasKey(e => e.ReportRiskFactorId).HasName("PK__ReportRi__5EC62F2E38F63F18");
+
+            entity.ToTable("ReportRiskFactor", "TB");
+
+            entity.Property(e => e.ReportRiskFactorId).HasColumnName("ReportRiskFactorID");
+            entity.Property(e => e.Description).HasMaxLength(256);
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.ReportId).HasColumnName("ReportID");
+            entity.Property(e => e.RiskFactorTypeId).HasColumnName("RiskFactorTypeID");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.ReportRiskFactorInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReportRiskFactor_AspNetUsers");
+
+            entity.HasOne(d => d.Report).WithMany(p => p.ReportRiskFactor)
+                .HasForeignKey(d => d.ReportId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReportRiskFactor_Report");
+
+            entity.HasOne(d => d.RiskFactorType).WithMany(p => p.ReportRiskFactor)
+                .HasForeignKey(d => d.RiskFactorTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReportRiskFactor_RiskFactorType");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.ReportRiskFactorUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_ReportRiskFactor_AspNetUsers1");
+        });
+
+        modelBuilder.Entity<ReportRiskGroup>(entity =>
+        {
+            entity.HasKey(e => e.ReportRiskGroupId).HasName("PK__ReportRi__23DE2A048ADE9DEA");
+
+            entity.ToTable("ReportRiskGroup", "TB");
+
+            entity.Property(e => e.ReportRiskGroupId).HasColumnName("ReportRiskGroupID");
+            entity.Property(e => e.Description).HasMaxLength(256);
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.ReportId).HasColumnName("ReportID");
+            entity.Property(e => e.RiskGroupTypeId).HasColumnName("RiskGroupTypeID");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.ReportRiskGroupInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReportRiskGroup_AspNetUsers");
+
+            entity.HasOne(d => d.Report).WithMany(p => p.ReportRiskGroup)
+                .HasForeignKey(d => d.ReportId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReportRiskGroup_Report");
+
+            entity.HasOne(d => d.RiskGroupType).WithMany(p => p.ReportRiskGroup)
+                .HasForeignKey(d => d.RiskGroupTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReportRiskGroup_RiskGroupType");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.ReportRiskGroupUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_ReportRiskGroup_AspNetUsers1");
+        });
+
+        modelBuilder.Entity<ReportSideEffect>(entity =>
+        {
+            entity.HasKey(e => e.ReportSideEffectId).HasName("PK__ReportSi__08952537D43C968A");
+
+            entity.ToTable("ReportSideEffect", "TB");
+
+            entity.Property(e => e.ReportSideEffectId).HasColumnName("ReportSideEffectID");
+            entity.Property(e => e.Description).HasMaxLength(256);
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.ReportId).HasColumnName("ReportID");
+            entity.Property(e => e.SubSideEffectTypeId).HasColumnName("SubSideEffectTypeID");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.ReportSideEffectInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReportSideEffect_AspNetUsers");
+
+            entity.HasOne(d => d.Report).WithMany(p => p.ReportSideEffect)
+                .HasForeignKey(d => d.ReportId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReportSideEffect_Report");
+
+            entity.HasOne(d => d.SubSideEffectType).WithMany(p => p.ReportSideEffect)
+                .HasForeignKey(d => d.SubSideEffectTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReportSideEffect_SubSideEffectType");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.ReportSideEffectUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_ReportSideEffect_AspNetUsers1");
+        });
+
+        modelBuilder.Entity<ReportStatus>(entity =>
+        {
+            entity.HasKey(e => e.ReportStatusId).HasName("PK_ReportRegisterStatus");
+
+            entity.ToTable("ReportStatus", "TB");
+
+            entity.Property(e => e.ReportStatusId).HasColumnName("ReportStatusID");
+            entity.Property(e => e.Description).HasMaxLength(512);
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.ReportId).HasColumnName("ReportID");
+            entity.Property(e => e.ReportStatusTypeId).HasColumnName("ReportStatusTypeID");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.ReportStatusInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReportStatus_AspNetUsers");
+
+            entity.HasOne(d => d.Report).WithMany(p => p.ReportStatus)
+                .HasForeignKey(d => d.ReportId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReportStatus_Report");
+
+            entity.HasOne(d => d.ReportStatusType).WithMany(p => p.ReportStatus)
+                .HasForeignKey(d => d.ReportStatusTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReportStatus_StatusType");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.ReportStatusUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_ReportStatus_AspNetUsers1");
+        });
+
         modelBuilder.Entity<ReportingTimeType>(entity =>
         {
             entity.Property(e => e.ReportingTimeTypeId).HasColumnName("ReportingTimeTypeID");
@@ -1495,6 +2338,68 @@ public partial class EwsContext : DbContext
             entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.ReportingTimeTypeUpdatedFromNavigation)
                 .HasForeignKey(d => d.UpdatedFrom)
                 .HasConstraintName("FK_ReportingTimeType_AspNetUsers1");
+        });
+
+        modelBuilder.Entity<RiskFactorType>(entity =>
+        {
+            entity.HasKey(e => e.RiskFactorTypeId).HasName("PK__RiskFact__747947E76E80BAA6");
+
+            entity.ToTable("RiskFactorType", "TB");
+
+            entity.Property(e => e.RiskFactorTypeId).HasColumnName("RiskFactorTypeID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.RiskFactorTypeInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_RiskFactorType_AspNetUsers");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.RiskFactorTypeUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_RiskFactorType_AspNetUsers1");
+        });
+
+        modelBuilder.Entity<RiskGroupType>(entity =>
+        {
+            entity.HasKey(e => e.RiskGroupTypeId).HasName("PK__RiskGrou__27F5CA7012A4C3AF");
+
+            entity.ToTable("RiskGroupType", "TB");
+
+            entity.Property(e => e.RiskGroupTypeId).HasColumnName("RiskGroupTypeID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.RiskGroupTypeInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_RiskGroupType_AspNetUsers");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.RiskGroupTypeUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_RiskGroupType_AspNetUsers1");
         });
 
         modelBuilder.Entity<SampleTakenType>(entity =>
@@ -1591,6 +2496,94 @@ public partial class EwsContext : DbContext
                 .HasConstraintName("FK_Settlement_City");
         });
 
+        modelBuilder.Entity<Sheet4>(entity =>
+        {
+            entity.HasNoKey();
+
+            entity.Property(e => e.Address).HasMaxLength(255);
+            entity.Property(e => e.Description).HasMaxLength(255);
+            entity.Property(e => e.EmailAddress).HasMaxLength(255);
+            entity.Property(e => e.HealthInstitutionLevelId).HasColumnName("HealthInstitutionLevelID");
+            entity.Property(e => e.IdentificationNumber).HasMaxLength(255);
+            entity.Property(e => e.LicenceNumber).HasMaxLength(255);
+            entity.Property(e => e.MinicipalityId).HasColumnName("MinicipalityID");
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(255)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(255)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(255)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.SettlementId).HasColumnName("SettlementID");
+            entity.Property(e => e.ShortNameEn)
+                .HasMaxLength(255)
+                .HasColumnName("ShortName_EN");
+            entity.Property(e => e.ShortNameSq)
+                .HasMaxLength(255)
+                .HasColumnName("ShortName_SQ");
+            entity.Property(e => e.ShortNameSr)
+                .HasMaxLength(255)
+                .HasColumnName("ShortName_SR");
+            entity.Property(e => e.Status).HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<SideEffectType>(entity =>
+        {
+            entity.HasKey(e => e.SideEffectTypeId).HasName("PK__SideEffe__5160496FDCDFA5D1");
+
+            entity.ToTable("SideEffectType", "TB");
+
+            entity.Property(e => e.SideEffectTypeId).HasColumnName("SideEffectTypeID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.SideEffectTypeInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SideEffectType_AspNetUsers");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.SideEffectTypeUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_SideEffectType_AspNetUsers1");
+        });
+
+        modelBuilder.Entity<SmsnPerdorues>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("SMSN perdorues");
+
+            entity.Property(e => e.EmailAdresa)
+                .HasMaxLength(50)
+                .HasColumnName("Email_adresa");
+            entity.Property(e => e.Emri).HasMaxLength(50);
+            entity.Property(e => e.Institution).HasMaxLength(50);
+            entity.Property(e => e.Mbiemri).HasMaxLength(50);
+            entity.Property(e => e.NrPersonal)
+                .HasMaxLength(50)
+                .HasColumnName("Nr_Personal");
+            entity.Property(e => e.NrTel)
+                .HasMaxLength(50)
+                .HasColumnName("Nr_Tel");
+            entity.Property(e => e.Role).HasMaxLength(50);
+            entity.Property(e => e.Specializim)
+                .HasMaxLength(50)
+                .HasColumnName("specializim");
+        });
+
         modelBuilder.Entity<StatusType>(entity =>
         {
             entity.Property(e => e.StatusTypeId).HasColumnName("StatusTypeID");
@@ -1639,6 +2632,43 @@ public partial class EwsContext : DbContext
                 .HasForeignKey(d => d.MenuId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_SubMenu_Menu");
+        });
+
+        modelBuilder.Entity<SubSideEffectType>(entity =>
+        {
+            entity.HasKey(e => e.SubSideEffectTypeId).HasName("PK__SubSideE__B3CF8F7BF0D761A7");
+
+            entity.ToTable("SubSideEffectType", "TB");
+
+            entity.Property(e => e.SubSideEffectTypeId).HasColumnName("SubSideEffectTypeID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.SideEffectTypeId).HasColumnName("SideEffectTypeID");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.SubSideEffectTypeInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SubSideEffectType_AspNetUsers");
+
+            entity.HasOne(d => d.SideEffectType).WithMany(p => p.SubSideEffectType)
+                .HasForeignKey(d => d.SideEffectTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SubSideEffectType_SideEffectType");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.SubSideEffectTypeUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_SubSideEffectType_AspNetUsers1");
         });
 
         modelBuilder.Entity<SurveyModel>(entity =>
@@ -1774,6 +2804,99 @@ public partial class EwsContext : DbContext
             entity.Property(e => e.TestTypeId).HasColumnName("TestTypeID");
             entity.Property(e => e.InsertedDate).HasColumnType("datetime");
             entity.Property(e => e.TestName).HasMaxLength(128);
+        });
+
+        modelBuilder.Entity<TreatmentDetailType>(entity =>
+        {
+            entity.HasKey(e => e.TreatmentDetailTypeId).HasName("PK__Treatmen__DC67CDC8A1650ACD");
+
+            entity.ToTable("TreatmentDetailType", "TB");
+
+            entity.Property(e => e.TreatmentDetailTypeId).HasColumnName("TreatmentDetailTypeID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.TreatmentDetailTypeInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_TreatmentDetailTypeID_AspNetUsers");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.TreatmentDetailTypeUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_TreatmentDetailTypeID_AspNetUsers1");
+        });
+
+        modelBuilder.Entity<TreatmentResultType>(entity =>
+        {
+            entity.HasKey(e => e.TreatmentDetailTypeId).HasName("PK__Treatmen__DC67CDC88FC2ED7F");
+
+            entity.ToTable("TreatmentResultType", "TB");
+
+            entity.Property(e => e.TreatmentDetailTypeId).HasColumnName("TreatmentDetailTypeID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.TreatmentResultTypeInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_TreatmentResultType_AspNetUsers");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.TreatmentResultTypeUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_TreatmentResultType_AspNetUsers1");
+        });
+
+        modelBuilder.Entity<TreatmentType>(entity =>
+        {
+            entity.HasKey(e => e.TreatmentTypeId).HasName("PK__Treatmen__F3EDE1799A892062");
+
+            entity.ToTable("TreatmentType", "TB");
+
+            entity.Property(e => e.TreatmentTypeId).HasColumnName("TreatmentTypeID");
+            entity.Property(e => e.InsertedDate).HasColumnType("datetime");
+            entity.Property(e => e.InsertedFrom).HasMaxLength(450);
+            entity.Property(e => e.NameEn)
+                .HasMaxLength(128)
+                .HasColumnName("Name_EN");
+            entity.Property(e => e.NameSq)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SQ");
+            entity.Property(e => e.NameSr)
+                .HasMaxLength(128)
+                .HasColumnName("Name_SR");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedFrom).HasMaxLength(450);
+
+            entity.HasOne(d => d.InsertedFromNavigation).WithMany(p => p.TreatmentTypeInsertedFromNavigation)
+                .HasForeignKey(d => d.InsertedFrom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_TreatmentTypeID_AspNetUsers");
+
+            entity.HasOne(d => d.UpdatedFromNavigation).WithMany(p => p.TreatmentTypeUpdatedFromNavigation)
+                .HasForeignKey(d => d.UpdatedFrom)
+                .HasConstraintName("FK_TreatmentTypeID_AspNetUsers1");
         });
 
         modelBuilder.Entity<UserAudit>(entity =>

@@ -12,4 +12,6 @@ public partial class Nationality
     public string NameEn { get; set; } = null!;
 
     public string NameSr { get; set; } = null!;
+
+    public virtual ICollection<Report> Report { get; set; } = new List<Report>();
 }

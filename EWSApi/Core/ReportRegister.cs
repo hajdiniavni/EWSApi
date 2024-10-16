@@ -51,6 +51,8 @@ public partial class ReportRegister
 
     public string? SuspectedPlace { get; set; }
 
+    public string? PatientCode { get; set; }
+
     public string InsertedFrom { get; set; } = null!;
 
     public DateTime InsertedDate { get; set; }
@@ -60,6 +62,10 @@ public partial class ReportRegister
     public DateTime? UpdatedDate { get; set; }
 
     public virtual CitizenRegister CitizenRegister { get; set; } = null!;
+
+    public virtual ICollection<DiseaseNotificationReportRegister> DiseaseNotificationReportRegister { get; set; } = new List<DiseaseNotificationReportRegister>();
+
+    public virtual Gender Gender { get; set; } = null!;
 
     public virtual HealthInstitution HealthInstitution { get; set; } = null!;
 

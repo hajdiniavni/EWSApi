@@ -17,7 +17,9 @@ public partial class ListaInstitucioneveBhis
 
     public string? Smsnid { get; set; }
 
-    public string? Column7 { get; set; }
+    public string? Shtohet { get; set; }
 
-    public string? Column8 { get; set; }
+    public string? Komuna { get; set; }
+
+    public string? Vendi { get; set; }
 }

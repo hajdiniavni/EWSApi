@@ -1,0 +1,189 @@
+[
+  {
+    "ContainingType": "EWSApi.Controllers.SMSNController",
+    "Method": "GetLabData",
+    "RelativePath": "api/SMSN/GetLabData/{UniqueNumber}/{LabCode}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UniqueNumber",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "LabCode",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EWSApi.Controllers.SMSNController",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EWSApi.Controllers.SMSNController",
+    "Method": "PostDiseaseInfection",
+    "RelativePath": "api/SMSN/PostDiseaseInfection",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "disease",
+        "Type": "EWSApi.Models.DiseaseInfection.DiseaseInfectionVM",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EWSApi.Models.DiseaseInfection.DiseaseInfectionVM",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EWSApi.Controllers.SMSNController",
+    "Method": "PostExamination",
+    "RelativePath": "api/SMSN/PostExamination",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "examination",
+        "Type": "EWSApi.Models.Examination.ExaminationVM",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EWSApi.Models.Examination.ExaminationVM",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EWSApi.Controllers.SMSNController",
+    "Method": "PostHealthInstitution",
+    "RelativePath": "api/SMSN/PostHealthInstitution",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "healthInstitution",
+        "Type": "EWSApi.Models.HealthInstitution.HealthInstitutionVM",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EWSApi.Models.HealthInstitution.HealthInstitutionVM",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EWSApi.Controllers.SMSNController",
+    "Method": "PostMedicalStaff",
+    "RelativePath": "api/SMSN/PostMedicalStaff",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "medicalStaff",
+        "Type": "EWSApi.Models.MedicalStaff.MedicalStaffVM",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EWSApi.Models.MedicalStaff.MedicalStaffVM",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EWSApi.Controllers.SMSNController",
+    "Method": "PostReportRegister",
+    "RelativePath": "api/SMSN/PostReportRegister",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reportRegister",
+        "Type": "EWSApi.Models.ReportRegister.ReportRegisterVM",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EWSApi.Models.ReportRegister.ReportRegisterVM",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EWSApi.Controllers.SMSNController",
+    "Method": "PostReportRegisterTestResult",
+    "RelativePath": "api/SMSN/PostReportRegisterTestResult",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reportRegisterTestResult",
+        "Type": "EWSApi.Models.ReportRegister.ReportRegisterTestResultVM",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EWSApi.Models.ReportRegister.ReportRegisterTestResultVM",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

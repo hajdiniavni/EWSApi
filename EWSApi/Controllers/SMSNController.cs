@@ -371,15 +371,22 @@ namespace EWSApi.Controllers
             try
             {
 
-              
 
+                int healthInstitutionID = 0;
 
                 string uniqueNumber = _sqlContext.GenerateUniqueNumber.FromSqlInterpolated($"select   dbo.GenerateUniqueNumber (1) as uniqueNumber").FirstOrDefault().uniqueNumber;
 
-                int healthInstitutionID = await _context.HealthInstitution
-               .Where(ms => ms.Bhisid == int.Parse(reportRegister.HealthInstitutionIdentificationNumber))
-               .Select(ms => ms.HealthInstitutionId)
-               .FirstOrDefaultAsync();
+                if (int.TryParse(reportRegister.HealthInstitutionIdentificationNumber, out int institutionId))
+                {
+                     healthInstitutionID = await _context.HealthInstitution
+                        .Where(ms => ms.Bhisid == institutionId)
+                        .Select(ms => ms.HealthInstitutionId)
+                        .FirstOrDefaultAsync();
+                }
+                else
+                {
+                    // Handle parsing failure, possibly logging or throwing a more specific exception
+                }
 
                 int citizenRegisterID = await _context.CitizenRegister
                .Where(ms => ms.PersonalNumber == AesCrypto.Ecrypt<string>(reportRegister.PersonalNumber))

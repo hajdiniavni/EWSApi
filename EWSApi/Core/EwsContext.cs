@@ -1090,22 +1090,19 @@ public partial class EwsContext : DbContext
                 .HasNoKey()
                 .ToTable("ListaInstitucioneveBHIS");
 
-            entity.Property(e => e.Column7)
-                .HasMaxLength(50)
-                .HasColumnName("column7");
-            entity.Property(e => e.Column8)
-                .HasMaxLength(50)
-                .HasColumnName("column8");
             entity.Property(e => e.Id).HasMaxLength(50);
             entity.Property(e => e.IdParent)
                 .HasMaxLength(50)
                 .HasColumnName("ID_Parent");
             entity.Property(e => e.Institucioni).HasMaxLength(50);
             entity.Property(e => e.Institucioni2).HasMaxLength(50);
+            entity.Property(e => e.Komuna).HasMaxLength(50);
             entity.Property(e => e.Niveli).HasMaxLength(50);
+            entity.Property(e => e.Shtohet).HasMaxLength(50);
             entity.Property(e => e.Smsnid)
                 .HasMaxLength(50)
                 .HasColumnName("SMSNID");
+            entity.Property(e => e.Vendi).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Log>(entity =>

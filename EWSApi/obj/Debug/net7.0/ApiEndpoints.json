@@ -2,7 +2,7 @@
   {
     "ContainingType": "EWSApi.Controllers.SMSNController",
     "Method": "GetLabData",
-    "RelativePath": "api/SMSN/GetLabData/{UniqueNumber}/{LabCode}",
+    "RelativePath": "api/SMSN/GetLabData/{UniqueNumber}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -11,16 +11,11 @@
         "Name": "UniqueNumber",
         "Type": "System.String",
         "IsRequired": true
-      },
-      {
-        "Name": "LabCode",
-        "Type": "System.String",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "EWSApi.Controllers.SMSNController",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Object, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

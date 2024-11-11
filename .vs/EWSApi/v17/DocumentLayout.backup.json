@@ -7,32 +7,8 @@
       "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\controllers\\smsncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|d:\\restful web api\\smsn\\smsn\\ewsapi\\ewsapi\\core\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\core\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|d:\\restful web api\\smsn\\smsn\\ewsapi\\ewsapi\\core\\ewscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\core\\ewscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|d:\\restful web api\\smsn\\smsn\\ewsapi\\ewsapi\\core\\bcgtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\core\\bcgtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|d:\\restful web api\\smsn\\smsn\\ewsapi\\ewsapi\\core\\aspnetusers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\core\\aspnetusers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|d:\\restful web api\\smsn\\smsn\\ewsapi\\ewsapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|d:\\restful web api\\smsn\\smsn\\ewsapi\\ewsapi\\models\\reportregister\\reportregistervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\models\\reportregister\\reportregistervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|d:\\restful web api\\smsn\\smsn\\ewsapi\\ewsapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,105 +18,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AspNetUsers.cs",
-              "DocumentMoniker": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Core\\AspNetUsers.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Core\\AspNetUsers.cs",
-              "ToolTip": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Core\\AspNetUsers.cs",
-              "RelativeToolTip": "EWSApi\\Core\\AspNetUsers.cs",
-              "ViewState": "AgIAAPAAAAAAAAAAAAAgwAwBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-22T14:50:53.353Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Bcgtype.cs",
-              "DocumentMoniker": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Core\\Bcgtype.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Core\\Bcgtype.cs",
-              "ToolTip": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Core\\Bcgtype.cs",
-              "RelativeToolTip": "EWSApi\\Core\\Bcgtype.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-22T14:50:47.696Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\appsettings.json",
-              "RelativeDocumentMoniker": "EWSApi\\appsettings.json",
-              "ToolTip": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\appsettings.json",
-              "RelativeToolTip": "EWSApi\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-10-22T14:23:07.83Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "AppDBContext.cs",
-              "DocumentMoniker": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Core\\AppDBContext.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Core\\AppDBContext.cs",
-              "ToolTip": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Core\\AppDBContext.cs",
-              "RelativeToolTip": "EWSApi\\Core\\AppDBContext.cs",
-              "ViewState": "AgIAALsAAAAAAAAAAAAgwNoAAABLAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-22T14:15:57.577Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "EwsContext.cs",
-              "DocumentMoniker": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Core\\EwsContext.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Core\\EwsContext.cs",
-              "ToolTip": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Core\\EwsContext.cs",
-              "RelativeToolTip": "EWSApi\\Core\\EwsContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T09:15:26.168Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Program.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Program.cs",
-              "ToolTip": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Program.cs",
-              "RelativeToolTip": "EWSApi\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-26T07:35:55.377Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "ReportRegisterVM.cs",
               "DocumentMoniker": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Models\\ReportRegister\\ReportRegisterVM.cs",
               "RelativeDocumentMoniker": "EWSApi\\Models\\ReportRegister\\ReportRegisterVM.cs",
               "ToolTip": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Models\\ReportRegister\\ReportRegisterVM.cs",
               "RelativeToolTip": "EWSApi\\Models\\ReportRegister\\ReportRegisterVM.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAEoAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAiwHYAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-04T07:15:18.031Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T07:12:12.766Z"
             },
             {
               "$type": "Document",
@@ -148,11 +42,11 @@
               "Title": "SMSNController.cs",
               "DocumentMoniker": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Controllers\\SMSNController.cs",
               "RelativeDocumentMoniker": "EWSApi\\Controllers\\SMSNController.cs",
-              "ToolTip": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Controllers\\SMSNController.cs*",
-              "RelativeToolTip": "EWSApi\\Controllers\\SMSNController.cs*",
-              "ViewState": "AgIAAGkBAAAAAAAAAAApwHYBAAAsAAAAAAAAAA==",
+              "ToolTip": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Controllers\\SMSNController.cs",
+              "RelativeToolTip": "EWSApi\\Controllers\\SMSNController.cs",
+              "ViewState": "AgIAAFsBAAAAAAAAAAAAAG4BAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-19T15:49:16.765Z",
+              "WhenOpened": "2024-10-31T12:30:20.612Z",
               "EditorCaption": ""
             }
           ]

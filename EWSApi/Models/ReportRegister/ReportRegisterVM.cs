@@ -101,7 +101,7 @@ public class CaseClassificationVM
    
     public int? CCSyndromeTypeId { get; set; }
     public int CaseClassificationTypeId { get; set; }
-    public int DiseaseInfectionId { get; set; }
+    public string DiseaseInfectionId { get; set; }
 }
 
 

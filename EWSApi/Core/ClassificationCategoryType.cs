@@ -25,7 +25,7 @@ public partial class ClassificationCategoryType
 
     public virtual AspNetUsers InsertedFromNavigation { get; set; } = null!;
 
-    public virtual ICollection<Report> Report { get; set; } = new List<Report>();
+    public virtual ICollection<ReportTreatment> ReportTreatment { get; set; } = new List<ReportTreatment>();
 
     public virtual AspNetUsers? UpdatedFromNavigation { get; set; }
 }

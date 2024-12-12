@@ -31,6 +31,8 @@ public partial class ReportRegister
 
     public string Birthdate { get; set; } = null!;
 
+    public int ActualYear { get; set; }
+
     public int GenderId { get; set; }
 
     public string Address { get; set; } = null!;

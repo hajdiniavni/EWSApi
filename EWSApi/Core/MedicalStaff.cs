@@ -34,4 +34,6 @@ public partial class MedicalStaff
     public virtual ICollection<ReportRegisterTherapy> ReportRegisterTherapyMedicalStaff { get; set; } = new List<ReportRegisterTherapy>();
 
     public virtual ICollection<ReportRegisterTherapy> ReportRegisterTherapyUpdatedByMedicalStaff { get; set; } = new List<ReportRegisterTherapy>();
+
+    public virtual ICollection<ReportStatus> ReportStatus { get; set; } = new List<ReportStatus>();
 }

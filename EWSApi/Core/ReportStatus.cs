@@ -15,6 +15,12 @@ public partial class ReportStatus
 
     public bool Active { get; set; }
 
+    public int? MedicalStaffId { get; set; }
+
+    public string? NurseId { get; set; }
+
+    public DateTime? EndDateOfTreatment { get; set; }
+
     public string InsertedFrom { get; set; } = null!;
 
     public DateTime InsertedDate { get; set; }
@@ -24,6 +30,10 @@ public partial class ReportStatus
     public DateTime? UpdatedDate { get; set; }
 
     public virtual AspNetUsers InsertedFromNavigation { get; set; } = null!;
+
+    public virtual MedicalStaff? MedicalStaff { get; set; }
+
+    public virtual AspNetUsers? Nurse { get; set; }
 
     public virtual Report Report { get; set; } = null!;
 

@@ -27,7 +27,7 @@ public partial class SubSideEffectType
 
     public virtual AspNetUsers InsertedFromNavigation { get; set; } = null!;
 
-    public virtual ICollection<ReportSideEffect> ReportSideEffect { get; set; } = new List<ReportSideEffect>();
+    public virtual ICollection<ReportRegimenTreatmentSubSideEffect> ReportRegimenTreatmentSubSideEffect { get; set; } = new List<ReportRegimenTreatmentSubSideEffect>();
 
     public virtual SideEffectType SideEffectType { get; set; } = null!;
 

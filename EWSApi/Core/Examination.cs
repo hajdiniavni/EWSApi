@@ -31,5 +31,11 @@ public partial class Examination
 
     public DateTime? UpdatedDate { get; set; }
 
+    public bool? IsTb { get; set; }
+
+    public virtual ICollection<ReportContactTest> ReportContactTest { get; set; } = new List<ReportContactTest>();
+
     public virtual ICollection<ReportRegisterTest> ReportRegisterTest { get; set; } = new List<ReportRegisterTest>();
+
+    public virtual ICollection<ReportTest> ReportTest { get; set; } = new List<ReportTest>();
 }

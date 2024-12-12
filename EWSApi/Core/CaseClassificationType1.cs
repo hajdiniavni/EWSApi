@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace EWSApi.Core;
 
-public partial class TreatmentDetailType
+public partial class CaseClassificationType1
 {
-    public int TreatmentDetailTypeId { get; set; }
+    public int CaseClassificationTypeId { get; set; }
 
     public string NameSq { get; set; } = null!;
 
@@ -23,7 +23,5 @@ public partial class TreatmentDetailType
 
     public DateTime? UpdatedDate { get; set; }
 
-    public virtual AspNetUsers InsertedFromNavigation { get; set; } = null!;
-
-    public virtual AspNetUsers? UpdatedFromNavigation { get; set; }
+    public virtual ICollection<Report> Report { get; set; } = new List<Report>();
 }

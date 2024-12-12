@@ -47,6 +47,8 @@ public partial class DiseaseInfection
 
     public virtual AspNetUsers InsertedFromNavigation { get; set; } = null!;
 
+    public virtual ICollection<ReportDiseaseInfection> ReportDiseaseInfection { get; set; } = new List<ReportDiseaseInfection>();
+
     public virtual ICollection<ReportRegisterCaseClassification> ReportRegisterCaseClassification { get; set; } = new List<ReportRegisterCaseClassification>();
 
     public virtual ICollection<ReportRegisterConcomitantDisease> ReportRegisterConcomitantDisease { get; set; } = new List<ReportRegisterConcomitantDisease>();

@@ -9,7 +9,7 @@ public partial class SurveyModel
 
     public int SurveyTypeId { get; set; }
 
-    public string Schema { get; set; } = null!;
+    public string? Schema { get; set; }
 
     public bool Active { get; set; }
 

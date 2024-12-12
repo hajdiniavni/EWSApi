@@ -25,7 +25,7 @@ public partial class RegimenTreatmentType
 
     public virtual AspNetUsers InsertedFromNavigation { get; set; } = null!;
 
-    public virtual ICollection<Report> Report { get; set; } = new List<Report>();
+    public virtual ICollection<ReportRegimenTreatment> ReportRegimenTreatment { get; set; } = new List<ReportRegimenTreatment>();
 
     public virtual AspNetUsers? UpdatedFromNavigation { get; set; }
 }

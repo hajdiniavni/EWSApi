@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace EWSApi.Core;
 
-public partial class SideEffectType
+public partial class ClassificationCategoryTreatmentType
 {
-    public int SideEffectTypeId { get; set; }
+    public int ClassificationCategoryTreatmentTypeId { get; set; }
 
     public string NameSq { get; set; } = null!;
 
@@ -25,9 +25,7 @@ public partial class SideEffectType
 
     public virtual AspNetUsers InsertedFromNavigation { get; set; } = null!;
 
-    public virtual ICollection<ReportRegimenTreatment> ReportRegimenTreatment { get; set; } = new List<ReportRegimenTreatment>();
-
-    public virtual ICollection<SubSideEffectType> SubSideEffectType { get; set; } = new List<SubSideEffectType>();
+    public virtual ICollection<ReportTreatment> ReportTreatment { get; set; } = new List<ReportTreatment>();
 
     public virtual AspNetUsers? UpdatedFromNavigation { get; set; }
 }

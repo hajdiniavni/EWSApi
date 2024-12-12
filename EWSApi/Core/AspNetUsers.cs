@@ -81,6 +81,10 @@ public partial class AspNetUsers
 
     public virtual ICollection<Bcgtype> BcgtypeUpdatedFromNavigation { get; set; } = new List<Bcgtype>();
 
+    public virtual ICollection<ClassificationCategoryTreatmentType> ClassificationCategoryTreatmentTypeInsertedFromNavigation { get; set; } = new List<ClassificationCategoryTreatmentType>();
+
+    public virtual ICollection<ClassificationCategoryTreatmentType> ClassificationCategoryTreatmentTypeUpdatedFromNavigation { get; set; } = new List<ClassificationCategoryTreatmentType>();
+
     public virtual ICollection<ClassificationCategoryType> ClassificationCategoryTypeInsertedFromNavigation { get; set; } = new List<ClassificationCategoryType>();
 
     public virtual ICollection<ClassificationCategoryType> ClassificationCategoryTypeUpdatedFromNavigation { get; set; } = new List<ClassificationCategoryType>();
@@ -119,15 +123,15 @@ public partial class AspNetUsers
 
     public virtual ICollection<HealthInstitution> HealthInstitutionUpdatedFromNavigation { get; set; } = new List<HealthInstitution>();
 
+    public virtual ICollection<HospitalTreatmentType> HospitalTreatmentTypeInsertedFromNavigation { get; set; } = new List<HospitalTreatmentType>();
+
+    public virtual ICollection<HospitalTreatmentType> HospitalTreatmentTypeUpdatedFromNavigation { get; set; } = new List<HospitalTreatmentType>();
+
     public virtual ICollection<Log> Log { get; set; } = new List<Log>();
 
     public virtual ICollection<Manual> ManualInsertedFromNavigation { get; set; } = new List<Manual>();
 
     public virtual ICollection<Manual> ManualUpdatedFromNavigation { get; set; } = new List<Manual>();
-
-    public virtual ICollection<MedicalTreatmentType> MedicalTreatmentTypeInsertedFromNavigation { get; set; } = new List<MedicalTreatmentType>();
-
-    public virtual ICollection<MedicalTreatmentType> MedicalTreatmentTypeUpdatedFromNavigation { get; set; } = new List<MedicalTreatmentType>();
 
     public virtual ICollection<Quarter> QuarterInsertedFromNavigation { get; set; } = new List<Quarter>();
 
@@ -147,7 +151,31 @@ public partial class AspNetUsers
 
     public virtual ICollection<RegimenTreatmentType> RegimenTreatmentTypeUpdatedFromNavigation { get; set; } = new List<RegimenTreatmentType>();
 
-    public virtual ICollection<Report> ReportInsertedFromNavigation { get; set; } = new List<Report>();
+    public virtual ICollection<Report> Report { get; set; } = new List<Report>();
+
+    public virtual ICollection<ReportContact> ReportContactInsertedFromNavigation { get; set; } = new List<ReportContact>();
+
+    public virtual ICollection<ReportContactTest> ReportContactTestInsertedFromNavigation { get; set; } = new List<ReportContactTest>();
+
+    public virtual ICollection<ReportContactTest> ReportContactTestUpdatedFromNavigation { get; set; } = new List<ReportContactTest>();
+
+    public virtual ICollection<ReportContact> ReportContactUpdatedFromNavigation { get; set; } = new List<ReportContact>();
+
+    public virtual ICollection<ReportDiseaseInfection> ReportDiseaseInfectionInsertedFromNavigation { get; set; } = new List<ReportDiseaseInfection>();
+
+    public virtual ICollection<ReportDiseaseInfection> ReportDiseaseInfectionUpdatedFromNavigation { get; set; } = new List<ReportDiseaseInfection>();
+
+    public virtual ICollection<ReportHospitalTreatment> ReportHospitalTreatmentInsertedFromNavigation { get; set; } = new List<ReportHospitalTreatment>();
+
+    public virtual ICollection<ReportHospitalTreatment> ReportHospitalTreatmentUpdatedFromNavigation { get; set; } = new List<ReportHospitalTreatment>();
+
+    public virtual ICollection<ReportRegimenTreatment> ReportRegimenTreatmentInsertedFromNavigation { get; set; } = new List<ReportRegimenTreatment>();
+
+    public virtual ICollection<ReportRegimenTreatmentSubSideEffect> ReportRegimenTreatmentSubSideEffectInsertedFromNavigation { get; set; } = new List<ReportRegimenTreatmentSubSideEffect>();
+
+    public virtual ICollection<ReportRegimenTreatmentSubSideEffect> ReportRegimenTreatmentSubSideEffectUpdatedFromNavigation { get; set; } = new List<ReportRegimenTreatmentSubSideEffect>();
+
+    public virtual ICollection<ReportRegimenTreatment> ReportRegimenTreatmentUpdatedFromNavigation { get; set; } = new List<ReportRegimenTreatment>();
 
     public virtual ICollection<ReportRegisterCaseClassification> ReportRegisterCaseClassificationInsertedFromNavigation { get; set; } = new List<ReportRegisterCaseClassification>();
 
@@ -209,15 +237,17 @@ public partial class AspNetUsers
 
     public virtual ICollection<ReportRiskGroup> ReportRiskGroupUpdatedFromNavigation { get; set; } = new List<ReportRiskGroup>();
 
-    public virtual ICollection<ReportSideEffect> ReportSideEffectInsertedFromNavigation { get; set; } = new List<ReportSideEffect>();
-
-    public virtual ICollection<ReportSideEffect> ReportSideEffectUpdatedFromNavigation { get; set; } = new List<ReportSideEffect>();
-
     public virtual ICollection<ReportStatus> ReportStatusInsertedFromNavigation { get; set; } = new List<ReportStatus>();
+
+    public virtual ICollection<ReportStatus> ReportStatusNurse { get; set; } = new List<ReportStatus>();
 
     public virtual ICollection<ReportStatus> ReportStatusUpdatedFromNavigation { get; set; } = new List<ReportStatus>();
 
-    public virtual ICollection<Report> ReportUpdatedFromNavigation { get; set; } = new List<Report>();
+    public virtual ICollection<ReportTest> ReportTest { get; set; } = new List<ReportTest>();
+
+    public virtual ICollection<ReportTreatment> ReportTreatmentInsertedFromNavigation { get; set; } = new List<ReportTreatment>();
+
+    public virtual ICollection<ReportTreatment> ReportTreatmentUpdatedFromNavigation { get; set; } = new List<ReportTreatment>();
 
     public virtual ICollection<ReportingTimeType> ReportingTimeTypeInsertedFromNavigation { get; set; } = new List<ReportingTimeType>();
 
@@ -230,6 +260,10 @@ public partial class AspNetUsers
     public virtual ICollection<RiskGroupType> RiskGroupTypeInsertedFromNavigation { get; set; } = new List<RiskGroupType>();
 
     public virtual ICollection<RiskGroupType> RiskGroupTypeUpdatedFromNavigation { get; set; } = new List<RiskGroupType>();
+
+    public virtual ICollection<RtgresultType> RtgresultTypeInsertedFromNavigation { get; set; } = new List<RtgresultType>();
+
+    public virtual ICollection<RtgresultType> RtgresultTypeUpdatedFromNavigation { get; set; } = new List<RtgresultType>();
 
     public virtual ICollection<SampleTakenType> SampleTakenTypeInsertedFromNavigation { get; set; } = new List<SampleTakenType>();
 
@@ -262,10 +296,6 @@ public partial class AspNetUsers
     public virtual ICollection<TreatmentResultType> TreatmentResultTypeInsertedFromNavigation { get; set; } = new List<TreatmentResultType>();
 
     public virtual ICollection<TreatmentResultType> TreatmentResultTypeUpdatedFromNavigation { get; set; } = new List<TreatmentResultType>();
-
-    public virtual ICollection<TreatmentType> TreatmentTypeInsertedFromNavigation { get; set; } = new List<TreatmentType>();
-
-    public virtual ICollection<TreatmentType> TreatmentTypeUpdatedFromNavigation { get; set; } = new List<TreatmentType>();
 
     public virtual ICollection<AspNetRoles> Role { get; set; } = new List<AspNetRoles>();
 }

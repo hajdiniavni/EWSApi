@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace EWSApi.Core;
 
-public partial class TreatmentDetailType
+public partial class ReportContactTest
 {
-    public int TreatmentDetailTypeId { get; set; }
+    public int ReportContactTestId { get; set; }
 
-    public string NameSq { get; set; } = null!;
+    public int ReportContactId { get; set; }
 
-    public string NameEn { get; set; } = null!;
+    public int ExaminationId { get; set; }
 
-    public string NameSr { get; set; } = null!;
+    public string TestTypeName { get; set; } = null!;
 
     public bool Active { get; set; }
 
@@ -23,7 +23,11 @@ public partial class TreatmentDetailType
 
     public DateTime? UpdatedDate { get; set; }
 
+    public virtual Examination Examination { get; set; } = null!;
+
     public virtual AspNetUsers InsertedFromNavigation { get; set; } = null!;
+
+    public virtual ICollection<ReportContactTestResult> ReportContactTestResult { get; set; } = new List<ReportContactTestResult>();
 
     public virtual AspNetUsers? UpdatedFromNavigation { get; set; }
 }

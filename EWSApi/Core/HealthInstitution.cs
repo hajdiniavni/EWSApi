@@ -59,13 +59,19 @@ public partial class HealthInstitution
 
     public virtual City Minicipality { get; set; } = null!;
 
+    public virtual ICollection<Report> Report { get; set; } = new List<Report>();
+
+    public virtual ICollection<ReportContactTestResult> ReportContactTestResult { get; set; } = new List<ReportContactTestResult>();
+
+    public virtual ICollection<ReportRegimenTreatment> ReportRegimenTreatment { get; set; } = new List<ReportRegimenTreatment>();
+
     public virtual ICollection<ReportRegister> ReportRegister { get; set; } = new List<ReportRegister>();
 
     public virtual ICollection<ReportRegisterReference> ReportRegisterReferenceHealthInstitutionFrom { get; set; } = new List<ReportRegisterReference>();
 
     public virtual ICollection<ReportRegisterReference> ReportRegisterReferenceHealthInstitutionTo { get; set; } = new List<ReportRegisterReference>();
 
-    public virtual ICollection<ReportRegisterTestResult> ReportRegisterTestResult { get; set; } = new List<ReportRegisterTestResult>();
+    public virtual ICollection<ReportTestResult> ReportTestResult { get; set; } = new List<ReportTestResult>();
 
     public virtual Settlement Settlement { get; set; } = null!;
 

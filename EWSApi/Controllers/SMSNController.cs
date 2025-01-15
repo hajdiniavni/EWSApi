@@ -692,6 +692,7 @@ namespace EWSApi.Controllers
                     ResultDate = reportRegisterTestResult.ResultDate,
                     UserName = reportRegisterTestResult.Username,
                     InsertedDate = DateTime.Now,
+                    Active = true
                    
 
                 }

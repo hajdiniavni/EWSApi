@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "2NDf0NJT7GPyxlXXyrK70+17KWeJDgESplF7tqiwqvo=",
+  "Hash": "/8PzOzv5XGEl3YWKdBt/uez/XKlLaL//ni+qPT3ehjQ=",
   "Source": "EWSApi",
   "BasePath": "_content/EWSApi",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

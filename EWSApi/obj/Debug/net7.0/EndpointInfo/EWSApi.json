@@ -1,0 +1,1318 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "EWSApi",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/CaseClassificationType": {
+      "get": {
+        "tags": [
+          "LookupTable"
+        ],
+        "parameters": [
+          {
+            "name": "LanguageID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DiseaseInfectionType": {
+      "get": {
+        "tags": [
+          "LookupTable"
+        ],
+        "parameters": [
+          {
+            "name": "LanguageID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DiseaseInfection": {
+      "get": {
+        "tags": [
+          "LookupTable"
+        ],
+        "parameters": [
+          {
+            "name": "DiseaseInfectionTypeID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "LanguageID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Examination": {
+      "get": {
+        "tags": [
+          "LookupTable"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ReportRegisterStatusType": {
+      "get": {
+        "tags": [
+          "LookupTable"
+        ],
+        "parameters": [
+          {
+            "name": "LanguageID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SampleTakenType": {
+      "get": {
+        "tags": [
+          "LookupTable"
+        ],
+        "parameters": [
+          {
+            "name": "LanguageID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Country": {
+      "get": {
+        "tags": [
+          "LookupTable"
+        ],
+        "parameters": [
+          {
+            "name": "LanguageID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/City": {
+      "get": {
+        "tags": [
+          "LookupTable"
+        ],
+        "parameters": [
+          {
+            "name": "LanguageID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Settlement": {
+      "get": {
+        "tags": [
+          "LookupTable"
+        ],
+        "parameters": [
+          {
+            "name": "CityID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "LanguageID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SuspectedPlaceType": {
+      "get": {
+        "tags": [
+          "LookupTable"
+        ],
+        "parameters": [
+          {
+            "name": "LanguageID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SyndromeType": {
+      "get": {
+        "tags": [
+          "LookupTable"
+        ],
+        "parameters": [
+          {
+            "name": "LanguageID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SMSN/GetLabData/{UniqueNumber}": {
+      "get": {
+        "tags": [
+          "SMSN"
+        ],
+        "parameters": [
+          {
+            "name": "UniqueNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SMSN/PostMedicalStaff": {
+      "post": {
+        "tags": [
+          "SMSN"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalStaffVM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalStaffVM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalStaffVM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicalStaffVM"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicalStaffVM"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicalStaffVM"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SMSN/PostExamination": {
+      "post": {
+        "tags": [
+          "SMSN"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExaminationVM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExaminationVM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExaminationVM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExaminationVM"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExaminationVM"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExaminationVM"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SMSN/PostHealthInstitution": {
+      "post": {
+        "tags": [
+          "SMSN"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HealthInstitutionVM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HealthInstitutionVM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/HealthInstitutionVM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthInstitutionVM"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthInstitutionVM"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthInstitutionVM"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SMSN/PostReportRegister": {
+      "post": {
+        "tags": [
+          "SMSN"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportRegisterVM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportRegisterVM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportRegisterVM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportRegisterVM"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportRegisterVM"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportRegisterVM"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SMSN/PostReportRegisterTestResult": {
+      "post": {
+        "tags": [
+          "SMSN"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportRegisterTestResultVM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportRegisterTestResultVM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportRegisterTestResultVM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportRegisterTestResultVM"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportRegisterTestResultVM"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportRegisterTestResultVM"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SMSN/PostDiseaseInfection": {
+      "post": {
+        "tags": [
+          "SMSN"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiseaseInfectionVM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiseaseInfectionVM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiseaseInfectionVM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiseaseInfectionVM"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiseaseInfectionVM"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiseaseInfectionVM"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CaseClassificationVM": {
+        "type": "object",
+        "properties": {
+          "ccSyndromeTypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "caseClassificationTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "diseaseInfectionId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DiseaseInfectionVM": {
+        "type": "object",
+        "properties": {
+          "diseaseInfectionTypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "diseaseCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataEncrypted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isTransmissionDisease": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "nameSq": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameSr": {
+            "type": "string",
+            "nullable": true
+          },
+          "reportingTimeTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "active": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExaminationVM": {
+        "required": [
+          "active",
+          "examinationCode",
+          "examinationName",
+          "foreignPrice",
+          "isDynamic",
+          "isEpidemic",
+          "localPrice",
+          "resultTime"
+        ],
+        "type": "object",
+        "properties": {
+          "examinationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "examinationName": {
+            "type": "string"
+          },
+          "examinationCode": {
+            "type": "string"
+          },
+          "isEpidemic": {
+            "type": "boolean"
+          },
+          "resultTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "foreignPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "isDynamic": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HealthInstitutionVM": {
+        "required": [
+          "address",
+          "description",
+          "emailAddress",
+          "healthInstitutionLevelId",
+          "identificationNumber",
+          "licenceNumber",
+          "minicipalityId",
+          "nameEn",
+          "nameSq",
+          "nameSr",
+          "phoneNumber",
+          "settlementId",
+          "shortNameEn",
+          "shortNameSq",
+          "shortNameSr",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "healthInstitutionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "healthInstitutionLevelId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "identificationNumber": {
+            "type": "string"
+          },
+          "licenceNumber": {
+            "type": "string"
+          },
+          "nameSq": {
+            "type": "string"
+          },
+          "nameEn": {
+            "type": "string"
+          },
+          "nameSr": {
+            "type": "string"
+          },
+          "shortNameSq": {
+            "type": "string"
+          },
+          "shortNameEn": {
+            "type": "string"
+          },
+          "shortNameSr": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "minicipalityId": {
+            "maximum": 38,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "settlementId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "address": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "emailAddress": {
+            "pattern": "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}",
+            "type": "string",
+            "format": "email"
+          },
+          "phoneNumber": {
+            "pattern": "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$",
+            "type": "string",
+            "format": "tel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MedicalStaffVM": {
+        "required": [
+          "firstname",
+          "lastname",
+          "licenceNumber",
+          "medicalStaffId",
+          "personalNumber",
+          "specialization",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "medicalStaffId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "personalNumber": {
+            "type": "string"
+          },
+          "licenceNumber": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "specialization": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReportRegisterSampleTakenVM": {
+        "type": "object",
+        "properties": {
+          "sampleTakenTypeId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReportRegisterStatusVM": {
+        "type": "object",
+        "properties": {
+          "reportRegisterStatusTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "healthInstitutionIdentificationNumberTO": {
+            "type": "string",
+            "nullable": true
+          },
+          "healthInstitutionNameTo": {
+            "type": "string",
+            "nullable": true
+          },
+          "healthInstitutionMunicipalityIDTo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "healthInstitutionAddressTo": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReportRegisterTestResultVM": {
+        "required": [
+          "healthInstitutionAddress",
+          "healthInstitutionCode",
+          "healthInstitutionName",
+          "isPositive",
+          "reportRegisterTestId",
+          "resultDate",
+          "resultSchema",
+          "testCode",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "reportRegisterTestId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "healthInstitutionCode": {
+            "type": "string"
+          },
+          "healthInstitutionName": {
+            "type": "string"
+          },
+          "healthInstitutionAddress": {
+            "type": "string"
+          },
+          "isPositive": {
+            "type": "boolean"
+          },
+          "resultSchema": {
+            "type": "string"
+          },
+          "testCode": {
+            "type": "string"
+          },
+          "resultDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "username": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReportRegisterTestVM": {
+        "type": "object",
+        "properties": {
+          "examinationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "testTypeName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReportRegisterVM": {
+        "required": [
+          "address",
+          "birthdate",
+          "birthPlace",
+          "consultingDate",
+          "countryId",
+          "firstname",
+          "foreign",
+          "lastname",
+          "livingStatus",
+          "maritalStatusId",
+          "medicalLicenseNumber",
+          "medicalPersonalNumber",
+          "municipality",
+          "municipalityId",
+          "personalNumber",
+          "phoneNumber",
+          "settlement",
+          "settlementId"
+        ],
+        "type": "object",
+        "properties": {
+          "healthInstitutionIdentificationNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "healthInstitutionLicenseNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "healthInstitutionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "healthInstitutionMunicipalityID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "healthInstitutionAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "personalNumber": {
+            "maxLength": 10,
+            "minLength": 10,
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "fatherName": {
+            "type": "string",
+            "nullable": true
+          },
+          "motherName": {
+            "type": "string",
+            "nullable": true
+          },
+          "partnerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "maxLength": 1,
+            "minLength": 1,
+            "type": "string",
+            "nullable": true
+          },
+          "birthdate": {
+            "type": "string"
+          },
+          "livingStatus": {
+            "type": "boolean"
+          },
+          "maritalStatusId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "foreign": {
+            "type": "boolean"
+          },
+          "countryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "municipalityId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "municipality": {
+            "type": "string"
+          },
+          "settlementId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "settlement": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "birthPlace": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "consultingDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "syndromeTypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "symptomDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "suspectedPlaceTypeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "suspectedPlace": {
+            "type": "string",
+            "nullable": true
+          },
+          "medicalLicenseNumber": {
+            "type": "string"
+          },
+          "medicalPersonalNumber": {
+            "type": "string"
+          },
+          "reportRegisterSampleTaken": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportRegisterSampleTakenVM"
+            },
+            "nullable": true
+          },
+          "caseClassification": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CaseClassificationVM"
+            },
+            "nullable": true
+          },
+          "reportRegisterStatus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportRegisterStatusVM"
+            },
+            "nullable": true
+          },
+          "reportRegisterTest": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportRegisterTestVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

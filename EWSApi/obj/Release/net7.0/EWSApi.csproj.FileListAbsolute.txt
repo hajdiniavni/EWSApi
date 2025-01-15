@@ -255,3 +255,7 @@ D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\EWSApi.pdb
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\EWSApi.genruntimeconfig.cache
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\ref\EWSApi.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\EWSApi.csproj.Up2Date
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\bin\Release\net7.0\EWSApi.staticwebassets.endpoints.json
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets.build.endpoints.json
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets\msbuild.EWSApi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets.upToDateCheck.txt

@@ -405,7 +405,7 @@ namespace EWSApi.Controllers
                .FirstOrDefaultAsync();
 
                 var diseaseInfectionIds = _context.DiseaseInfection
-     .Where(ms => reportRegister.caseClassification.Select(cc => cc.DiseaseInfectionId).Contains(ms.DiseaseCode))
+     .Where(ms => reportRegister.caseClassification.Select(cc => cc.DiseaseInfectionId.Trim()).Contains(ms.DiseaseCode.Trim()))
      .ToDictionary(ms => ms.DiseaseCode, ms => ms.DiseaseInfectionId);
 
 
@@ -512,7 +512,7 @@ namespace EWSApi.Controllers
                     ReportRegisterId = ResportRegisterID,
                     SyndromeTypeId = cc.CCSyndromeTypeId,
                     CaseClassificationTypeId = cc.CaseClassificationTypeId,
-                    DiseaseInfectionId = diseaseInfectionIds.ContainsKey(cc.DiseaseInfectionId) ? diseaseInfectionIds[cc.DiseaseInfectionId] : 0,
+                    DiseaseInfectionId = diseaseInfectionIds.ContainsKey(cc.DiseaseInfectionId.Trim()) ? diseaseInfectionIds[cc.DiseaseInfectionId.Trim()] : 0,
                     Active = true,
                     InsertedDate = DateTime.Now,
                     InsertedFrom = _conf["Jwt:UserID"].ToString()

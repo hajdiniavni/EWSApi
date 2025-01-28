@@ -63,8 +63,7 @@
               "RelativeToolTip": "EWSApi\\Core\\AppDBContext.cs",
               "ViewState": "AgIAANUMAAAAAAAAAAAQwPEMAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T13:46:55.361Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T13:46:55.361Z"
             },
             {
               "$type": "Document",
@@ -88,7 +87,8 @@
               "RelativeToolTip": "EWSApi\\Models\\ReportRegister\\ReportRegisterTestResultVM.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T08:13:41.136Z"
+              "WhenOpened": "2024-11-19T08:13:41.136Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -100,7 +100,8 @@
               "RelativeToolTip": "EWSApi\\Models\\ReportRegister\\ReportRegisterVM.cs",
               "ViewState": "AgIAACYAAAAAAAAAAAAAwCIAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T07:12:12.766Z"
+              "WhenOpened": "2024-11-11T07:12:12.766Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -110,7 +111,7 @@
               "RelativeDocumentMoniker": "EWSApi\\Controllers\\SMSNController.cs",
               "ToolTip": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Controllers\\SMSNController.cs",
               "RelativeToolTip": "EWSApi\\Controllers\\SMSNController.cs",
-              "ViewState": "AgIAAHECAAAAAAAAAAAmwIACAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAEUCAAAAAAAAAAAQwFYCAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-31T12:30:20.612Z",
               "EditorCaption": ""

@@ -130,7 +130,7 @@ namespace EWSApi.Controllers
 
             var currentHttpContext = _httpContextAccessor.HttpContext;
             var transaction = _context.Database.BeginTransaction();
-            string jsonMedicalStaff = "";
+            string jsonMedicalStaff = JsonConvert.SerializeObject(medicalStaff);
             try
             {
               
@@ -173,7 +173,7 @@ namespace EWSApi.Controllers
                     existingMedicalStaff.UpdatedFrom = _conf["Jwt:UserID"];
 
                     await _context.SaveChangesAsync();
-                     jsonMedicalStaff = JsonConvert.SerializeObject(existingMedicalStaff);
+                    
                     transaction.Commit();
                     _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "MedicalStaff updated: " + jsonMedicalStaff + "", false);
                 }
@@ -201,7 +201,7 @@ namespace EWSApi.Controllers
 
             var currentHttpContext = _httpContextAccessor.HttpContext;
             var transaction = _context.Database.BeginTransaction();
-            string jsonExamination = "";
+            string jsonExamination = JsonConvert.SerializeObject(examination);
             try
             {
               
@@ -250,7 +250,7 @@ namespace EWSApi.Controllers
                     existingExamination.UpdatedFrom = _conf["Jwt:UserID"];
 
                     await _context.SaveChangesAsync();
-                     jsonExamination = JsonConvert.SerializeObject(examination);
+             
                     transaction.Commit();
                     _logService.InsertLog(currentHttpContext, "PostExamination", "Examination updated: " + jsonExamination + "", false);
                 }
@@ -278,7 +278,7 @@ namespace EWSApi.Controllers
 
             var currentHttpContext = _httpContextAccessor.HttpContext;
             var transaction = _context.Database.BeginTransaction();
-            string jsonHealthInstitution = "";
+            string jsonHealthInstitution = JsonConvert.SerializeObject(healthInstitution);
             try
             {
 
@@ -341,7 +341,7 @@ namespace EWSApi.Controllers
                     existingHealthInstitution.UpdatedFrom = _conf["Jwt:UserID"];
 
                     await _context.SaveChangesAsync();
-                     jsonHealthInstitution = JsonConvert.SerializeObject(healthInstitution);
+                   
                     transaction.Commit();
                     _logService.InsertLog(currentHttpContext, "PostHealthInstitution", "healthInstitution updated: " + jsonHealthInstitution + "", false);
                 }
@@ -373,7 +373,7 @@ namespace EWSApi.Controllers
         {
             var transaction = _context.Database.BeginTransaction();
             var currentHttpContext = _httpContextAccessor.HttpContext;
-            string json = "";
+            string json = JsonConvert.SerializeObject(reportRegister);
             try
             {
 
@@ -400,7 +400,7 @@ namespace EWSApi.Controllers
                .FirstOrDefaultAsync();
 
                 int medicalStaffID = await _context.MedicalStaff
-               .Where(ms => ms.PersonalNumber == reportRegister.MedicalPersonalNumber && ms.LicenceNumber == reportRegister.MedicalLicenseNumber)
+               .Where(ms => ms.PersonalNumber == reportRegister.MedicalPersonalNumber)// && ms.LicenceNumber == reportRegister.MedicalLicenseNumber)
                .Select(ms => ms.MedicalStaffId)
                .FirstOrDefaultAsync();
 
@@ -521,6 +521,18 @@ namespace EWSApi.Controllers
                 _context.ReportRegisterCaseClassification.AddRange(newClassClassification);
                 await _context.SaveChangesAsync();
 
+
+                _context.ReportRegisterStatus.Add(new ReportRegisterStatus
+                {
+                    ReportRegisterId = ResportRegisterID,
+                    ReportRegisterStatusTypeId = 6,
+                    MedicalStaffId = medicalStaffID == 0 ? null : medicalStaffID,
+                    Active = false,
+                    InsertedDate = DateTime.Now,
+                    InsertedFrom = _conf["Jwt:UserID"].ToString()
+                });
+                await _context.SaveChangesAsync();
+
                 var newReportRegisterStatus = reportRegister.reportRegisterStatus.Select(async status =>
                 {
                     //if (status.ReportRegisterStatusTypeId == 1 || status.ReportRegisterStatusTypeId == 2)
@@ -623,18 +635,9 @@ namespace EWSApi.Controllers
                 });
                 await _context.SaveChangesAsync();
 
-                _context.ReportRegisterStatus.Add(new ReportRegisterStatus
-                {
-                    ReportRegisterId = ResportRegisterID,
-                    ReportRegisterStatusTypeId = 6,
-                    MedicalStaffId = medicalStaffID == 0 ? null : medicalStaffID,
-                    Active = false,
-                    InsertedDate = DateTime.Now,
-                    InsertedFrom = _conf["Jwt:UserID"].ToString()
-                });
-                await _context.SaveChangesAsync();
+              
 
-                 json = JsonConvert.SerializeObject(reportRegister);
+               
 
                 transaction.Commit();
                 _logService.InsertLog(currentHttpContext, "PostReportRegister", "PostReportRegister inserted: " + json + "", false);
@@ -657,7 +660,7 @@ namespace EWSApi.Controllers
         {
             var transaction = _context.Database.BeginTransaction();
             var currentHttpContext = _httpContextAccessor.HttpContext;
-            string json = "";
+            string json = JsonConvert.SerializeObject(reportRegisterTestResult);
             //int healthInstitutionID = 0;
 
             //if (int.TryParse(reportRegisterTestResult.HealthInstitutionIdentificationNumber, out int institutionId))
@@ -700,7 +703,7 @@ namespace EWSApi.Controllers
                
                 await _context.SaveChangesAsync();  
 
-                 json = JsonConvert.SerializeObject(reportRegisterTestResult);
+                 
 
                 transaction.Commit();
                 _logService.InsertLog(currentHttpContext, "PostReportRegisterTestResult", "PostReportRegisterTestResult inserted: " + json + "", false);
@@ -726,7 +729,7 @@ namespace EWSApi.Controllers
 
             var currentHttpContext = _httpContextAccessor.HttpContext;
             var transaction = _context.Database.BeginTransaction();
-            string jsonDisease = "";
+            string jsonDisease = JsonConvert.SerializeObject(disease);
             try
             {
 
@@ -777,7 +780,7 @@ namespace EWSApi.Controllers
                     existingDisease.UpdatedFrom = _conf["Jwt:UserID"];
 
                     await _context.SaveChangesAsync();
-                     jsonDisease = JsonConvert.SerializeObject(disease);
+                   
                     transaction.Commit();
                     _logService.InsertLog(currentHttpContext, "PostDiseaseInfection", "DiseaseInfection updated: " + jsonDisease + "", false);
                 }

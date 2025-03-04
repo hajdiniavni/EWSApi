@@ -405,24 +405,26 @@ namespace EWSApi.Controllers
                .FirstOrDefaultAsync();
 
                 var diseaseInfectionIds = _context.DiseaseInfection
-     .Where(ms => reportRegister.caseClassification.Select(cc => cc.DiseaseInfectionId.Trim()).Contains(ms.DiseaseCode.Trim()))
-     .ToDictionary(ms => ms.DiseaseCode, ms => ms.DiseaseInfectionId);
+      .Select(ms => new { DiseaseCode = ms.DiseaseCode.Trim(), ms.DiseaseInfectionId })
+      .Where(ms => reportRegister.caseClassification
+          .Select(cc => cc.DiseaseInfectionId.Trim()).Contains(ms.DiseaseCode))
+      .ToDictionary(ms => ms.DiseaseCode, ms => ms.DiseaseInfectionId);
 
 
                 if (healthInstitutionID == null || healthInstitutionID == 0)
                 {
-
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk u gjet asnje institucion shendetesor me keto parametra: " + json + "", false);
                     return Ok(new {  Message = "Nuk u gjet asnje institucion shendetesor me keto parametra" });
                 }
                 if (medicalStaffID == null || medicalStaffID == 0)
                 {
-
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk u gjet asnje personel mjekesore me keto parametra: " + json + "", false);
                     return Ok(new { Message = "Nuk u gjet asnje personel mjekesore me keto parametra" });
                 }
 
                 if (diseaseInfectionIds == null )
                 {
-
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk u gjet asnje diseaseInfectionIds me keto parametra: " + json + "", false);
                     return Ok(new { Message = "Nuk u gjet asnje diseaseInfectionIds me keto parametra" });
                 }
 
@@ -510,9 +512,9 @@ namespace EWSApi.Controllers
                 var newClassClassification = reportRegister.caseClassification.Select(cc => new ReportRegisterCaseClassification
                 {
                     ReportRegisterId = ResportRegisterID,
-                    SyndromeTypeId = cc.CCSyndromeTypeId,
+                    SyndromeTypeId = cc.CCSyndromeTypeId == 0 ? null : cc.CCSyndromeTypeId,
                     CaseClassificationTypeId = cc.CaseClassificationTypeId,
-                    DiseaseInfectionId = diseaseInfectionIds.ContainsKey(cc.DiseaseInfectionId.Trim()) ? diseaseInfectionIds[cc.DiseaseInfectionId.Trim()] : 0,
+                    DiseaseInfectionId = diseaseInfectionIds.TryGetValue(cc.DiseaseInfectionId.Trim(), out var infectionId) ? infectionId : 0, // Prevents FK violation
                     Active = true,
                     InsertedDate = DateTime.Now,
                     InsertedFrom = _conf["Jwt:UserID"].ToString()

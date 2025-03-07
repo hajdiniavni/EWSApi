@@ -102,10 +102,10 @@ public partial class ReportRegisterVM
     [Required(ErrorMessage = "Mungesë informacioni për fushën MedicalPersonalNumber")]
     public string? MedicalPersonalNumber { get; set; }
 
-    public List<ReportRegisterSampleTakenVM> reportRegisterSampleTaken { get; set; } = new List<ReportRegisterSampleTakenVM>();
+    public List<ReportRegisterSampleTakenVM>? reportRegisterSampleTaken { get; set; } = new List<ReportRegisterSampleTakenVM>();
     public List<CaseClassificationVM> caseClassification { get; set; } = new List<CaseClassificationVM>();
     public List<ReportRegisterStatusVM> reportRegisterStatus { get; set; } = new List<ReportRegisterStatusVM>();
-    public List<ReportRegisterTestVM> reportRegisterTest { get; set; } = new List<ReportRegisterTestVM>();
+    public List<ReportRegisterTestVM>? reportRegisterTest { get; set; } = new List<ReportRegisterTestVM>();
 }
 
 /// <summary>

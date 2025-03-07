@@ -496,18 +496,21 @@ namespace EWSApi.Controllers
                 int ResportRegisterID = newResportRegister.ReportRegisterId;
 
 
-                var newReportRegisterSampleTaken = reportRegister.reportRegisterSampleTaken.Select(sample => new ReportRegisterSampleTaken
+                var newReportRegisterSampleTaken = reportRegister.reportRegisterSampleTaken?
+         .Select(sample => new ReportRegisterSampleTaken
+         {
+             ReportRegisterId = ResportRegisterID,
+             SampleTakenTypeId = (int)sample.SampleTakenTypeId,
+             Active = true,
+             InsertedDate = DateTime.Now,
+             InsertedFrom = _conf["Jwt:UserID"].ToString()
+         }).ToList() ?? new List<ReportRegisterSampleTaken>();
+
+                if (newReportRegisterSampleTaken.Any())
                 {
-                    ReportRegisterId = ResportRegisterID,
-                    SampleTakenTypeId = sample.SampleTakenTypeId,
-                    Active = true,
-                    InsertedDate = DateTime.Now,
-                    InsertedFrom = _conf["Jwt:UserID"].ToString()
-                }).ToList();
-
-
-                _context.ReportRegisterSampleTaken.AddRange(newReportRegisterSampleTaken);
-                await _context.SaveChangesAsync();
+                    _context.ReportRegisterSampleTaken.AddRange(newReportRegisterSampleTaken);
+                    await _context.SaveChangesAsync();
+                }
 
                 var newClassClassification = reportRegister.caseClassification.Select(cc => new ReportRegisterCaseClassification
                 {
@@ -612,20 +615,21 @@ namespace EWSApi.Controllers
 
                 await _context.SaveChangesAsync();
 
+                var newReportRegisterExamination = reportRegister.reportRegisterTest?
+                    .Select(test => new ReportRegisterTest
+                    {
+                        ReportRegisterId = ResportRegisterID,
+                        ExaminationId = test.ExaminationId,
+                        TestTypeName = test.TestTypeName,
+                        InsertedDate = DateTime.Now,
+                        InsertedFrom = _conf["Jwt:UserID"].ToString()
+                    }).ToList() ?? new List<ReportRegisterTest>();
 
-                var newReportRegisterExamination = reportRegister.reportRegisterTest.Select(test => new ReportRegisterTest
+                if (newReportRegisterExamination.Any())
                 {
-                    ReportRegisterId = ResportRegisterID,
-                    ExaminationId = test.ExaminationId,
-                    TestTypeName = test.TestTypeName,
-                    InsertedDate = DateTime.Now,
-                    InsertedFrom = _conf["Jwt:UserID"].ToString()
-                }).ToList();
-
-      
-
-                _context.ReportRegisterTest.AddRange(newReportRegisterExamination);
-                await _context.SaveChangesAsync();
+                    _context.ReportRegisterTest.AddRange(newReportRegisterExamination);
+                    await _context.SaveChangesAsync();
+                }
 
                 _context.ReportRegisterTrackingStatus.Add(new ReportRegisterTrackingStatus
                 {

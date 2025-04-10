@@ -511,7 +511,20 @@ namespace EWSApi.Controllers
                     _context.ReportRegisterSampleTaken.AddRange(newReportRegisterSampleTaken);
                     await _context.SaveChangesAsync();
                 }
+                if (reportRegister?.caseClassification == null || !reportRegister.caseClassification.Any())
+                {
+                    transaction.Rollback();
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "caseClassification është i detyrueshëm" + json, true);
+                    return BadRequest(new { Message = "caseClassification është i detyrueshëm." });
+                }
 
+                // ✅ Validate if any CaseClassificationTypeId is invalid
+                if (reportRegister.caseClassification.Any(cc => cc.CaseClassificationTypeId == 0))
+                {
+                    transaction.Rollback();
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "CaseClassificationTypeId është i pavlefshëm" + json, true);
+                    return BadRequest(new { Message = "CaseClassificationTypeId është i pavlefshëm." });
+                }
                 var newClassClassification = reportRegister.caseClassification.Select(cc => new ReportRegisterCaseClassification
                 {
                     ReportRegisterId = ResportRegisterID,
@@ -538,82 +551,71 @@ namespace EWSApi.Controllers
                 });
                 await _context.SaveChangesAsync();
 
-                var newReportRegisterStatus = reportRegister.reportRegisterStatus.Select(async status =>
+                if (reportRegister?.reportRegisterStatus == null || !reportRegister.reportRegisterStatus.Any())
                 {
-                    //if (status.ReportRegisterStatusTypeId == 1 || status.ReportRegisterStatusTypeId == 2)
-                    //{
-                        // Always insert into the current table (ReportRegisterStatus)
-                        var reportRegisterStatusItem = new ReportRegisterStatus
-                        {
-                            ReportRegisterId = ResportRegisterID,
-                            ReportRegisterStatusTypeId = status.ReportRegisterStatusTypeId,
-                            MedicalStaffId = medicalStaffID == 0 ? null : medicalStaffID,
-                            Active = true,
-                            InsertedDate = DateTime.Now,
-                            InsertedFrom = _conf["Jwt:UserID"].ToString()
-                        };
+                    transaction.Rollback();
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "reportRegisterStatus është i detyrueshëm" + json, true);
+                    return BadRequest(new { Message = "reportRegisterStatus është i detyrueshëm." });
+                }
 
-                        // Add to the DbSet of your DbContext
-                        _context.ReportRegisterStatus.Add(reportRegisterStatusItem);
+                var newReportRegisterStatus = new List<ReportRegisterStatus>();
 
-                        // Save changes to the database to generate the ID
-                        _context.SaveChanges();
+                foreach (var status in reportRegister.reportRegisterStatus)
+                {
+                    if (status.ReportRegisterStatusTypeId == 6)
+                    {
+                        transaction.Rollback();
+                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk duhet te dergohet statusi 6" + json, true);
+                        return BadRequest(new { Message = "Nuk duhet te dergohet statusi 6" });
+                    }
 
-                        // Get the generated ID
-                        var generatedReportRegisterStatusId = reportRegisterStatusItem.ReportRegisterStatusId;
-                        if (status.ReportRegisterStatusTypeId == 2)
-                        {
+                    var reportRegisterStatusItem = new ReportRegisterStatus
+                    {
+                        ReportRegisterId = ResportRegisterID,
+                        ReportRegisterStatusTypeId = status.ReportRegisterStatusTypeId,
+                        MedicalStaffId = medicalStaffID == 0 ? null : medicalStaffID,
+                        Active = true,
+                        InsertedDate = DateTime.Now,
+                        InsertedFrom = _conf["Jwt:UserID"].ToString()
+                    };
 
+                    _context.ReportRegisterStatus.Add(reportRegisterStatusItem);
+                    await _context.SaveChangesAsync(); // Ensure changes are saved before proceeding
+
+                    var generatedReportRegisterStatusId = reportRegisterStatusItem.ReportRegisterStatusId;
+
+                    if (status.ReportRegisterStatusTypeId == 2)
+                    {
                         int healthInstitutionIDto = 0;
-                        if (int.TryParse(status.HealthInstitutionIdentificationNumberTO, out int institutionId))
+                        if (int.TryParse(status.HealthInstitutionIdentificationNumberTO, out int institutionIdd))
                         {
                             healthInstitutionIDto = await _context.HealthInstitution
-                               .Where(ms => ms.Bhisid == institutionId)
-                               .Select(ms => ms.HealthInstitutionId)
-                               .FirstOrDefaultAsync();
-                        }
-                        else
-                        {
-                            // Handle parsing failure, possibly logging or throwing a more specific exception
+                                .Where(ms => ms.Bhisid == institutionIdd)
+                                .Select(ms => ms.HealthInstitutionId)
+                                .FirstOrDefaultAsync();
                         }
 
-
-                        //if (healthInstitutionIDTo == null || healthInstitutionIDTo == 0)
-                        //{
-
-                        //    return Ok(new { Message = "Nuk u gjet asnje institucion shendetesor per dergim me keto parametra" });
-                        //}
-                        // Create ReportRegisterReference with the generated ID
                         var reportRegisterReference = new ReportRegisterReference
-                            {
-                                ReportRegisterStatusId = generatedReportRegisterStatusId,
-                                InsertedDate = DateTime.Now,
-                                InsertedFrom = _conf["Jwt:UserID"].ToString(),
-                                Active = true,
-                                HealthInstitutionFromId = healthInstitutionID,
-                                HealthInstitutionFromName = reportRegister.HealthInstitutionName,
-                                HealthInstitutionFromAddress = reportRegister.HealthInstitutionAddress,
-                                HealthInstitutionToId = healthInstitutionIDto,
-                                HealthInstitutionToAddress = status.HealthInstitutionAddressTo,
-                                HealthInstitutionToName = status.HealthInstitutionNameTo
-                            };
+                        {
+                            ReportRegisterStatusId = generatedReportRegisterStatusId,
+                            InsertedDate = DateTime.Now,
+                            InsertedFrom = _conf["Jwt:UserID"].ToString(),
+                            Active = true,
+                            HealthInstitutionFromId = healthInstitutionID,
+                            HealthInstitutionFromName = reportRegister.HealthInstitutionName,
+                            HealthInstitutionFromAddress = reportRegister.HealthInstitutionAddress,
+                            HealthInstitutionToId = healthInstitutionIDto,
+                            HealthInstitutionToAddress = status.HealthInstitutionAddressTo,
+                            HealthInstitutionToName = status.HealthInstitutionNameTo
+                        };
 
-                            // Add to the DbSet of your DbContext
-                            _context.ReportRegisterReference.Add(reportRegisterReference);
-                        }
-                        // Return the original ReportRegisterStatus object
-                        return reportRegisterStatusItem;
-                    //}
-                    //else
-                    //{
+                        _context.ReportRegisterReference.Add(reportRegisterReference);
+                    }
 
-                    //    transaction.Rollback();
-                    //    _logService.InsertLog(currentHttpContext, "PostReportRegister", "An error occurred while processing the request ReportRegister", true);
-                    //    return BadRequest(new { Message = "Statusi duhet te jete Trajtim ambulantor/shtëpiak ose Referuar në institucion shëndetësor" });
-                    //}
-                }).ToList();
+                    newReportRegisterStatus.Add(reportRegisterStatusItem);
+                }
 
-                await _context.SaveChangesAsync();
+              
 
                 var newReportRegisterExamination = reportRegister.reportRegisterTest?
                     .Select(test => new ReportRegisterTest

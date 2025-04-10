@@ -125,6 +125,8 @@ public class CaseClassificationVM
 /// </summary>
 public class ReportRegisterStatusVM
 {
+    [Required]
+    [NotSix(ErrorMessage = "Statusi nuk duhet të jetë 6.")]
     public int ReportRegisterStatusTypeId { get; set; }
 
     public string? HealthInstitutionIdentificationNumberTO { get; set; }
@@ -134,6 +136,18 @@ public class ReportRegisterStatusVM
 
     public string? HealthInstitutionAddressTo { get; set; }
 
+}
+// Custom validation attribute
+public class NotSixAttribute : ValidationAttribute
+{
+    public override bool IsValid(object value)
+    {
+        if (value is int intValue)
+        {
+            return intValue != 6;
+        }
+        return false;
+    }
 }
 
 /// <summary>

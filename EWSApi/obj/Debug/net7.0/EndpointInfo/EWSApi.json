@@ -1051,6 +1051,9 @@
         "additionalProperties": false
       },
       "ReportRegisterStatusVM": {
+        "required": [
+          "reportRegisterStatusTypeId"
+        ],
         "type": "object",
         "properties": {
           "reportRegisterStatusTypeId": {

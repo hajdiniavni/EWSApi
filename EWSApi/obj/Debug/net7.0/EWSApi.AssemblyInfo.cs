@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EWSApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d4ab38a32ceb70cc5785b5f983827ae1b243fb9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+89c8820d6bee29061fa1f582dba5dd105aa38734")]
 [assembly: System.Reflection.AssemblyProductAttribute("EWSApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EWSApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -79,6 +79,7 @@ public partial class ReportRegisterVM
     [Required(ErrorMessage = "Mungesë informacioni për fushën BirthPlace")]
     public string? BirthPlace { get; set; }
 
+    [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Invalid email format.")]
     public string? Email { get; set; }
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace EWSApi.Core;
 
@@ -45,6 +46,7 @@ public partial class CitizenRegister
     public string Address { get; set; } = null!;
 
     public string? BirthPlace { get; set; }
+
 
     public string? Email { get; set; }
 

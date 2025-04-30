@@ -1251,6 +1251,7 @@
             "type": "string"
           },
           "email": {
+            "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$",
             "type": "string",
             "nullable": true
           },

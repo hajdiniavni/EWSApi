@@ -363,21 +363,37 @@ namespace EWSApi.Controllers
 
         
         }
+        bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
 
+            // Simple email regex pattern
+            string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(email, pattern);
+        }
 
 
         //POST: api/PostHealthInstitution
         //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        
+
         [HttpPost("PostReportRegister")]
-        public async Task<ActionResult<ReportRegisterVM>> PostReportRegister(ReportRegisterVM reportRegister)
+        public async Task<ActionResult<ReportRegisterVM>> PostReportRegister([FromBody] ReportRegisterVM reportRegister)
         {
-           
-                var transaction = _context.Database.BeginTransaction();
+         
+            var transaction = _context.Database.BeginTransaction();
                 var currentHttpContext = _httpContextAccessor.HttpContext;
-                string json = JsonConvert.SerializeObject(reportRegister);
-                try
-                {
+            string json = JsonConvert.SerializeObject(reportRegister);
+
+            if (!ModelState.IsValid)
+            {
+                transaction.Rollback();
+                _logService.InsertLog(currentHttpContext, "PostReportRegister", ModelState + " " + json, true);
+                return BadRequest(ModelState); // or return a custom validation response
+            }
+
+            try
+            {
 
 
                     int healthInstitutionID = 0;
@@ -395,13 +411,13 @@ namespace EWSApi.Controllers
                     {
                         // Handle parsing failure, possibly logging or throwing a more specific exception
                     }
-                if (!string.IsNullOrWhiteSpace(reportRegister.Email) &&
-!Regex.IsMatch(reportRegister.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-                {
-                    transaction.Rollback();
-                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Email format is invalid." + json, true);
-                    return BadRequest(new { Message = "Email format is invalid." });
-                }
+//                if (!string.IsNullOrWhiteSpace(reportRegister.Email) &&
+//!Regex.IsMatch(reportRegister.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+//                {
+//                    transaction.Rollback();
+//                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Email format is invalid." + json, true);
+//                    return BadRequest(new { Message = "Email format is invalid." });
+//                }
                 int citizenRegisterID = await _context.CitizenRegister
                    .Where(ms => ms.PersonalNumber == AesCrypto.Ecrypt<string>(reportRegister.PersonalNumber))
                    .Select(ms => ms.CitizenRegisterId)
@@ -474,7 +490,7 @@ namespace EWSApi.Controllers
                             Address = AesCrypto.Ecrypt<string>(reportRegister.Address),
                             BirthPlace = AesCrypto.Ecrypt<string>(reportRegister.BirthPlace),
                             PhoneNumber = AesCrypto.Ecrypt<string>(Regex.Replace(reportRegister.PhoneNumber, @"\D", "")),
-                            Email = AesCrypto.Ecrypt<string>(reportRegister.Email),
+                            Email = AesCrypto.Ecrypt<string>(IsValidEmail(reportRegister.Email) ? reportRegister.Email : null),
                             InsertedFrom = _conf["Jwt:UserID"].ToString(),
                             InsertedDate = DateTime.Now
 

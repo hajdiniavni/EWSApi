@@ -47,13 +47,13 @@ public partial class ReportRegisterVM
     [Required(ErrorMessage = "Birthdate is required.")]
     //[Display(Name = "Birthdate")]
     //[RegularExpression(@"^\d{4}-\d{2}-\d{2}$", ErrorMessage = "Datelindja duhet te jete vetem ne formatin 'yyyy-MM-dd'.")]
-    public string? Birthdate { get; set; }
+    public string Birthdate { get; set; }
 
     [Required(ErrorMessage = "Mungesë informacioni për fushën LivingStatus")]
     public bool LivingStatus { get; set; }
 
     [Required(ErrorMessage = "Mungesë informacioni për fushën MaritalStatusId")]
-    public int? MaritalStatusId { get; set; }
+    public int MaritalStatusId { get; set; }
 
     [Required(ErrorMessage = "Mungesë informacioni për fushën Foreign")]
     public bool Foreign { get; set; }
@@ -62,32 +62,32 @@ public partial class ReportRegisterVM
     public int CountryId { get; set; }
 
     [Required(ErrorMessage = "Mungesë informacioni për fushën MunicipalityId")]
-    public int? MunicipalityId { get; set; }
+    public int MunicipalityId { get; set; }
 
     [Required(ErrorMessage = "Mungesë informacioni për fushën Municipality")]
-    public string? Municipality { get; set; }
+    public string Municipality { get; set; }
 
     [Required(ErrorMessage = "Mungesë informacioni për fushën SettlementId")]
-    public int? SettlementId { get; set; }
+    public int SettlementId { get; set; }
 
     [Required(ErrorMessage = "Mungesë informacioni për fushën Settlement")]
-    public string? Settlement { get; set; }
+    public string Settlement { get; set; }
 
     [Required(ErrorMessage = "Mungesë informacioni për fushën Address")]
     public string Address { get; set; } = null!;
 
     [Required(ErrorMessage = "Mungesë informacioni për fushën BirthPlace")]
-    public string? BirthPlace { get; set; }
+    public string BirthPlace { get; set; }
 
-    [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Invalid email format.")]
-    public string? Email { get; set; }
+    //[RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Invalid email format.")]
+    public string Email { get; set; }
 
 
     [Required(ErrorMessage = "Mungesë informacioni për fushën PhoneNumber")]
-    public string? PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; }
 
     [Required(ErrorMessage = "Mungesë informacioni për fushën ConsultingDate")]
-    public DateTime? ConsultingDate { get; set; }
+    public DateTime ConsultingDate { get; set; }
 
     public int? SyndromeTypeId { get; set; }
 
@@ -97,11 +97,11 @@ public partial class ReportRegisterVM
 
     public string? SuspectedPlace { get; set; }
 
-    [Required(ErrorMessage = "Mungesë informacioni për fushën MedicalLicenseNumber")]
+    //[Required(ErrorMessage = "Mungesë informacioni për fushën MedicalLicenseNumber")]
     public string? MedicalLicenseNumber { get; set; }
 
     [Required(ErrorMessage = "Mungesë informacioni për fushën MedicalPersonalNumber")]
-    public string? MedicalPersonalNumber { get; set; }
+    public string MedicalPersonalNumber { get; set; }
 
     public List<ReportRegisterSampleTakenVM>? reportRegisterSampleTaken { get; set; } = new List<ReportRegisterSampleTakenVM>();
     public List<CaseClassificationVM> caseClassification { get; set; } = new List<CaseClassificationVM>();

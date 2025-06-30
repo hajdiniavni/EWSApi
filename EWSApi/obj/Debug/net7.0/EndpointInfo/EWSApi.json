@@ -1152,7 +1152,6 @@
           "lastname",
           "livingStatus",
           "maritalStatusId",
-          "medicalLicenseNumber",
           "medicalPersonalNumber",
           "municipality",
           "municipalityId",
@@ -1251,7 +1250,6 @@
             "type": "string"
           },
           "email": {
-            "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$",
             "type": "string",
             "nullable": true
           },
@@ -1281,7 +1279,8 @@
             "nullable": true
           },
           "medicalLicenseNumber": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "medicalPersonalNumber": {
             "type": "string"

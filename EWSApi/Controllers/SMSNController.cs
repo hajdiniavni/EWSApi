@@ -504,6 +504,7 @@ namespace EWSApi.Controllers
 
                     }
 
+                    int actualYear = Age(DateTime.ParseExact(AesCrypto.Decrypt<string>(reportRegister.Birthdate), "dd/MM/yyyy", null), DateTime.Now);
                     var newResportRegister = new ReportRegister
                     {
                         UniqueNumber = uniqueNumber,
@@ -519,6 +520,7 @@ namespace EWSApi.Controllers
                         PartnerName = AesCrypto.Ecrypt<string>(reportRegister.PartnerName),
                         GenderId = reportRegister.Gender == "M" ? 1 : 2,
                         Birthdate = AesCrypto.Ecrypt<string>(DateTime.ParseExact(reportRegister.Birthdate, "yyyy-MM-ddTHH:mm:ss.fffZ", null).ToString("dd/MM/yyyy")),
+                        ActualYear = actualYear
                         Address = AesCrypto.Ecrypt<string>(reportRegister.Address),
                         PhoneNumber = AesCrypto.Ecrypt<string>(Regex.Replace(reportRegister.PhoneNumber, @"\D", "")),
                         ConsultingDate = reportRegister.ConsultingDate,
@@ -700,8 +702,14 @@ namespace EWSApi.Controllers
             
         }
 
+        public static int Age(DateTime birthdate, DateTime today)
+        {
+            int years = today.Year - birthdate.Year;
+            if (today.Month < birthdate.Month || (today.Month == birthdate.Month && today.Day < birthdate.Day))
+                years--;
+            return years;
+        }
 
-        
         [HttpPost("PostReportRegisterTestResult")]
         public async Task<ActionResult<ReportRegisterTestResultVM>> PostReportRegisterTestResult(ReportRegisterTestResultVM reportRegisterTestResult)
         {

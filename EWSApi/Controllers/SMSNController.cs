@@ -504,7 +504,7 @@ namespace EWSApi.Controllers
 
                     }
 
-                    int actualYear = Age(DateTime.ParseExact(AesCrypto.Decrypt<string>(reportRegister.Birthdate), "dd/MM/yyyy", null), DateTime.Now);
+                    int actualYear = Age(DateTime.Parse(reportRegister.Birthdate), DateTime.Now);
                     var newResportRegister = new ReportRegister
                     {
                         UniqueNumber = uniqueNumber,
@@ -520,7 +520,7 @@ namespace EWSApi.Controllers
                         PartnerName = AesCrypto.Ecrypt<string>(reportRegister.PartnerName),
                         GenderId = reportRegister.Gender == "M" ? 1 : 2,
                         Birthdate = AesCrypto.Ecrypt<string>(DateTime.ParseExact(reportRegister.Birthdate, "yyyy-MM-ddTHH:mm:ss.fffZ", null).ToString("dd/MM/yyyy")),
-                        ActualYear = actualYear
+                        ActualYear = actualYear,
                         Address = AesCrypto.Ecrypt<string>(reportRegister.Address),
                         PhoneNumber = AesCrypto.Ecrypt<string>(Regex.Replace(reportRegister.PhoneNumber, @"\D", "")),
                         ConsultingDate = reportRegister.ConsultingDate,

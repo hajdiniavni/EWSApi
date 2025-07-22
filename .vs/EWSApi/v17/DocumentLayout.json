@@ -5,10 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|c:\\users\\lirim.islami\\desktop\\ewsapi\\ewsapi\\controllers\\smsncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\controllers\\smsncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|c:\\users\\lirim.islami\\desktop\\ewsapi\\ewsapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,11 +18,7 @@
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
@@ -34,7 +26,23 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
@@ -105,18 +113,6 @@
               "Name": "ST:151:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:136:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:137:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "SMSNController.cs",
@@ -124,40 +120,10 @@
               "RelativeDocumentMoniker": "EWSApi\\Controllers\\SMSNController.cs",
               "ToolTip": "C:\\Users\\lirim.islami\\Desktop\\EWSApi\\EWSApi\\Controllers\\SMSNController.cs",
               "RelativeToolTip": "EWSApi\\Controllers\\SMSNController.cs",
-              "ViewState": "AQIAAIsBAAAAAAAAAAAAALUBAABDAAAA",
+              "ViewState": "AQIAAI8BAAAAAAAAAAAAAKsBAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-31T12:30:20.612Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\lirim.islami\\Desktop\\EWSApi\\EWSApi\\Program.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Program.cs",
-              "ToolTip": "C:\\Users\\lirim.islami\\Desktop\\EWSApi\\EWSApi\\Program.cs",
-              "RelativeToolTip": "EWSApi\\Program.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAACMAAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T08:04:05.487Z"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 213,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             }
           ]
         }

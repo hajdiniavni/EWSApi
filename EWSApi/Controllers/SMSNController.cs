@@ -424,7 +424,7 @@ namespace EWSApi.Controllers
                    .FirstOrDefaultAsync();
 
                     int medicalStaffID = await _context.MedicalStaff
-                   .Where(ms => ms.PersonalNumber == reportRegister.MedicalPersonalNumber.Trim()) // && ms.LicenceNumber == reportRegister.MedicalLicenseNumber)
+                   .Where(ms => ms.PersonalNumber == reportRegister.MedicalPersonalNumber.Trim())// && ms.LicenceNumber == reportRegister.MedicalLicenseNumber)
                    .Select(ms => ms.MedicalStaffId)
                    .FirstOrDefaultAsync();
 

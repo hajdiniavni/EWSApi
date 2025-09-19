@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lirim.islami\\Desktop\\EWSApi\\EWSApi\\EWSApi.csproj": {}
+    "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\EWSApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lirim.islami\\Desktop\\EWSApi\\EWSApi\\EWSApi.csproj": {
+    "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\EWSApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lirim.islami\\Desktop\\EWSApi\\EWSApi\\EWSApi.csproj",
+        "projectUniqueName": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\EWSApi.csproj",
         "projectName": "EWSApi",
-        "projectPath": "C:\\Users\\lirim.islami\\Desktop\\EWSApi\\EWSApi\\EWSApi.csproj",
-        "packagesPath": "C:\\Users\\lirim.islami\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lirim.islami\\Desktop\\EWSApi\\EWSApi\\obj\\",
+        "projectPath": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\EWSApi.csproj",
+        "packagesPath": "C:\\Users\\betim.krasniqi\\.nuget\\packages\\",
+        "outputPath": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\lirim.islami\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\betim.krasniqi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,7 +43,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net7.0": {
@@ -96,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

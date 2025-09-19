@@ -588,8 +588,19 @@ namespace EWSApi.Controllers
 
                     var newReportRegisterStatus = new List<ReportRegisterStatus>();
 
-                    foreach (var status in reportRegister.reportRegisterStatus)
-                    {
+                var distinctStatuses = reportRegister.reportRegisterStatus
+       .GroupBy(s => new
+       {
+           s.ReportRegisterStatusTypeId,
+           s.HealthInstitutionIdentificationNumberTO,
+           s.HealthInstitutionNameTo,
+           s.HealthInstitutionAddressTo
+       })
+       .Select(g => g.First())
+       .ToList();
+
+                foreach (var status in distinctStatuses)
+                {
                         if (status.ReportRegisterStatusTypeId == 6)
                         {
                             transaction.Rollback();

@@ -411,13 +411,46 @@ namespace EWSApi.Controllers
                     {
                         // Handle parsing failure, possibly logging or throwing a more specific exception
                     }
-//                if (!string.IsNullOrWhiteSpace(reportRegister.Email) &&
-//!Regex.IsMatch(reportRegister.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-//                {
-//                    transaction.Rollback();
-//                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Email format is invalid." + json, true);
-//                    return BadRequest(new { Message = "Email format is invalid." });
-//                }
+                //                if (!string.IsNullOrWhiteSpace(reportRegister.Email) &&
+                //!Regex.IsMatch(reportRegister.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                //                {
+                //                    transaction.Rollback();
+                //                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Email format is invalid." + json, true);
+                //                    return BadRequest(new { Message = "Email format is invalid." });
+                //                }
+
+                if (reportRegister.caseClassification.Any(cc => cc.CaseClassificationTypeId == 0))
+                {
+                    transaction.Rollback();
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "CaseClassificationTypeId është i pavlefshëm" + json, true);
+                    return BadRequest(new { Message = "CaseClassificationTypeId është i pavlefshëm." });
+                }
+
+                // kushti eshte bart lart, qe me kontrollu a ka raportim per ate semundje.
+                var diseaseInfectionIds = _context.DiseaseInfection
+                              .Select(ms => new { DiseaseCode = ms.DiseaseCode.Trim(), ms.DiseaseInfectionId })
+                              .Where(ms => reportRegister.caseClassification
+                                  .Select(cc => cc.DiseaseInfectionId.Trim()).Contains(ms.DiseaseCode))
+                              .ToDictionary(ms => ms.DiseaseCode, ms => ms.DiseaseInfectionId);
+
+                if (diseaseInfectionIds == null)
+                {
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk u gjet asnje diseaseInfectionIds me keto parametra: " + json + "", false);
+                    return Ok(new { Message = "Nuk u gjet asnje diseaseInfectionIds me keto parametra" });
+                }
+                var infectionIds = diseaseInfectionIds.Values.ToList();
+                var hasReport = await _context.ReportRegister.Where(e => e.PersonalNumber == reportRegister.PersonalNumber && e.ReportRegisterStatus.Any(e => e.Active)
+                                        && e.ReportRegisterCaseClassification.Any(a => a.Active == true && infectionIds.Contains(a.DiseaseInfectionId))
+                                        && e.InsertedDate.Date == DateTime.Now.Date && e.InsertedFrom == _conf["Jwt:UserID"].ToString()).AnyAsync();
+
+                if (hasReport)
+                {
+                    transaction.Rollback();
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Personi me numer personal:" + reportRegister.PersonalNumber + " eshte raportuar!" + json, true);
+                    return BadRequest(new { Message = "Personi me numer personal:" + reportRegister.PersonalNumber + " eshte raportuar!" });
+                }
+
+
                 int citizenRegisterID = await _context.CitizenRegister
                    .Where(ms => ms.PersonalNumber == AesCrypto.Ecrypt<string>(reportRegister.PersonalNumber))
                    .Select(ms => ms.CitizenRegisterId)
@@ -443,11 +476,11 @@ namespace EWSApi.Controllers
                         return BadRequest(new { Message = "CaseClassificationTypeId është i pavlefshëm." });
                     }
 
-                    var diseaseInfectionIds = _context.DiseaseInfection
-          .Select(ms => new { DiseaseCode = ms.DiseaseCode.Trim(), ms.DiseaseInfectionId })
-          .Where(ms => reportRegister.caseClassification
-              .Select(cc => cc.DiseaseInfectionId.Trim()).Contains(ms.DiseaseCode))
-          .ToDictionary(ms => ms.DiseaseCode, ms => ms.DiseaseInfectionId);
+          //          var diseaseInfectionIds = _context.DiseaseInfection
+          //.Select(ms => new { DiseaseCode = ms.DiseaseCode.Trim(), ms.DiseaseInfectionId })
+          //.Where(ms => reportRegister.caseClassification
+          //    .Select(cc => cc.DiseaseInfectionId.Trim()).Contains(ms.DiseaseCode))
+          //.ToDictionary(ms => ms.DiseaseCode, ms => ms.DiseaseInfectionId);
 
 
                     if (healthInstitutionID == null || healthInstitutionID == 0)

@@ -515,3 +515,4 @@ D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Debug\net7.0\rjimswa.dswa.cache.j
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Debug\net7.0\rjsmrazor.dswa.cache.json
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Debug\net7.0\rjsmcshtml.dswa.cache.json
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Debug\net7.0\staticwebassets.build.json.cache
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Debug\net7.0\swae.build.ex.cache

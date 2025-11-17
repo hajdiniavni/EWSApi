@@ -243,11 +243,6 @@ D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\EWSApi.MvcApplicat
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\EWSApi.sourcelink.json
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets.build.json
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets.development.json
-D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets\msbuild.EWSApi.Microsoft.AspNetCore.StaticWebAssets.props
-D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets\msbuild.build.EWSApi.props
-D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets\msbuild.buildMultiTargeting.EWSApi.props
-D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets\msbuild.buildTransitive.EWSApi.props
-D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets.pack.json
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\scopedcss\bundle\EWSApi.styles.css
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\EWSApi.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\refint\EWSApi.dll
@@ -257,5 +252,9 @@ D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\ref\EWSApi.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\EWSApi.csproj.Up2Date
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\bin\Release\net7.0\EWSApi.staticwebassets.endpoints.json
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets.build.endpoints.json
-D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets\msbuild.EWSApi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets.upToDateCheck.txt
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\rpswa.dswa.cache.json
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\rjimswa.dswa.cache.json
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\rjsmrazor.dswa.cache.json
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\rjsmcshtml.dswa.cache.json
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\staticwebassets.build.json.cache

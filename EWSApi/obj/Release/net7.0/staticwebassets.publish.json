@@ -1,12 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "LXIHxl6ASOPSIV8io468XrkWCennqZPqXxU8SF6+yz0=",
-  "Source": "EWSApi",
-  "BasePath": "_content/EWSApi",
-  "Mode": "Default",
-  "ManifestType": "Publish",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
-}
+{"Version":1,"Hash":"kUgAYIO72Gs1bn3SR7Fxu/zBOgINrlPfb46q0Bga054=","Source":"EWSApi","BasePath":"/","Mode":"Root","ManifestType":"Publish","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}

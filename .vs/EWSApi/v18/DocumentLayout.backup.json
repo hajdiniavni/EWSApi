@@ -1,31 +1,7 @@
 {
   "Version": 1,
-<<<<<<< HEAD
   "WorkspaceRootPath": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|d:\\restful web api\\smsn\\smsn\\ewsapi\\ewsapi\\controllers\\smsncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\controllers\\smsncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|d:\\restful web api\\smsn\\smsn\\ewsapi\\ewsapi\\models\\reportregister\\reportregistervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\models\\reportregister\\reportregistervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|d:\\restful web api\\smsn\\smsn\\ewsapi\\ewsapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-=======
-  "WorkspaceRootPath": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|c:\\users\\elorina.abazi\\source\\repos\\ewsapi\\ewsapi\\controllers\\smsncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\controllers\\smsncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|c:\\users\\elorina.abazi\\source\\repos\\ewsapi\\ewsapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
->>>>>>> 1853b71a22c7235cebff456c56595dc5ed1d9065
-      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -33,27 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-<<<<<<< HEAD
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:136:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-=======
-          "SelectedChildIndex": 8,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
->>>>>>> 1853b71a22c7235cebff456c56595dc5ed1d9065
             },
             {
               "$type": "Bookmark",
@@ -61,107 +21,27 @@
             },
             {
               "$type": "Bookmark",
-<<<<<<< HEAD
               "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-=======
-              "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:136:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
->>>>>>> 1853b71a22c7235cebff456c56595dc5ed1d9065
             },
             {
               "$type": "Bookmark",
               "Name": "ST:135:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-<<<<<<< HEAD
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Program.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Program.cs",
-              "ToolTip": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Program.cs",
-              "RelativeToolTip": "EWSApi\\Program.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAACwAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T08:04:05.487Z"
-=======
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SMSNController.cs",
-              "DocumentMoniker": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Controllers\\SMSNController.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Controllers\\SMSNController.cs",
-              "ToolTip": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Controllers\\SMSNController.cs",
-              "RelativeToolTip": "EWSApi\\Controllers\\SMSNController.cs",
-              "ViewState": "AgIAAKABAAAAAAAAAAAswK0BAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-06T12:42:42.825Z",
-              "EditorCaption": ""
->>>>>>> 1853b71a22c7235cebff456c56595dc5ed1d9065
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-<<<<<<< HEAD
-              "Title": "ReportRegisterVM.cs",
-              "DocumentMoniker": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Models\\ReportRegister\\ReportRegisterVM.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Models\\ReportRegister\\ReportRegisterVM.cs",
-              "ToolTip": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Models\\ReportRegister\\ReportRegisterVM.cs",
-              "RelativeToolTip": "EWSApi\\Models\\ReportRegister\\ReportRegisterVM.cs",
-              "ViewState": "AgIAAJAAAAAAAAAAAADwv14AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T11:08:54.281Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SMSNController.cs",
-              "DocumentMoniker": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Controllers\\SMSNController.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Controllers\\SMSNController.cs",
-              "ToolTip": "D:\\RESTful WEB API\\SMSN\\SMSN\\EWSApi\\EWSApi\\Controllers\\SMSNController.cs",
-              "RelativeToolTip": "EWSApi\\Controllers\\SMSNController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFgCAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-31T12:30:20.612Z",
-              "EditorCaption": ""
-=======
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Program.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Program.cs",
-              "ToolTip": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Program.cs",
-              "RelativeToolTip": "EWSApi\\Program.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAACwAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-06T12:42:42.769Z"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": -1,
-          "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{79664857-03bf-4bca-aa54-ec998b3328f8}"
->>>>>>> 1853b71a22c7235cebff456c56595dc5ed1d9065
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         }

@@ -43,7 +43,7 @@ namespace EWSApi.Controllers
 
 
         // GET: api/SMSN/GetLabData/578
-        
+
         [HttpGet("GetLabData/{UniqueNumber}")]
         public async Task<ActionResult<IEnumerable<object>>> GetLabData([FromRoute] LabDataRequestModel requestModel)//(string UniqueNumber, string LabCode)
         {
@@ -52,7 +52,7 @@ namespace EWSApi.Controllers
 
             if (_context.ReportRegister == null)
             {
-                 _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + requestModel.UniqueNumber + ", Accepted date= " + DateTime.Now.ToString() + "", true);
+                _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + requestModel.UniqueNumber + ", Accepted date= " + DateTime.Now.ToString() + "", true);
                 return NotFound();
             }
 
@@ -67,7 +67,7 @@ namespace EWSApi.Controllers
                                 join rrs in _context.ReportRegisterStatus
                                      on new { rr.ReportRegisterId, Active = true } equals new { rrs.ReportRegisterId, rrs.Active }
                                 join ms in _context.MedicalStaff on rrs.MedicalStaffId equals ms.MedicalStaffId into medicalStaff
-                                     from staff in medicalStaff.DefaultIfEmpty() // Left Join
+                                from staff in medicalStaff.DefaultIfEmpty() // Left Join
                                 join rrt in _context.ReportRegisterTest on rr.ReportRegisterId equals rrt.ReportRegisterId
                                 join e in _context.Examination on rrt.ExaminationId equals e.ExaminationId into testTypes
                                 where (rr.UniqueNumber == requestModel.UniqueNumber) || (cr.PersonalNumber == AesCrypto.Ecrypt<string>(requestModel.UniqueNumber)) // Assuming personalNumberParameter is the parameter for @PersonalNumber
@@ -84,23 +84,23 @@ namespace EWSApi.Controllers
                                     Doctor = (staff == null) ? null : $"{staff.Firstname} {staff.Lastname} - {staff.LicenceNumber}",
                                     TestTypes = testTypes
                                                .Where(tt => tt != null && !excludedReportRegisterTestIds.Contains(rrt.ReportRegisterTestId))
-                                               .Select(tt => new {ReportRegisterTestID = rrt.ReportRegisterTestId, TestID= tt.ExaminationId, TestNumber = tt.ExaminationCode, Description = tt.ExaminationName })
+                                               .Select(tt => new { ReportRegisterTestID = rrt.ReportRegisterTestId, TestID = tt.ExaminationId, TestNumber = tt.ExaminationCode, Description = tt.ExaminationName })
                                                .Distinct()
                                                .ToList(),
 
                                 }).GroupBy(x => x.UniqueNumberSMSN)
                                   .Select(group => new
-                                   {
-                                       UniqueNumberSMSN = group.Key,
-                                       PersonalNumber = group.First().PersonalNumber,
-                                       HealthInstitutionName = group.First().HealthInstitutionName,
-                                       HealthInstitutionAddress  = group.First().HealthInstitutionAddress,
-                                       Name = group.First().Name,
-                                       ParentName = group.First().ParentName,
-                                       Surname = group.First().Surname,
-                                       Address = group.First().Address,
-                                       Doctor = group.First().Doctor,
-                                       TestTypes = group.SelectMany(x => x.TestTypes).Distinct().ToList(),
+                                  {
+                                      UniqueNumberSMSN = group.Key,
+                                      PersonalNumber = group.First().PersonalNumber,
+                                      HealthInstitutionName = group.First().HealthInstitutionName,
+                                      HealthInstitutionAddress = group.First().HealthInstitutionAddress,
+                                      Name = group.First().Name,
+                                      ParentName = group.First().ParentName,
+                                      Surname = group.First().Surname,
+                                      Address = group.First().Address,
+                                      Doctor = group.First().Doctor,
+                                      TestTypes = group.SelectMany(x => x.TestTypes).Distinct().ToList(),
                                   })
                                   .ToListAsync();
 
@@ -112,7 +112,7 @@ namespace EWSApi.Controllers
 
             if (result == null || result.Count == 0)
             {
-                 _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + requestModel.UniqueNumber + ", Accepted date= " + DateTime.Now.ToString() + "", true);
+                _logService.InsertLog(currentHttpContext, "GetLabData", "Nuk u gjet asnje me keto UniqueNumber= " + requestModel.UniqueNumber + ", Accepted date= " + DateTime.Now.ToString() + "", true);
                 return NotFound();
 
             }
@@ -124,7 +124,7 @@ namespace EWSApi.Controllers
 
         // POST: api/PostMedicalStaff
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        
+
         [HttpPost("PostMedicalStaff")]
         public async Task<ActionResult<MedicalStaffVM>> PostMedicalStaff(MedicalStaffVM medicalStaff)
         {
@@ -134,7 +134,7 @@ namespace EWSApi.Controllers
             string jsonMedicalStaff = JsonConvert.SerializeObject(medicalStaff);
             try
             {
-              
+
 
                 var existingMedicalStaff = await _context.MedicalStaff
                   .FirstOrDefaultAsync(ms => ms.PersonalNumber == medicalStaff.PersonalNumber && ms.LicenceNumber == medicalStaff.LicenceNumber);
@@ -158,7 +158,7 @@ namespace EWSApi.Controllers
                     );
 
                     await _context.SaveChangesAsync();
-                     jsonMedicalStaff = JsonConvert.SerializeObject(medicalStaff);
+                    jsonMedicalStaff = JsonConvert.SerializeObject(medicalStaff);
                     transaction.Commit();
                     _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "MedicalStaff created: " + jsonMedicalStaff + "", false);
                 }
@@ -174,7 +174,7 @@ namespace EWSApi.Controllers
                     existingMedicalStaff.UpdatedFrom = _conf["Jwt:UserID"];
 
                     await _context.SaveChangesAsync();
-                    
+
                     transaction.Commit();
                     _logService.InsertLog(currentHttpContext, "PostMedicalStaff", "MedicalStaff updated: " + jsonMedicalStaff + "", false);
                 }
@@ -195,7 +195,7 @@ namespace EWSApi.Controllers
 
         //POST: api/PostExamination
         //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        
+
         [HttpPost("PostExamination")]
         public async Task<ActionResult<ExaminationVM>> PostExamination(ExaminationVM examination)
         {
@@ -205,7 +205,7 @@ namespace EWSApi.Controllers
             string jsonExamination = JsonConvert.SerializeObject(examination);
             try
             {
-              
+
                 var existingExamination = await _context.Examination
                   .FirstOrDefaultAsync(ms => ms.ExaminationId == examination.ExaminationId);
 
@@ -231,7 +231,7 @@ namespace EWSApi.Controllers
                     );
 
                     await _context.SaveChangesAsync();
-                     jsonExamination = JsonConvert.SerializeObject(examination);
+                    jsonExamination = JsonConvert.SerializeObject(examination);
                     transaction.Commit();
                     _logService.InsertLog(currentHttpContext, "PostExamination", "Examination created: " + jsonExamination + "", false);
                 }
@@ -251,7 +251,7 @@ namespace EWSApi.Controllers
                     existingExamination.UpdatedFrom = _conf["Jwt:UserID"];
 
                     await _context.SaveChangesAsync();
-             
+
                     transaction.Commit();
                     _logService.InsertLog(currentHttpContext, "PostExamination", "Examination updated: " + jsonExamination + "", false);
                 }
@@ -272,7 +272,7 @@ namespace EWSApi.Controllers
 
         //POST: api/PostHealthInstitution
         //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        
+
         [HttpPost("PostHealthInstitution")]
         public async Task<ActionResult<HealthInstitutionVM>> PostHealthInstitution(HealthInstitutionVM healthInstitution)
         {
@@ -317,7 +317,7 @@ namespace EWSApi.Controllers
                     );
 
                     await _context.SaveChangesAsync();
-                     jsonHealthInstitution = JsonConvert.SerializeObject(healthInstitution);
+                    jsonHealthInstitution = JsonConvert.SerializeObject(healthInstitution);
                     transaction.Commit();
                     _logService.InsertLog(currentHttpContext, "PostHealthInstitution", "healthInstitution created: " + jsonHealthInstitution + "", false);
                 }
@@ -342,7 +342,7 @@ namespace EWSApi.Controllers
                     existingHealthInstitution.UpdatedFrom = _conf["Jwt:UserID"];
 
                     await _context.SaveChangesAsync();
-                   
+
                     transaction.Commit();
                     _logService.InsertLog(currentHttpContext, "PostHealthInstitution", "healthInstitution updated: " + jsonHealthInstitution + "", false);
                 }
@@ -361,7 +361,7 @@ namespace EWSApi.Controllers
                 return BadRequest(new { Message = ex.InnerException.ToString() });
             }
 
-        
+
         }
         bool IsValidEmail(string email)
         {
@@ -380,9 +380,9 @@ namespace EWSApi.Controllers
         [HttpPost("PostReportRegister")]
         public async Task<ActionResult<ReportRegisterVM>> PostReportRegister([FromBody] ReportRegisterVM reportRegister)
         {
-         
+
             var transaction = _context.Database.BeginTransaction();
-                var currentHttpContext = _httpContextAccessor.HttpContext;
+            var currentHttpContext = _httpContextAccessor.HttpContext;
             string json = JsonConvert.SerializeObject(reportRegister);
 
             if (!ModelState.IsValid)
@@ -396,122 +396,81 @@ namespace EWSApi.Controllers
             {
 
 
-                    int healthInstitutionID = 0;
+                int healthInstitutionID = 0;
 
-                    string uniqueNumber = _sqlContext.GenerateUniqueNumber.FromSqlInterpolated($"select   dbo.GenerateUniqueNumber (1) as uniqueNumber").FirstOrDefault().uniqueNumber;
+                string uniqueNumber = _sqlContext.GenerateUniqueNumber.FromSqlInterpolated($"select   dbo.GenerateUniqueNumber (1) as uniqueNumber").FirstOrDefault().uniqueNumber;
 
-                    if (int.TryParse(reportRegister.HealthInstitutionIdentificationNumber, out int institutionId))
-                    {
-                        healthInstitutionID = await _context.HealthInstitution
-                           .Where(ms => ms.Bhisid == institutionId)
-                           .Select(ms => ms.HealthInstitutionId)
-                           .FirstOrDefaultAsync();
-                    }
-                    else
-                    {
-                        // Handle parsing failure, possibly logging or throwing a more specific exception
-                    }
-//                if (!string.IsNullOrWhiteSpace(reportRegister.Email) &&
-//!Regex.IsMatch(reportRegister.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-//                {
-//                    transaction.Rollback();
-//                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Email format is invalid." + json, true);
-//                    return BadRequest(new { Message = "Email format is invalid." });
-//                }
+                if (int.TryParse(reportRegister.HealthInstitutionIdentificationNumber, out int institutionId))
+                {
+                    healthInstitutionID = await _context.HealthInstitution
+                       .Where(ms => ms.Bhisid == institutionId)
+                       .Select(ms => ms.HealthInstitutionId)
+                       .FirstOrDefaultAsync();
+                }
+                else
+                {
+                    // Handle parsing failure, possibly logging or throwing a more specific exception
+                }
+                //                if (!string.IsNullOrWhiteSpace(reportRegister.Email) &&
+                //!Regex.IsMatch(reportRegister.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                //                {
+                //                    transaction.Rollback();
+                //                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Email format is invalid." + json, true);
+                //                    return BadRequest(new { Message = "Email format is invalid." });
+                //                }
                 int citizenRegisterID = await _context.CitizenRegister
                    .Where(ms => ms.PersonalNumber == AesCrypto.Ecrypt<string>(reportRegister.PersonalNumber))
                    .Select(ms => ms.CitizenRegisterId)
                    .FirstOrDefaultAsync();
 
-                    int medicalStaffID = await _context.MedicalStaff
-                   .Where(ms => ms.PersonalNumber == reportRegister.MedicalPersonalNumber)// && ms.LicenceNumber == reportRegister.MedicalLicenseNumber)
-                   .Select(ms => ms.MedicalStaffId)
-                   .FirstOrDefaultAsync();
+                int medicalStaffID = await _context.MedicalStaff
+               .Where(ms => ms.PersonalNumber == reportRegister.MedicalPersonalNumber)// && ms.LicenceNumber == reportRegister.MedicalLicenseNumber)
+               .Select(ms => ms.MedicalStaffId)
+               .FirstOrDefaultAsync();
 
-                    if (reportRegister?.caseClassification == null || !reportRegister.caseClassification.Any())
+                if (reportRegister?.caseClassification == null || !reportRegister.caseClassification.Any())
+                {
+                    transaction.Rollback();
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "caseClassification është i detyrueshëm" + json, true);
+                    return BadRequest(new { Message = "caseClassification është i detyrueshëm." });
+                }
+
+                // ✅ Validate if any CaseClassificationTypeId is invalid
+                if (reportRegister.caseClassification.Any(cc => cc.CaseClassificationTypeId == 0))
+                {
+                    transaction.Rollback();
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "CaseClassificationTypeId është i pavlefshëm" + json, true);
+                    return BadRequest(new { Message = "CaseClassificationTypeId është i pavlefshëm." });
+                }
+
+                var diseaseInfectionIds = _context.DiseaseInfection
+      .Select(ms => new { DiseaseCode = ms.DiseaseCode.Trim(), ms.DiseaseInfectionId })
+      .Where(ms => reportRegister.caseClassification
+          .Select(cc => cc.DiseaseInfectionId.Trim()).Contains(ms.DiseaseCode))
+      .ToDictionary(ms => ms.DiseaseCode, ms => ms.DiseaseInfectionId);
+
+
+                if (healthInstitutionID == null || healthInstitutionID == 0)
+                {
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk u gjet asnje institucion shendetesor me keto parametra: " + json + "", false);
+                    return Ok(new { Message = "Nuk u gjet asnje institucion shendetesor me keto parametra" });
+                }
+                if (medicalStaffID == null || medicalStaffID == 0)
+                {
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk u gjet asnje personel mjekesore me keto parametra: " + json + "", false);
+                    return Ok(new { Message = "Nuk u gjet asnje personel mjekesore me keto parametra" });
+                }
+
+                if (diseaseInfectionIds == null)
+                {
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk u gjet asnje diseaseInfectionIds me keto parametra: " + json + "", false);
+                    return Ok(new { Message = "Nuk u gjet asnje diseaseInfectionIds me keto parametra" });
+                }
+
+                if (citizenRegisterID == null || citizenRegisterID == 0)
+                {
+                    var newCitizen = new CitizenRegister
                     {
-                        transaction.Rollback();
-                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "caseClassification është i detyrueshëm" + json, true);
-                        return BadRequest(new { Message = "caseClassification është i detyrueshëm." });
-                    }
-
-                    // ✅ Validate if any CaseClassificationTypeId is invalid
-                    if (reportRegister.caseClassification.Any(cc => cc.CaseClassificationTypeId == 0))
-                    {
-                        transaction.Rollback();
-                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "CaseClassificationTypeId është i pavlefshëm" + json, true);
-                        return BadRequest(new { Message = "CaseClassificationTypeId është i pavlefshëm." });
-                    }
-
-                    var diseaseInfectionIds = _context.DiseaseInfection
-          .Select(ms => new { DiseaseCode = ms.DiseaseCode.Trim(), ms.DiseaseInfectionId })
-          .Where(ms => reportRegister.caseClassification
-              .Select(cc => cc.DiseaseInfectionId.Trim()).Contains(ms.DiseaseCode))
-          .ToDictionary(ms => ms.DiseaseCode, ms => ms.DiseaseInfectionId);
-
-
-                    if (healthInstitutionID == null || healthInstitutionID == 0)
-                    {
-                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk u gjet asnje institucion shendetesor me keto parametra: " + json + "", false);
-                        return Ok(new { Message = "Nuk u gjet asnje institucion shendetesor me keto parametra" });
-                    }
-                    if (medicalStaffID == null || medicalStaffID == 0)
-                    {
-                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk u gjet asnje personel mjekesore me keto parametra: " + json + "", false);
-                        return Ok(new { Message = "Nuk u gjet asnje personel mjekesore me keto parametra" });
-                    }
-
-                    if (diseaseInfectionIds == null)
-                    {
-                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk u gjet asnje diseaseInfectionIds me keto parametra: " + json + "", false);
-                        return Ok(new { Message = "Nuk u gjet asnje diseaseInfectionIds me keto parametra" });
-                    }
-
-                    if (citizenRegisterID == null || citizenRegisterID == 0)
-                    {
-                        var newCitizen = new CitizenRegister
-                        {
-                            PersonalNumber = AesCrypto.Ecrypt<string>(reportRegister.PersonalNumber),
-                            Firstname = AesCrypto.Ecrypt<string>(reportRegister.Firstname),
-                            Lastname = AesCrypto.Ecrypt<string>(reportRegister.Lastname),
-                            FatherName = AesCrypto.Ecrypt<string>(reportRegister.FatherName),
-                            MotherName = AesCrypto.Ecrypt<string>(reportRegister.MotherName),
-                            PartnerName = AesCrypto.Ecrypt<string>(reportRegister.PartnerName),
-                            GenderId = reportRegister.Gender == "M" ? 1 : 2,
-                            Birthdate = AesCrypto.Ecrypt<string>(DateTime.ParseExact(reportRegister.Birthdate, "yyyy-MM-ddTHH:mm:ss.fffZ", null).ToString("dd/MM/yyyy")),
-                            LivingStatus = reportRegister.LivingStatus,
-                            MaritalStatusId = reportRegister.MaritalStatusId,
-                            Foreign = reportRegister.Foreign,
-                            CountryId = reportRegister.CountryId,
-                            MunicipalityId = reportRegister.MunicipalityId,
-                            Municipality = AesCrypto.Ecrypt<string>(reportRegister.Municipality),
-                            SettlementId = reportRegister.SettlementId,
-                            Settlement = AesCrypto.Ecrypt<string>(reportRegister.Settlement),
-                            Address = AesCrypto.Ecrypt<string>(reportRegister.Address),
-                            BirthPlace = AesCrypto.Ecrypt<string>(reportRegister.BirthPlace),
-                            PhoneNumber = AesCrypto.Ecrypt<string>(Regex.Replace(reportRegister.PhoneNumber, @"\D", "")),
-                            Email = AesCrypto.Ecrypt<string>(IsValidEmail(reportRegister.Email) ? reportRegister.Email : null),
-                            InsertedFrom = _conf["Jwt:UserID"].ToString(),
-                            InsertedDate = DateTime.Now
-
-
-
-                        };
-
-                        _context.CitizenRegister.Add(newCitizen);
-                        await _context.SaveChangesAsync();
-                        citizenRegisterID = newCitizen.CitizenRegisterId;
-
-                    }
-
-                    int actualYear = Age(DateTime.Parse(reportRegister.Birthdate), DateTime.Now);
-                    var newResportRegister = new ReportRegister
-                    {
-                        UniqueNumber = uniqueNumber,
-                        HealthInstitutionId = healthInstitutionID,
-                        HealthInstitutionName = reportRegister.HealthInstitutionName,
-                        HealthInstitutionAddress = reportRegister.HealthInstitutionAddress,
-                        CitizenRegisterId = citizenRegisterID,
                         PersonalNumber = AesCrypto.Ecrypt<string>(reportRegister.PersonalNumber),
                         Firstname = AesCrypto.Ecrypt<string>(reportRegister.Firstname),
                         Lastname = AesCrypto.Ecrypt<string>(reportRegister.Lastname),
@@ -520,73 +479,114 @@ namespace EWSApi.Controllers
                         PartnerName = AesCrypto.Ecrypt<string>(reportRegister.PartnerName),
                         GenderId = reportRegister.Gender == "M" ? 1 : 2,
                         Birthdate = AesCrypto.Ecrypt<string>(DateTime.ParseExact(reportRegister.Birthdate, "yyyy-MM-ddTHH:mm:ss.fffZ", null).ToString("dd/MM/yyyy")),
-                        ActualYear = actualYear,
+                        LivingStatus = reportRegister.LivingStatus,
+                        MaritalStatusId = reportRegister.MaritalStatusId,
+                        Foreign = reportRegister.Foreign,
+                        CountryId = reportRegister.CountryId,
+                        MunicipalityId = reportRegister.MunicipalityId,
+                        Municipality = AesCrypto.Ecrypt<string>(reportRegister.Municipality),
+                        SettlementId = reportRegister.SettlementId,
+                        Settlement = AesCrypto.Ecrypt<string>(reportRegister.Settlement),
                         Address = AesCrypto.Ecrypt<string>(reportRegister.Address),
+                        BirthPlace = AesCrypto.Ecrypt<string>(reportRegister.BirthPlace),
                         PhoneNumber = AesCrypto.Ecrypt<string>(Regex.Replace(reportRegister.PhoneNumber, @"\D", "")),
-                        ConsultingDate = reportRegister.ConsultingDate,
-                        SyndromeTypeId = reportRegister.SyndromeTypeId,
-                        SymptomDate = reportRegister.SymptomDate,
-                        SuspectedPlaceTypeId = reportRegister.SuspectedPlaceTypeID,
-                        SuspectedPlace = reportRegister.SuspectedPlace,
-                        InsertedDate = DateTime.Now,
-                        InsertedFrom = _conf["Jwt:UserID"].ToString()
+                        Email = AesCrypto.Ecrypt<string>(IsValidEmail(reportRegister.Email) ? reportRegister.Email : null),
+                        InsertedFrom = _conf["Jwt:UserID"].ToString(),
+                        InsertedDate = DateTime.Now
+
+
 
                     };
-                    _context.ReportRegister.Add(newResportRegister);
+
+                    _context.CitizenRegister.Add(newCitizen);
                     await _context.SaveChangesAsync();
-                    int ResportRegisterID = newResportRegister.ReportRegisterId;
+                    citizenRegisterID = newCitizen.CitizenRegisterId;
+
+                }
+
+                int actualYear = Age(DateTime.Parse(reportRegister.Birthdate), DateTime.Now);
+                var newResportRegister = new ReportRegister
+                {
+                    UniqueNumber = uniqueNumber,
+                    HealthInstitutionId = healthInstitutionID,
+                    HealthInstitutionName = reportRegister.HealthInstitutionName,
+                    HealthInstitutionAddress = reportRegister.HealthInstitutionAddress,
+                    CitizenRegisterId = citizenRegisterID,
+                    PersonalNumber = AesCrypto.Ecrypt<string>(reportRegister.PersonalNumber),
+                    Firstname = AesCrypto.Ecrypt<string>(reportRegister.Firstname),
+                    Lastname = AesCrypto.Ecrypt<string>(reportRegister.Lastname),
+                    FatherName = AesCrypto.Ecrypt<string>(reportRegister.FatherName),
+                    MotherName = AesCrypto.Ecrypt<string>(reportRegister.MotherName),
+                    PartnerName = AesCrypto.Ecrypt<string>(reportRegister.PartnerName),
+                    GenderId = reportRegister.Gender == "M" ? 1 : 2,
+                    Birthdate = AesCrypto.Ecrypt<string>(DateTime.ParseExact(reportRegister.Birthdate, "yyyy-MM-ddTHH:mm:ss.fffZ", null).ToString("dd/MM/yyyy")),
+                    ActualYear = actualYear,
+                    Address = AesCrypto.Ecrypt<string>(reportRegister.Address),
+                    PhoneNumber = AesCrypto.Ecrypt<string>(Regex.Replace(reportRegister.PhoneNumber, @"\D", "")),
+                    ConsultingDate = reportRegister.ConsultingDate,
+                    SyndromeTypeId = reportRegister.SyndromeTypeId,
+                    SymptomDate = reportRegister.SymptomDate,
+                    SuspectedPlaceTypeId = reportRegister.SuspectedPlaceTypeID,
+                    SuspectedPlace = reportRegister.SuspectedPlace,
+                    InsertedDate = DateTime.Now,
+                    InsertedFrom = _conf["Jwt:UserID"].ToString()
+
+                };
+                _context.ReportRegister.Add(newResportRegister);
+                await _context.SaveChangesAsync();
+                int ResportRegisterID = newResportRegister.ReportRegisterId;
 
 
-                    var newReportRegisterSampleTaken = reportRegister.reportRegisterSampleTaken?
-             .Select(sample => new ReportRegisterSampleTaken
-             {
-                 ReportRegisterId = ResportRegisterID,
-                 SampleTakenTypeId = (int)sample.SampleTakenTypeId,
-                 Active = true,
-                 InsertedDate = DateTime.Now,
-                 InsertedFrom = _conf["Jwt:UserID"].ToString()
-             }).ToList() ?? new List<ReportRegisterSampleTaken>();
+                var newReportRegisterSampleTaken = reportRegister.reportRegisterSampleTaken?
+         .Select(sample => new ReportRegisterSampleTaken
+         {
+             ReportRegisterId = ResportRegisterID,
+             SampleTakenTypeId = (int)sample.SampleTakenTypeId,
+             Active = true,
+             InsertedDate = DateTime.Now,
+             InsertedFrom = _conf["Jwt:UserID"].ToString()
+         }).ToList() ?? new List<ReportRegisterSampleTaken>();
 
-                    if (newReportRegisterSampleTaken.Any())
-                    {
-                        _context.ReportRegisterSampleTaken.AddRange(newReportRegisterSampleTaken);
-                        await _context.SaveChangesAsync();
-                    }
-
-                    var newClassClassification = reportRegister.caseClassification.Select(cc => new ReportRegisterCaseClassification
-                    {
-                        ReportRegisterId = ResportRegisterID,
-                        SyndromeTypeId = cc.CCSyndromeTypeId == 0 ? null : cc.CCSyndromeTypeId,
-                        CaseClassificationTypeId = cc.CaseClassificationTypeId,
-                        DiseaseInfectionId = diseaseInfectionIds.TryGetValue(cc.DiseaseInfectionId.Trim(), out var infectionId) ? infectionId : 0, // Prevents FK violation
-                        Active = true,
-                        InsertedDate = DateTime.Now,
-                        InsertedFrom = _conf["Jwt:UserID"].ToString()
-                    }).ToList();
-
-                    _context.ReportRegisterCaseClassification.AddRange(newClassClassification);
+                if (newReportRegisterSampleTaken.Any())
+                {
+                    _context.ReportRegisterSampleTaken.AddRange(newReportRegisterSampleTaken);
                     await _context.SaveChangesAsync();
+                }
+
+                var newClassClassification = reportRegister.caseClassification.Select(cc => new ReportRegisterCaseClassification
+                {
+                    ReportRegisterId = ResportRegisterID,
+                    SyndromeTypeId = cc.CCSyndromeTypeId == 0 ? null : cc.CCSyndromeTypeId,
+                    CaseClassificationTypeId = cc.CaseClassificationTypeId,
+                    DiseaseInfectionId = diseaseInfectionIds.TryGetValue(cc.DiseaseInfectionId.Trim(), out var infectionId) ? infectionId : 0, // Prevents FK violation
+                    Active = true,
+                    InsertedDate = DateTime.Now,
+                    InsertedFrom = _conf["Jwt:UserID"].ToString()
+                }).ToList();
+
+                _context.ReportRegisterCaseClassification.AddRange(newClassClassification);
+                await _context.SaveChangesAsync();
 
 
-                    _context.ReportRegisterStatus.Add(new ReportRegisterStatus
-                    {
-                        ReportRegisterId = ResportRegisterID,
-                        ReportRegisterStatusTypeId = 6,
-                        MedicalStaffId = medicalStaffID == 0 ? null : medicalStaffID,
-                        Active = false,
-                        InsertedDate = DateTime.Now,
-                        InsertedFrom = _conf["Jwt:UserID"].ToString()
-                    });
-                    await _context.SaveChangesAsync();
+                _context.ReportRegisterStatus.Add(new ReportRegisterStatus
+                {
+                    ReportRegisterId = ResportRegisterID,
+                    ReportRegisterStatusTypeId = 6,
+                    MedicalStaffId = medicalStaffID == 0 ? null : medicalStaffID,
+                    Active = false,
+                    InsertedDate = DateTime.Now,
+                    InsertedFrom = _conf["Jwt:UserID"].ToString()
+                });
+                await _context.SaveChangesAsync();
 
-                    if (reportRegister?.reportRegisterStatus == null || !reportRegister.reportRegisterStatus.Any())
-                    {
-                        transaction.Rollback();
-                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "reportRegisterStatus është i detyrueshëm" + json, true);
-                        return BadRequest(new { Message = "reportRegisterStatus është i detyrueshëm." });
-                    }
+                if (reportRegister?.reportRegisterStatus == null || !reportRegister.reportRegisterStatus.Any())
+                {
+                    transaction.Rollback();
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "reportRegisterStatus është i detyrueshëm" + json, true);
+                    return BadRequest(new { Message = "reportRegisterStatus është i detyrueshëm." });
+                }
 
-                    var newReportRegisterStatus = new List<ReportRegisterStatus>();
+                var newReportRegisterStatus = new List<ReportRegisterStatus>();
 
                 var distinctStatuses = reportRegister.reportRegisterStatus
        .GroupBy(s => new
@@ -601,116 +601,122 @@ namespace EWSApi.Controllers
 
                 foreach (var status in distinctStatuses)
                 {
-                        if (status.ReportRegisterStatusTypeId == 6)
-                        {
-                            transaction.Rollback();
-                            _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk duhet te dergohet statusi 6" + json, true);
-                            return BadRequest(new { Message = "Nuk duhet te dergohet statusi 6" });
-                        }
-                        if (status.ReportRegisterStatusTypeId == 0)
-                        {
-                            transaction.Rollback();
-                            _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk duhet te dergohet statusi 0" + json, true);
-                            return BadRequest(new { Message = "Nuk duhet te dergohet statusi 0" });
-                        }
-
-                        var reportRegisterStatusItem = new ReportRegisterStatus
-                        {
-                            ReportRegisterId = ResportRegisterID,
-                            ReportRegisterStatusTypeId = status.ReportRegisterStatusTypeId,
-                            MedicalStaffId = medicalStaffID == 0 ? null : medicalStaffID,
-                            Active = true,
-                            InsertedDate = DateTime.Now,
-                            InsertedFrom = _conf["Jwt:UserID"].ToString()
-                        };
-
-                        _context.ReportRegisterStatus.Add(reportRegisterStatusItem);
-                        await _context.SaveChangesAsync(); // Ensure changes are saved before proceeding
-
-                        var generatedReportRegisterStatusId = reportRegisterStatusItem.ReportRegisterStatusId;
-
-                        if (status.ReportRegisterStatusTypeId == 2)
-                        {
-                            int healthInstitutionIDto = 0;
-                            if (int.TryParse(status.HealthInstitutionIdentificationNumberTO, out int institutionIdd))
-                            {
-                                healthInstitutionIDto = await _context.HealthInstitution
-                                    .Where(ms => ms.Bhisid == institutionIdd)
-                                    .Select(ms => ms.HealthInstitutionId)
-                                    .FirstOrDefaultAsync();
-                            }
-
-                            var reportRegisterReference = new ReportRegisterReference
-                            {
-                                ReportRegisterStatusId = generatedReportRegisterStatusId,
-                                InsertedDate = DateTime.Now,
-                                InsertedFrom = _conf["Jwt:UserID"].ToString(),
-                                Active = true,
-                                HealthInstitutionFromId = healthInstitutionID,
-                                HealthInstitutionFromName = reportRegister.HealthInstitutionName,
-                                HealthInstitutionFromAddress = reportRegister.HealthInstitutionAddress,
-                                HealthInstitutionToId = healthInstitutionIDto,
-                                HealthInstitutionToAddress = status.HealthInstitutionAddressTo,
-                                HealthInstitutionToName = status.HealthInstitutionNameTo
-                            };
-
-                            _context.ReportRegisterReference.Add(reportRegisterReference);
-                        }
-
-                        newReportRegisterStatus.Add(reportRegisterStatusItem);
-                    }
-
-
-                    // ✅ Validate if any CaseClassificationTypeId is invalid
-                    if (reportRegister.reportRegisterTest != null &&
-            reportRegister.reportRegisterTest.Any(cc => cc.ExaminationId == 0))
+                    if (status.ReportRegisterStatusTypeId == 6)
                     {
                         transaction.Rollback();
-                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "ExaminationId është i pavlefshëm" + json, true);
-                        return BadRequest(new { Message = "ExaminationId është i pavlefshëm." });
+                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk duhet te dergohet statusi 6" + json, true);
+                        return BadRequest(new { Message = "Nuk duhet te dergohet statusi 6" });
                     }
-                    var newReportRegisterExamination = reportRegister.reportRegisterTest?
-                        .Select(test => new ReportRegisterTest
-                        {
-                            ReportRegisterId = ResportRegisterID,
-                            ExaminationId = test.ExaminationId,
-                            TestTypeName = test.TestTypeName,
-                            InsertedDate = DateTime.Now,
-                            InsertedFrom = _conf["Jwt:UserID"].ToString()
-                        }).ToList() ?? new List<ReportRegisterTest>();
-
-                    if (newReportRegisterExamination.Any())
+                    if (status.ReportRegisterStatusTypeId == 7)
                     {
-                        _context.ReportRegisterTest.AddRange(newReportRegisterExamination);
-                        await _context.SaveChangesAsync();
+                        transaction.Rollback();
+                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk duhet te dergohet statusi 7 (Rast i mbyllur)" + json, true);
+                        return BadRequest(new { Message = "Nuk mundeni të raportoni me statusin: Rast i mbyllur, vendosni status tjetër." });
+                    }
+                    if (status.ReportRegisterStatusTypeId == 0)
+                    {
+                        transaction.Rollback();
+                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk duhet te dergohet statusi 0" + json, true);
+                        return BadRequest(new { Message = "Nuk duhet te dergohet statusi 0" });
                     }
 
-                    _context.ReportRegisterTrackingStatus.Add(new ReportRegisterTrackingStatus
+                    var reportRegisterStatusItem = new ReportRegisterStatus
                     {
                         ReportRegisterId = ResportRegisterID,
-                        StatusTypeId = 7,
+                        ReportRegisterStatusTypeId = status.ReportRegisterStatusTypeId,
+                        MedicalStaffId = medicalStaffID == 0 ? null : medicalStaffID,
                         Active = true,
                         InsertedDate = DateTime.Now,
                         InsertedFrom = _conf["Jwt:UserID"].ToString()
-                    });
-                    await _context.SaveChangesAsync();
+                    };
 
+                    _context.ReportRegisterStatus.Add(reportRegisterStatusItem);
+                    await _context.SaveChangesAsync(); // Ensure changes are saved before proceeding
 
+                    var generatedReportRegisterStatusId = reportRegisterStatusItem.ReportRegisterStatusId;
 
+                    if (status.ReportRegisterStatusTypeId == 2)
+                    {
+                        int healthInstitutionIDto = 0;
+                        if (int.TryParse(status.HealthInstitutionIdentificationNumberTO, out int institutionIdd))
+                        {
+                            healthInstitutionIDto = await _context.HealthInstitution
+                                .Where(ms => ms.Bhisid == institutionIdd)
+                                .Select(ms => ms.HealthInstitutionId)
+                                .FirstOrDefaultAsync();
+                        }
 
+                        var reportRegisterReference = new ReportRegisterReference
+                        {
+                            ReportRegisterStatusId = generatedReportRegisterStatusId,
+                            InsertedDate = DateTime.Now,
+                            InsertedFrom = _conf["Jwt:UserID"].ToString(),
+                            Active = true,
+                            HealthInstitutionFromId = healthInstitutionID,
+                            HealthInstitutionFromName = reportRegister.HealthInstitutionName,
+                            HealthInstitutionFromAddress = reportRegister.HealthInstitutionAddress,
+                            HealthInstitutionToId = healthInstitutionIDto,
+                            HealthInstitutionToAddress = status.HealthInstitutionAddressTo,
+                            HealthInstitutionToName = status.HealthInstitutionNameTo
+                        };
 
-                    transaction.Commit();
-                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "PostReportRegister inserted: " + json + "", false);
-                    return Ok(new { UniqueNumber = uniqueNumber, Message = "Success" });
+                        _context.ReportRegisterReference.Add(reportRegisterReference);
+                    }
+
+                    newReportRegisterStatus.Add(reportRegisterStatusItem);
                 }
-                catch (Exception ex)
+
+
+                // ✅ Validate if any CaseClassificationTypeId is invalid
+                if (reportRegister.reportRegisterTest != null &&
+        reportRegister.reportRegisterTest.Any(cc => cc.ExaminationId == 0))
                 {
-
                     transaction.Rollback();
-                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "An error occurred while processing the request ReportRegister :" + ex.InnerException.ToString() + " " + json, true);
-                    return BadRequest(new { Message = ex.InnerException.ToString() });
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "ExaminationId është i pavlefshëm" + json, true);
+                    return BadRequest(new { Message = "ExaminationId është i pavlefshëm." });
                 }
-            
+                var newReportRegisterExamination = reportRegister.reportRegisterTest?
+                    .Select(test => new ReportRegisterTest
+                    {
+                        ReportRegisterId = ResportRegisterID,
+                        ExaminationId = test.ExaminationId,
+                        TestTypeName = test.TestTypeName,
+                        InsertedDate = DateTime.Now,
+                        InsertedFrom = _conf["Jwt:UserID"].ToString()
+                    }).ToList() ?? new List<ReportRegisterTest>();
+
+                if (newReportRegisterExamination.Any())
+                {
+                    _context.ReportRegisterTest.AddRange(newReportRegisterExamination);
+                    await _context.SaveChangesAsync();
+                }
+
+                _context.ReportRegisterTrackingStatus.Add(new ReportRegisterTrackingStatus
+                {
+                    ReportRegisterId = ResportRegisterID,
+                    StatusTypeId = 7,
+                    Active = true,
+                    InsertedDate = DateTime.Now,
+                    InsertedFrom = _conf["Jwt:UserID"].ToString()
+                });
+                await _context.SaveChangesAsync();
+
+
+
+
+
+                transaction.Commit();
+                _logService.InsertLog(currentHttpContext, "PostReportRegister", "PostReportRegister inserted: " + json + "", false);
+                return Ok(new { UniqueNumber = uniqueNumber, Message = "Success" });
+            }
+            catch (Exception ex)
+            {
+
+                transaction.Rollback();
+                _logService.InsertLog(currentHttpContext, "PostReportRegister", "An error occurred while processing the request ReportRegister :" + ex.InnerException.ToString() + " " + json, true);
+                return BadRequest(new { Message = ex.InnerException.ToString() });
+            }
+
         }
 
         public static int Age(DateTime birthdate, DateTime today)
@@ -746,7 +752,7 @@ namespace EWSApi.Controllers
             //    return Ok(new { Message = "Nuk u gjet asnje institucion shendetesor me keto parametra" });
             //}
 
-            try 
+            try
             {
                 _context.ReportRegisterTestResult.Add(new ReportRegisterTestResult
                 {
@@ -762,14 +768,14 @@ namespace EWSApi.Controllers
                     UserName = reportRegisterTestResult.Username,
                     InsertedDate = DateTime.Now,
                     Active = true
-                   
+
 
                 }
                 );
-               
-                await _context.SaveChangesAsync();  
 
-                 
+                await _context.SaveChangesAsync();
+
+
 
                 transaction.Commit();
                 _logService.InsertLog(currentHttpContext, "PostReportRegisterTestResult", "PostReportRegisterTestResult inserted: " + json + "", false);
@@ -789,7 +795,7 @@ namespace EWSApi.Controllers
 
         //POST: api/PostDiseaseInfection
         //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        
+
         [HttpPost("PostDiseaseInfection")]
         public async Task<ActionResult<DiseaseInfectionVM>> PostDiseaseInfection(DiseaseInfectionVM disease)
         {
@@ -826,7 +832,7 @@ namespace EWSApi.Controllers
                     );
 
                     await _context.SaveChangesAsync();
-                     jsonDisease = JsonConvert.SerializeObject(disease);
+                    jsonDisease = JsonConvert.SerializeObject(disease);
                     transaction.Commit();
                     _logService.InsertLog(currentHttpContext, "PostDiseaseInfection", "DiseaseInfection created: " + jsonDisease + "", false);
                 }
@@ -847,7 +853,7 @@ namespace EWSApi.Controllers
                     existingDisease.UpdatedFrom = _conf["Jwt:UserID"];
 
                     await _context.SaveChangesAsync();
-                   
+
                     transaction.Commit();
                     _logService.InsertLog(currentHttpContext, "PostDiseaseInfection", "DiseaseInfection updated: " + jsonDisease + "", false);
                 }

@@ -193,7 +193,7 @@ namespace EWSApi.Controllers
 
 
 
-            var result = await (from p in _context.ReportRegisterStatusType where p.ReportRegisterStatusTypeId != 6
+            var result = await (from p in _context.ReportRegisterStatusType where p.ReportRegisterStatusTypeId != 6 && p.ReportRegisterStatusTypeId != 7 
                                 select new
                                 {
                                     ID = p.ReportRegisterStatusTypeId,

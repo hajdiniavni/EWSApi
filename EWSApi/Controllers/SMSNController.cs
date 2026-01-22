@@ -604,20 +604,20 @@ namespace EWSApi.Controllers
                     if (status.ReportRegisterStatusTypeId == 6)
                     {
                         transaction.Rollback();
-                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk duhet te dergohet statusi 6 (Në proces)" + json, true);
+                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk duhet te dergohet statusi: Në proces." + json, true);
                         return BadRequest(new { Message = "Nuk mundeni të raportoni me statusin: Në proces, vendosni status tjetër." });
                     }
                     if (status.ReportRegisterStatusTypeId == 7)
                     {
                         transaction.Rollback();
-                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk duhet te dergohet statusi 7 (Rast i mbyllur)" + json, true);
+                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk duhet te dergohet statusi: Rast i mbyllur." + json, true);
                         return BadRequest(new { Message = "Nuk mundeni të raportoni me statusin: Rast i mbyllur, vendosni status tjetër." });
                     }
                     if (status.ReportRegisterStatusTypeId == 0)
                     {
                         transaction.Rollback();
-                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk duhet te dergohet statusi 0" + json, true);
-                        return BadRequest(new { Message = "Nuk duhet te dergohet statusi 0" });
+                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Duhet të zgjedhni një status." + json, true);
+                        return BadRequest(new { Message = "Duhet të zgjedhni një status." });
                     }
 
                     var reportRegisterStatusItem = new ReportRegisterStatus

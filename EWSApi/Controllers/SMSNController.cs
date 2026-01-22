@@ -604,8 +604,8 @@ namespace EWSApi.Controllers
                     if (status.ReportRegisterStatusTypeId == 6)
                     {
                         transaction.Rollback();
-                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk duhet te dergohet statusi 6" + json, true);
-                        return BadRequest(new { Message = "Nuk duhet te dergohet statusi 6" });
+                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk duhet te dergohet statusi 6 (Në proces)" + json, true);
+                        return BadRequest(new { Message = "Nuk mundeni të raportoni me statusin: Në proces, vendosni status tjetër." });
                     }
                     if (status.ReportRegisterStatusTypeId == 7)
                     {

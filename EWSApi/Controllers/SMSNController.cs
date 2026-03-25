@@ -589,15 +589,22 @@ namespace EWSApi.Controllers
                 var newReportRegisterStatus = new List<ReportRegisterStatus>();
 
                 var distinctStatuses = reportRegister.reportRegisterStatus
-       .GroupBy(s => new
-       {
-           s.ReportRegisterStatusTypeId,
-           s.HealthInstitutionIdentificationNumberTO,
-           s.HealthInstitutionNameTo,
-           s.HealthInstitutionAddressTo
-       })
-       .Select(g => g.First())
-       .ToList();
+                           .GroupBy(s => new
+                           {
+                               s.ReportRegisterStatusTypeId,
+                               s.HealthInstitutionIdentificationNumberTO,
+                               s.HealthInstitutionNameTo,
+                               s.HealthInstitutionAddressTo
+                           })
+                           .Select(g => g.First())
+                           .ToList();
+
+                if (distinctStatuses.Count() > 1)
+                {
+                    transaction.Rollback();
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Vetem nje status aktiv." + json, true);
+                    return BadRequest(new { Message = "Për raportim dërgohet vetëm një status aktiv." });
+                }
 
                 foreach (var status in distinctStatuses)
                 {
@@ -620,6 +627,34 @@ namespace EWSApi.Controllers
                         return BadRequest(new { Message = "Duhet të zgjedhni një status." });
                     }
 
+                    if (status.ReportRegisterStatusTypeId == 3)
+                    {
+                        transaction.Rollback();
+                        _logService.InsertLog(currentHttpContext, "PostReportRegister", "Nuk duhet te dergohet statusi: Hospitalizuar." + json, true);
+                        return BadRequest(new { Message = "Nuk mundeni të raportoni me statusin: Hospitalizuar, vendosni status tjetër." });
+                    }
+
+                    if (status.ReportRegisterStatusTypeId == 2)
+                    {
+                        int healthInstitutionIDto = 0;
+                       
+                        if (int.TryParse(status.HealthInstitutionIdentificationNumberTO, out int institutionIdd))
+                        {
+                            healthInstitutionIDto = await _context.HealthInstitution
+                                .Where(ms => ms.Bhisid == institutionIdd)
+                                .Select(ms => ms.HealthInstitutionId)
+                                .FirstOrDefaultAsync();
+                        }
+
+                        if (healthInstitutionID == healthInstitutionIDto)
+                        {
+                            transaction.Rollback();
+                            _logService.InsertLog(currentHttpContext, "PostReportRegister", "Statusi: Referuar në institucion shëndetësor. Institucioni qe po e referon dhe ai qe do ta pranon nuk duhet te jene te njejte." + json, true);
+                            return BadRequest(new { Message = "Nëse dërgoni statusin: Referuar në institucion shëndetësor, institucioni duhet të jetë i ndryshëm nga institucioni juaj." });
+                        }
+                    }
+
+                  
                     var reportRegisterStatusItem = new ReportRegisterStatus
                     {
                         ReportRegisterId = ResportRegisterID,
@@ -669,7 +704,7 @@ namespace EWSApi.Controllers
 
                 // ✅ Validate if any CaseClassificationTypeId is invalid
                 if (reportRegister.reportRegisterTest != null &&
-        reportRegister.reportRegisterTest.Any(cc => cc.ExaminationId == 0))
+                     reportRegister.reportRegisterTest.Any(cc => cc.ExaminationId == 0))
                 {
                     transaction.Rollback();
                     _logService.InsertLog(currentHttpContext, "PostReportRegister", "ExaminationId është i pavlefshëm" + json, true);
@@ -700,10 +735,6 @@ namespace EWSApi.Controllers
                     InsertedFrom = _conf["Jwt:UserID"].ToString()
                 });
                 await _context.SaveChangesAsync();
-
-
-
-
 
                 transaction.Commit();
                 _logService.InsertLog(currentHttpContext, "PostReportRegister", "PostReportRegister inserted: " + json + "", false);
@@ -768,8 +799,6 @@ namespace EWSApi.Controllers
                     UserName = reportRegisterTestResult.Username,
                     InsertedDate = DateTime.Now,
                     Active = true
-
-
                 }
                 );
 

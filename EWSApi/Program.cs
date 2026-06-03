@@ -1,4 +1,6 @@
 using EWSApi.Core;
+using EWSApi.Services;
+using EWSApi.Utils.Configuration;
 using EWSAPI.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +20,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<EwsContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddDbContext<AppDBContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.Configure<ElasticConfiguration>(builder.Configuration.GetSection("Elasticsearch"));
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -39,6 +42,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 builder.Services.AddScoped<LogService>();
+builder.Services.AddScoped<IIndexService, IndexService>();
+builder.Services.AddScoped<IReportRegisterService, ReportRegisterService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {

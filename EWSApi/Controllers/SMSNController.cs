@@ -14,8 +14,7 @@ using EWSApi.Models.Examination;
 using EWSApi.Models.MedicalStaff;
 using EWSApi.Models.ReportRegister;
 using EWSApi.Models.DiseaseInfection;
-using System.Data.Common;
-using System.Transactions;
+using EWSApi.Services;
 using Newtonsoft.Json.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Text.RegularExpressions;
@@ -31,14 +30,16 @@ namespace EWSApi.Controllers
         private readonly EwsContext _context;
         private readonly AppDBContext _sqlContext;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IReportRegisterService _reportRegisterService;
 
-        public SMSNController(EwsContext context, AppDBContext sqlContext, LogService logService, IHttpContextAccessor httpContextAccessor, IConfiguration conf)
+        public SMSNController(EwsContext context, AppDBContext sqlContext, LogService logService, IHttpContextAccessor httpContextAccessor, IConfiguration conf, IReportRegisterService reportRegisterService)
         {
             this._context = context;
             this._sqlContext = sqlContext;
             _conf = conf;
             this._logService = logService;
             this._httpContextAccessor = httpContextAccessor;
+            this._reportRegisterService = reportRegisterService;
         }
 
 
@@ -737,6 +738,15 @@ namespace EWSApi.Controllers
                 await _context.SaveChangesAsync();
 
                 transaction.Commit();
+                try
+                {
+                    await _reportRegisterService.ReIndexAllReportRegisters(new[] { ResportRegisterID });
+                }
+                catch (Exception ex)
+                {
+                    _logService.InsertLog(currentHttpContext, "PostReportRegister", "Deshtoi riindeksimi per ReportRegisterId " + ResportRegisterID + ": " + ex.Message, true);
+                }
+
                 _logService.InsertLog(currentHttpContext, "PostReportRegister", "PostReportRegister inserted: " + json + "", false);
                 return Ok(new { UniqueNumber = uniqueNumber, Message = "Success" });
             }

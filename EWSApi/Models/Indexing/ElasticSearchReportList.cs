@@ -9,6 +9,8 @@ namespace EWSApi.Models.Indexing
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public int? Age { get; set; }
+        public string? AgeGroup { get; set; }
+        public int? GenderId { get; set; }
 
         public DateTime? TreatmentStartDate { get; set; }
         public int? DiseaseDataEncrypted { get; set; }

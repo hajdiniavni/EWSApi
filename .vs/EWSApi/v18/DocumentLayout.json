@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|c:\\users\\elorina.abazi\\source\\repos\\ewsapi\\ewsapi\\models\\indexing\\elasticsearchreportlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\models\\indexing\\elasticsearchreportlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|c:\\users\\elorina.abazi\\source\\repos\\ewsapi\\ewsapi\\utils\\validation\\stringlengthifattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\utils\\validation\\stringlengthifattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|c:\\users\\elorina.abazi\\source\\repos\\ewsapi\\ewsapi\\models\\reportregister\\reportregistervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\models\\reportregister\\reportregistervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|c:\\users\\elorina.abazi\\source\\repos\\ewsapi\\ewsapi\\utils\\validation\\requiredifattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\utils\\validation\\requiredifattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|c:\\users\\elorina.abazi\\source\\repos\\ewsapi\\ewsapi\\controllers\\smsncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\controllers\\smsncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|c:\\users\\elorina.abazi\\source\\repos\\ewsapi\\ewsapi\\services\\reportregisterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\services\\reportregisterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|c:\\users\\elorina.abazi\\source\\repos\\ewsapi\\ewsapi\\services\\iindexservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5A5BBF5-CA4E-458A-8656-72E9DC159F13}|EWSApi\\EWSApi.csproj|solutionrelative:ewsapi\\services\\iindexservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 18,
+          "SelectedChildIndex": 19,
           "Children": [
             {
               "$type": "Bookmark",
@@ -101,55 +101,59 @@
               "Name": "ST:139:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ElasticSearchReportList.cs",
-              "DocumentMoniker": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Models\\Indexing\\ElasticSearchReportList.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Models\\Indexing\\ElasticSearchReportList.cs",
-              "ToolTip": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Models\\Indexing\\ElasticSearchReportList.cs",
-              "RelativeToolTip": "EWSApi\\Models\\Indexing\\ElasticSearchReportList.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAHAAAAAAAAAA==",
+              "Title": "StringLengthIfAttribute.cs",
+              "DocumentMoniker": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Utils\\Validation\\StringLengthIfAttribute.cs",
+              "RelativeDocumentMoniker": "EWSApi\\Utils\\Validation\\StringLengthIfAttribute.cs",
+              "ToolTip": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Utils\\Validation\\StringLengthIfAttribute.cs",
+              "RelativeToolTip": "EWSApi\\Utils\\Validation\\StringLengthIfAttribute.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAsAAABcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T07:49:17.958Z",
+              "WhenOpened": "2026-07-13T11:09:48.883Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ReportRegisterService.cs",
-              "DocumentMoniker": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Services\\ReportRegisterService.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Services\\ReportRegisterService.cs",
-              "ToolTip": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Services\\ReportRegisterService.cs",
-              "RelativeToolTip": "EWSApi\\Services\\ReportRegisterService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAMAAAAAAAAAA==",
+              "Title": "RequiredIfAttribute.cs",
+              "DocumentMoniker": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Utils\\Validation\\RequiredIfAttribute.cs",
+              "RelativeDocumentMoniker": "EWSApi\\Utils\\Validation\\RequiredIfAttribute.cs",
+              "ToolTip": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Utils\\Validation\\RequiredIfAttribute.cs",
+              "RelativeToolTip": "EWSApi\\Utils\\Validation\\RequiredIfAttribute.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T07:46:50.518Z",
+              "WhenOpened": "2026-07-13T09:51:02.224Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "SMSNController.cs",
-              "DocumentMoniker": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Controllers\\SMSNController.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Controllers\\SMSNController.cs",
-              "ToolTip": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Controllers\\SMSNController.cs",
-              "RelativeToolTip": "EWSApi\\Controllers\\SMSNController.cs",
-              "ViewState": "AgIAABUBAAAAAAAAAAAowH4BAAAIAAAAAAAAAA==",
+              "Title": "ReportRegisterVM.cs",
+              "DocumentMoniker": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Models\\ReportRegister\\ReportRegisterVM.cs",
+              "RelativeDocumentMoniker": "EWSApi\\Models\\ReportRegister\\ReportRegisterVM.cs",
+              "ToolTip": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Models\\ReportRegister\\ReportRegisterVM.cs",
+              "RelativeToolTip": "EWSApi\\Models\\ReportRegister\\ReportRegisterVM.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAIwBwAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T07:42:47.042Z",
+              "WhenOpened": "2026-07-13T09:35:58.568Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "IIndexService.cs",
-              "DocumentMoniker": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Services\\IIndexService.cs",
-              "RelativeDocumentMoniker": "EWSApi\\Services\\IIndexService.cs",
-              "ToolTip": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Services\\IIndexService.cs",
-              "RelativeToolTip": "EWSApi\\Services\\IIndexService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAANAAAAAAAAAA==",
+              "Title": "SMSNController.cs",
+              "DocumentMoniker": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Controllers\\SMSNController.cs",
+              "RelativeDocumentMoniker": "EWSApi\\Controllers\\SMSNController.cs",
+              "ToolTip": "C:\\Users\\elorina.abazi\\source\\repos\\EWSApi\\EWSApi\\Controllers\\SMSNController.cs",
+              "RelativeToolTip": "EWSApi\\Controllers\\SMSNController.cs",
+              "ViewState": "AgIAAA0BAAAAAAAAAAAAAH0BAABoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T07:40:47.527Z",
+              "WhenOpened": "2026-07-08T06:47:36.551Z",
               "EditorCaption": ""
             }
           ]
@@ -161,10 +165,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{79664857-03bf-4bca-aa54-ec998b3328f8}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Bookmark",

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EWSApi.Utils.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -25,8 +26,10 @@ public partial class ReportRegisterVM
 
 
     [Required(ErrorMessage = "Mungesë informacioni për fushën PersonalNumber")]
-    [MaxLength(10, ErrorMessage = "Numri personal duhet ti përmbaj 10 numra!")]
-    [MinLength(10, ErrorMessage = "Numri personal duhet ti përmbaj 10 numra!")]
+    [StringLengthIf("Foreign", false, 10, 10, ErrorMessage = "Numri personal duhet ti përmbaj 10 numra!")]
+    //  [RequiredIf("Foreign", false, ErrorMessage = "Mungesë informacioni për fushën PersonalNumber")]
+    //[MaxLength(10, ErrorMessage = "Numri personal duhet ti përmbaj 10 numra!")]
+    //[MinLength(10, ErrorMessage = "Numri personal duhet ti përmbaj 10 numra!")]
     public string PersonalNumber { get; set; } = null!;
 
     [Required(ErrorMessage = "Mungesë informacioni për fushën Firstname")]

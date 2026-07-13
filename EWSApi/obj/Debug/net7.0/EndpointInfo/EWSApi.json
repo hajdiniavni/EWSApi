@@ -1184,8 +1184,6 @@
             "nullable": true
           },
           "personalNumber": {
-            "maxLength": 10,
-            "minLength": 10,
             "type": "string"
           },
           "firstname": {

@@ -484,7 +484,7 @@ namespace EWSApi.Controllers
                         MaritalStatusId = reportRegister.MaritalStatusId,
                         Foreign = reportRegister.Foreign,
                         CountryId = reportRegister.CountryId,
-                        MunicipalityId = reportRegister.MunicipalityId == 0 && reportRegister.Foreign == true ? 39 : reportRegister.MunicipalityId,
+                        MunicipalityId = reportRegister.MunicipalityId,
                         Municipality = AesCrypto.Ecrypt<string>(reportRegister.Municipality),
                         SettlementId = reportRegister.SettlementId,
                         Settlement = AesCrypto.Ecrypt<string>(reportRegister.Settlement),

@@ -6,6 +6,8 @@ D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\EWSApi.
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\EWSApi.pdb
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\Azure.Core.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\Azure.Identity.dll
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\Elastic.Clients.Elasticsearch.dll
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\Elastic.Transport.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\Humanizer.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\MessagePack.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\MessagePack.Annotations.dll
@@ -69,6 +71,7 @@ D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.Composition.Runtime.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.Composition.TypedParts.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.Configuration.ConfigurationManager.dll
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.Diagnostics.DiagnosticSource.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.Drawing.Common.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.Memory.Data.dll
@@ -76,6 +79,8 @@ D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.Runtime.Caching.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.Security.Permissions.dll
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.Text.Encodings.Web.dll
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.Text.Json.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\System.Windows.Extensions.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\af\Humanizer.resources.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\ar\Humanizer.resources.dll
@@ -227,5 +232,6 @@ D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\runtime
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\runtimes\browser\lib\net7.0\System.Text.Encodings.Web.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\obj\Release\net7.0\PubTmp\Out\EWSApi.deps.json

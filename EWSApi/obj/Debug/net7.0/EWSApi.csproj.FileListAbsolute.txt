@@ -783,3 +783,9 @@ C:\Users\elorina.abazi\source\repos\EWSApi\EWSApi\bin\Debug\net7.0\System.Text.J
 C:\Users\elorina.abazi\source\repos\EWSApi\EWSApi\bin\Debug\net7.0\runtimes\browser\lib\net7.0\System.Text.Encodings.Web.dll
 C:\Users\elorina.abazi\source\repos\EWSApi\EWSApi\bin\Debug\net7.0\EWSApi.exe
 C:\Users\elorina.abazi\source\repos\EWSApi\EWSApi\obj\Debug\net7.0\staticwebassets.upToDateCheck.txt
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\bin\Debug\net7.0\Elastic.Clients.Elasticsearch.dll
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\bin\Debug\net7.0\Elastic.Transport.dll
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\bin\Debug\net7.0\System.Diagnostics.DiagnosticSource.dll
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\bin\Debug\net7.0\System.Text.Encodings.Web.dll
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\bin\Debug\net7.0\System.Text.Json.dll
+D:\RESTful WEB API\SMSN\SMSN\EWSApi\EWSApi\bin\Debug\net7.0\runtimes\browser\lib\net7.0\System.Text.Encodings.Web.dll

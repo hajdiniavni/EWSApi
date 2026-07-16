@@ -39,6 +39,7 @@ namespace EWSApi.Models.Indexing
         public int? HealthInstitutionId { get; set; }
         public int? HealthInstitutionCityId { get; set; }
         public int? HealthInstitutionRegionId { get; set; }
+        public int? HealthInstitutionLevelId { get; set; }
         public string? HealthInstitutionCity { get; set; }
         public string? HealthInstitution { get; set; }
 
